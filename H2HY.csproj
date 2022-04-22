@@ -52,6 +52,8 @@
     <Compile Include="H2TYMainViewModel.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\INavigationService.cs" />
+    <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Stores\INavigationStore.cs" />
     <Compile Include="Stores\INavigationStoreModal.cs" />
     <Compile Include="Stores\NativeNavigationStoreModal.cs" />
