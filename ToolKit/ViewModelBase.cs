@@ -12,6 +12,19 @@ namespace H2HY
         /// </summary>
         public abstract void Dispose();
 
+        internal void DisposeAll()
+        {
+            // not possible "out of a package"
+            //foreach (PropertyInfo propertyInfo in GetType().GetProperties().Where(p => p.PropertyType.IsSubclassOf(typeof(ViewModelBase))))
+            //{
+            //    MethodInfo m = propertyInfo.PropertyType.GetMethod(nameof(Dispose), new Type[0] { });
+            //    _ = m.Invoke(propertyInfo.GetValue(this), new object[] { });
+            //}
+
+            Dispose();
+        }
+
+
         protected void RaisePropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -33,10 +46,23 @@ namespace H2HY
             RaisePropertyChanged(propertyName);
         }
 
+        /// <summary>
+        /// The attached view has been closed without. (modal or nonmodal)
+        /// </summary>
         public virtual void ViewClosed()
         {
+            // not possible "out of a package"
+            //foreach (PropertyInfo propertyInfo in GetType().GetProperties().Where(p => p.PropertyType.IsSubclassOf(typeof(ViewModelBase))))
+            //{
+            //    MethodInfo m = propertyInfo.PropertyType.GetMethod(nameof(ViewClosed), new Type[0] { });
+            //    _ = m.Invoke(propertyInfo.GetValue(this), new object[] { });
+            //}
         }
 
+        /// <summary>
+        /// The attached modal view has been closed with an result.
+        /// </summary>
+        /// <param name="dialogResult"></param>
         public virtual void ViewClosed(bool dialogResult)
         {
         }

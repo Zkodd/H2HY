@@ -13,7 +13,8 @@ namespace H2HY.Stores
             get => _currentViewModel;
             set
             {
-                _currentViewModel?.Dispose();
+                _currentViewModel?.ViewClosed();
+                _currentViewModel?.DisposeAll();
                 _currentViewModel = value;
                 OnCurrentViewModelChanged();
             }
@@ -30,5 +31,11 @@ namespace H2HY.Stores
         {
             CurrentViewModelChanged?.Invoke();
         }
+
+        ~NavigationStore()
+        {
+            CurrentViewModel = null;
+        }
+
     }
 }

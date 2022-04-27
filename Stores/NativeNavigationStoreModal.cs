@@ -20,7 +20,7 @@ namespace H2HY.Stores
             get => _currentViewModel;
             set
             {
-                _currentViewModel?.Dispose();
+                _currentViewModel?.DisposeAll();
                 _currentViewModel = value;
 
                 _dialogService.ShowDialog(value, OnCurrentViewClosed);
@@ -49,5 +49,11 @@ namespace H2HY.Stores
         {
             CurrentViewModelChanged?.Invoke();
         }
+
+        ~NativeNavigationStoreModal()
+        {
+            CurrentViewModel = null;
+        }
+
     }
 }
