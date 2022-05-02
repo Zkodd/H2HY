@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modal\Modal.cs" />
+    <Compile Include="Models\IId.cs" />
+    <Compile Include="Provider\FileProvider.cs" />
+    <Compile Include="Provider\IProvider.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\FileDialogServiceBase.cs" />
     <Compile Include="Services\FileOpenDialogService.cs" />
@@ -58,6 +61,8 @@
     <Compile Include="Stores\INavigationStoreModal.cs" />
     <Compile Include="Stores\NativeNavigationStoreModal.cs" />
     <Compile Include="Stores\NavigationStore.cs" />
+    <Compile Include="Stores\Store.cs" />
+    <Compile Include="Stores\StoreChanged.cs" />
     <Compile Include="Toolkit\CommandBase.cs" />
     <Compile Include="Toolkit\RelayCommand.cs" />
     <Compile Include="Toolkit\ViewModelBase.cs" />
@@ -71,6 +76,7 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

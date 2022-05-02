@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>1.0.1.8</version>
+    <version>1.0.2.2</version>
     <title>Hope to Help Ya</title>
     <authors>Thorsten Appel</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,6 +11,6 @@
     <description>Basic helper for MVVVM issues. But not only.</description>
     <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>$copyright$</copyright>
-    <tags>Tag1 Tag2</tags>
+    <tags></tags>
   </metadata>
 </package>
