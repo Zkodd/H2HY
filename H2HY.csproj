@@ -48,6 +48,7 @@
     <Compile Include="Models\IId.cs" />
     <Compile Include="Provider\FileProvider.cs" />
     <Compile Include="Provider\IProvider.cs" />
+    <Compile Include="Provider\MemoryProvider.cs" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\FileDialogServiceBase.cs" />
     <Compile Include="Services\FileOpenDialogService.cs" />
