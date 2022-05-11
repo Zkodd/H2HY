@@ -6,6 +6,10 @@ using System.Xml.Serialization;
 
 namespace H2HY.Provider
 {
+    /// <summary>
+    /// Provider for write and save model into xml files.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class FileProvider<T> : IProvider<T> where T : IIDInterface
     {
         private readonly string _filename;
@@ -111,7 +115,5 @@ namespace H2HY.Provider
             item.Id = ids.Count() + 1;
             while (ids.FirstOrDefault(i => i == item.Id) != default) { item.Id++; }
         }
-
-
     }
 }

@@ -14,7 +14,7 @@ namespace H2HY
 
         internal void DisposeAll()
         {
-            // not possible "out of a package"
+            // this is not possible "out of a package"
             //foreach (PropertyInfo propertyInfo in GetType().GetProperties().Where(p => p.PropertyType.IsSubclassOf(typeof(ViewModelBase))))
             //{
             //    MethodInfo m = propertyInfo.PropertyType.GetMethod(nameof(Dispose), new Type[0] { });
@@ -47,7 +47,7 @@ namespace H2HY
         }
 
         /// <summary>
-        /// The attached view has been closed without. (modal or nonmodal)
+        /// The attached view has been closed without a result. (modal or nonmodal)
         /// </summary>
         public virtual void ViewClosed()
         {
@@ -60,7 +60,7 @@ namespace H2HY
         }
 
         /// <summary>
-        /// The attached modal view has been closed with an result.
+        /// The attached modal view has been closed with the given result.
         /// </summary>
         /// <param name="dialogResult"></param>
         public virtual void ViewClosed(bool dialogResult)
