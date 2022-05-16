@@ -15,13 +15,13 @@ namespace H2HY
     ///    </DataTemplate>
     /// </Grid.Resources>
     /// </summary>
-    public class H2TYMainViewModel : ViewModelBase
+    public class H2HYMainViewModel : ViewModelBase
     {
         private readonly INavigationStore _navigationStore;
 
         private readonly INavigationStoreModal _navigationStoreModal;
 
-        public H2TYMainViewModel
+        public H2HYMainViewModel
         (
             INavigationStore navigationStore,
             INavigationStoreModal modalNavigationStore
@@ -48,6 +48,8 @@ namespace H2HY
         {
             _navigationStoreModal.CurrentViewModelChanged -= OnCurrentModalViewModelChanged;
             _navigationStore.CurrentViewModelChanged -= OnCurrentViewModelChanged;
+
+            CurrentViewModel.Dispose();
         }
 
         private void OnCurrentModalViewModelChanged()

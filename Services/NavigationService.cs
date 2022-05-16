@@ -3,7 +3,7 @@ using System;
 
 namespace H2HY.Services
 {
-    public class NavigationService<TViewModel> : INavigationService<TViewModel> where TViewModel : ViewModelBase
+    public class NavigationService<TViewModel> : INavigationService where TViewModel : ViewModelBase
     {
         private readonly INavigationStore _navigationStore;
         private readonly Func<TViewModel> _createViewModel;
