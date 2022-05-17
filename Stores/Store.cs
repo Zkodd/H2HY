@@ -4,6 +4,13 @@ using System.Collections.Generic;
 
 namespace H2HY.Stores
 {
+    /// <summary>
+    /// Usage Example:
+    /// 
+    /// services.AddSingleton<FaultStore>();
+    /// services.AddTransient<IProvider<FaultModel>>(s => new FileProvider<FaultModel>("Faults.xml"))
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class Store<T>
     {
         private readonly Lazy<List<T>> _items;
@@ -37,8 +44,15 @@ namespace H2HY.Stores
         }
 
         /// <summary>
+        /// Loads all items.
+        /// </summary>
+        public IEnumerable<T> LoadAll()
+        {
+            return Items;
+        }
+
+        /// <summary>
         /// Saves the entire current list. 
-        /// Maybe u've to call clear befor this action.
         /// </summary>
         public void SaveAll()
         {

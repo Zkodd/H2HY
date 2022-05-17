@@ -8,8 +8,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <!-- <icon>icon.png</icon> -->
-    <description>Basic helper for MVVVM issues. But not only.</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <description>Basic helper for MVVVM issues.</description>
+    <releaseNotes></releaseNotes>
     <copyright>$copyright$</copyright>
     <tags></tags>
     <repository type="git" url="git@github.com:Zkodd/H2HY.git"/>
