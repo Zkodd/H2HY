@@ -7,8 +7,10 @@ namespace H2HY.Stores
     /// <summary>
     /// Usage Example:
     /// 
+    /// <![CDATA[ 
     /// services.AddSingleton<FaultStore>();
-    /// services.AddTransient<IProvider<FaultModel>>(s => new FileProvider<FaultModel>("Faults.xml"))
+    /// IProvider<T> where T : IIDInterface
+    /// services.AddTransient<IProvider<FaultModel>>(s => new FileProvider<FaultModel>("Faults.xml")) ]]>
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class Store<T>

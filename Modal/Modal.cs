@@ -4,6 +4,10 @@ using System.Windows.Media;
 
 namespace H2HY.Modal
 {
+    /// <summary>
+    /// Not done now. Only for .net >= 5
+    /// https://www.youtube.com/watch?v=M8BAIq0yoy8&list=PLA8ZIAm2I03ggP55JbLOrXl6puKw4rEb2&index=7
+    /// </summary>
     public class Modal : ContentControl
     {
         public static readonly DependencyProperty IsOpenProperty =

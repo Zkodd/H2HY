@@ -2,8 +2,14 @@
 
 namespace H2HY.Services
 {
+    /// <summary>
+    /// DialogBase for Save and Load Dialog - don't use.
+    /// </summary>
     public class FileDialogServiceBase
     {
+        /// <summary>
+        /// Created by the construtor. Is neither a FileOpen or an FileSaveDialog.
+        /// </summary>
         protected FileDialog _fileDialog;
 
         public string Extension { get => _fileDialog.DefaultExt; set => _fileDialog.DefaultExt = value; }
