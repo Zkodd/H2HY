@@ -1,4 +1,6 @@
-﻿namespace H2HY
+﻿using System;
+
+namespace H2HY
 {
     /// <summary>
     /// No need to inherite from here.
@@ -23,12 +25,17 @@
     ///</summary>
     public class H2HYLayoutViewModel : ViewModelBase
     {
+        public H2HYLayoutViewModel()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// The H2HYLayoutViewModel is recreated on every navigation.
         /// </summary>
         /// <param name="navigationBarViewModel">navigation viewmodel</param>
         /// <param name="contentViewModel">current content viewmodel</param>
-        public H2HYLayoutViewModel(ViewModelBase navigationBarViewModel, ViewModelBase contentViewModel)
+        public H2HYLayoutViewModel(H2HYNavigationBar navigationBarViewModel, ViewModelBase contentViewModel)
         {
             NavigationBarViewModel = navigationBarViewModel;
             ContentViewModel = contentViewModel;
@@ -42,7 +49,7 @@
         /// <summary>
         /// Viewmodel for the navigationbar, containing navigation commands.
         /// </summary>
-        public ViewModelBase NavigationBarViewModel { get; }
+        public H2HYNavigationBar NavigationBarViewModel { get; }
 
         /// <summary>
         /// Dispose NavigationBarViewModel and ContentViewModel

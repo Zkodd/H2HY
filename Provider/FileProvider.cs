@@ -113,7 +113,10 @@ namespace H2HY.Provider
             usedItems.ToList().ForEach(i => ids.Add(i.Id));
 
             item.Id = ids.Count() + 1;
-            while (ids.FirstOrDefault(i => i == item.Id) != default) { item.Id++; }
+            while (ids.FirstOrDefault(i => i == item.Id) != default) 
+            {
+                item.Id++; 
+            }
         }
     }
 }

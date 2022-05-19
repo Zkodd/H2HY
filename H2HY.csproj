@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="H2HYLayoutViewModel.cs" />
+    <Compile Include="H2HYNavigationBar.cs" />
     <Compile Include="Modal\Modal.cs" />
     <Compile Include="Models\IId.cs" />
     <Compile Include="Provider\FileProvider.cs" />

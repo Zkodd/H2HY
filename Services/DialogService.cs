@@ -10,6 +10,7 @@ namespace H2HY.Services
     //  DialogService.RegistertDialog<HazardLogChapterEditView, HazardLogChapterEditCaptionViewModel>();
     //
     // HazardLogChapterEditCaptionViewModel.cs, use Dialoagservice:
+    //
     //      DialogService dialogService = new();
     //      EditCaption = new RelayCommand(i =>
     //      {

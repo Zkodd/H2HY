@@ -10,22 +10,22 @@ namespace H2HY.Services
     public class LayoutNavigationService<TViewModel> : INavigationService where TViewModel : ViewModelBase
     {
         private readonly INavigationStore _navigationStore;
-        private readonly Func<TViewModel> _createViewModel;
-        private readonly Func<ViewModelBase> _createNavigationBarViewModel;
+        private readonly Func<TViewModel> _createContentViewModel;
+        private readonly Func<H2HYNavigationBar> _createNavigationBarViewModel;
 
         public LayoutNavigationService(
             INavigationStore navigationStore,
             Func<TViewModel> createViewModel,
-            Func<ViewModelBase> createNavigationBarViewModel)
+            Func<H2HYNavigationBar> createNavigationBarViewModel)
         {
             _navigationStore = navigationStore;
-            _createViewModel = createViewModel;
+            _createContentViewModel = createViewModel;
             _createNavigationBarViewModel = createNavigationBarViewModel;
         }
 
         public void Navigate()
         {
-            _navigationStore.CurrentViewModel = new H2HYLayoutViewModel(_createNavigationBarViewModel(), _createViewModel());
+            _navigationStore.CurrentViewModel = new H2HYLayoutViewModel(_createNavigationBarViewModel(), _createContentViewModel());
         }
     }
 }

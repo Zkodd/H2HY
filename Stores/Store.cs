@@ -1,6 +1,7 @@
 ﻿using H2HY.Provider;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace H2HY.Stores
 {
@@ -97,6 +98,20 @@ namespace H2HY.Stores
             {
                 _provider.Remove(item);
                 Changed?.Invoke(item, StoreChanged.Remove);
+            }
+        }
+
+        /// <summary>
+        /// Removes items where the given lambdafunction returns true.
+        /// Calls Changed(item, StoreChanged.Remove) for each item on succsess.
+        /// </summary>
+        /// <param name="predicate">Lambdafunction, returns true for removal.</param>
+        public void RemoveWhere(Func<T, bool> predicate)
+        {
+            IEnumerable<T> itemstoremove = Items.Where(i => predicate(i)).ToList();
+            foreach (T item in itemstoremove)
+            {
+                Remove(item);
             }
         }
 

@@ -16,6 +16,9 @@ namespace H2HY.Services
     /// </summary>
     public class FileOpenDialogService : FileDialogServiceBase
     {
+        /// <summary>
+        /// constructor for creating a OpenFileDialog
+        /// </summary>
         public FileOpenDialogService()
         {
             _fileDialog = new OpenFileDialog();
