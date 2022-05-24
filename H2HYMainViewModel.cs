@@ -5,8 +5,10 @@ namespace H2HY
 {
     /// <summary>
     /// usage as MainViewModel: inherite and define a construtor like this:
-    /// public MainViewModel(INavigationStore navigationStore, INavigationStoreModal navigationStoreModal) : base(navigationStore, navigationStoreModal) {}
-    ///
+    /// <![CDATA[public MyMainViewModel(INavigationStore navigationStore, INavigationStoreModal navigationStoreModal) : base(navigationStore, navigationStoreModal) {}]]>
+    /// and register it to your DI service:
+    /// <![CDATA[services.AddSingleton<H2HYMainViewModel>();]]>
+    /// 
     /// Create Bindings to:
     /// <ContentControl Content="{Binding CurrentViewModel}" />
     /// Now, Bind the viewmodelstype to the Views: add something like this to your MainView.xaml:
