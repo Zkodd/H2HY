@@ -1,4 +1,5 @@
 ﻿using H2HY.Stores;
+using System;
 
 namespace H2HY
 {
@@ -23,6 +24,19 @@ namespace H2HY
 
         private readonly INavigationStoreModal _navigationStoreModal;
 
+        /// <summary>
+        /// Parameterless construtor is not allowed.
+        /// </summary>
+        public H2HYMainViewModel()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        /// <param name="navigationStore">Navigation store</param>
+        /// <param name="modalNavigationStore">Modal navigation store</param>
         public H2HYMainViewModel
         (
             INavigationStore navigationStore,
@@ -36,16 +50,23 @@ namespace H2HY
             _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
         }
 
-        protected INavigationStore NavigationStore => _navigationStore;
-
-        protected INavigationStoreModal NavigationStoreModal => _navigationStoreModal;
-
         public ViewModelBase CurrentModalViewModel => _navigationStoreModal.CurrentViewModel;
 
+        /// <summary>
+        /// Returns the current viewmodel. This is bind to the Mainview/Mainwindow using:
+        /// <![CDATA[ <ContentControl Content="{Binding CurrentViewModel}" /> ]]>
+        /// </summary>
         public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
 
         public bool IsModalOpen => _navigationStoreModal.IsOpen;
 
+        protected INavigationStore NavigationStore => _navigationStore;
+
+        protected INavigationStoreModal NavigationStoreModal => _navigationStoreModal;
+
+        /// <summary>
+        /// Also calls Dispose on the current viewmodel.
+        /// </summary>
         public override void Dispose()
         {
             _navigationStoreModal.CurrentViewModelChanged -= OnCurrentModalViewModelChanged;

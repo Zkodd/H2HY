@@ -25,6 +25,9 @@ namespace H2HY
     ///</summary>
     public class H2HYLayoutViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Parameterless constructor is now allowed.
+        /// </summary>
         public H2HYLayoutViewModel()
         {
             throw new NotImplementedException();
@@ -58,6 +61,28 @@ namespace H2HY
         {
             NavigationBarViewModel.Dispose();
             ContentViewModel.Dispose();
+        }
+
+        /// <summary>
+        /// The attached view has been closed without a result. (modal or nonmodal)
+        /// </summary>
+        public override void ViewClosed()
+        {
+            base.ViewClosed();
+
+            NavigationBarViewModel.ViewClosed();
+            ContentViewModel.ViewClosed();
+        }
+
+        /// <summary>
+        /// The attached modal view has been closed with the given result.
+        /// </summary>
+        /// <param name="dialogResult"></param>
+        public override void ViewClosed(bool dialogResult)
+        {
+            base.ViewClosed(dialogResult);
+            NavigationBarViewModel.ViewClosed(dialogResult);
+            ContentViewModel.ViewClosed(dialogResult);
         }
     }
 }
