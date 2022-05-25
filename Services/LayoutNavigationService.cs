@@ -17,7 +17,7 @@ namespace H2HY.Services
     ///    }
     /// ]]>
     /// </summary>
-    /// <typeparam name="TViewModel"></typeparam>
+    /// <typeparam name="TViewModel">Content viewmodel</typeparam>
     public class LayoutNavigationService<TViewModel> : INavigationService where TViewModel : ViewModelBase
     {
         private readonly Func<TViewModel> _createContentViewModel;

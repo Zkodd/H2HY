@@ -23,5 +23,10 @@ namespace H2HY.Services
         {
             _fileDialog = new OpenFileDialog();
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the dialog box allows multiple files to be selected.
+        /// </summary>
+        public bool MultiSelect { get => (_fileDialog as OpenFileDialog).Multiselect; set => (_fileDialog as OpenFileDialog).Multiselect = value; }
     }
 }

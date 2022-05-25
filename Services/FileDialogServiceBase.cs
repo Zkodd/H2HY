@@ -12,6 +12,11 @@ namespace H2HY.Services
         /// </summary>
         protected FileDialog _fileDialog;
 
+        /// <summary>
+        /// Gets or sets the current file name filter string, which determines the choices that appear in the 
+        /// "Save as file type" or "Files of type" box in the dialog box.
+        /// Example: "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+        /// </summary>
         public string Extension { get => _fileDialog.DefaultExt; set => _fileDialog.DefaultExt = value; }
 
         public string FileName { get; private set; }
