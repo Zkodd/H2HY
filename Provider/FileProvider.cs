@@ -85,6 +85,8 @@ namespace H2HY.Provider
 
         private static void LoadModel(string filename, out List<T> areas)
         {
+            //An exception is thrown but handled by the XmlSerializer,
+            //so if you just ignore it everything should continue fine.
             XmlSerializer reader = new XmlSerializer(typeof(List<T>));
 
             if (File.Exists(filename))

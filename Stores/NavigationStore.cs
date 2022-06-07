@@ -2,10 +2,17 @@
 
 namespace H2HY.Stores
 {
+    /// <summary>
+    /// A Navigation store for the mainview model.
+    /// </summary>
     public class NavigationStore : INavigationStore, INavigationStoreModal
     {
         private ViewModelBase _currentViewModel;
 
+        /// <summary>
+        /// Called after the current view model changed. So, the mainview model can 
+        /// call property changed.
+        /// </summary>
         public event Action CurrentViewModelChanged;
         /// <summary>
         /// Set the current viewmodel.

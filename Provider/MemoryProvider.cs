@@ -13,6 +13,22 @@ namespace H2HY.Provider
     {
         private readonly HashSet<T> _memoryList = new HashSet<T>();
 
+
+        //
+        // Summary:
+        //     Adds the specified element to a set.
+        //
+        // Parameters:
+        //   item:
+        //     The element to add to the set.
+        //
+        // Returns:
+        //     true if the element is added to the System.Collections.Generic.HashSet`1 object;
+        //     false if the element is already present.
+
+
+        //to do: change interface from void to bool
+
         public void Add(T item)
         {
             _memoryList.Add(item);

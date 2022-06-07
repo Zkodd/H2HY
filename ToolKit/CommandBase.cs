@@ -16,6 +16,11 @@ namespace H2HY
             return true;
         }
 
+        /// <summary>
+        /// executed command.
+        /// abstract - u are forced to override it.
+        /// </summary>
+        /// <param name="parameter"></param>
         public abstract void Execute(object parameter);
     }
 }

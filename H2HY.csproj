@@ -74,7 +74,9 @@
     <Compile Include="Stores\Store.cs" />
     <Compile Include="Stores\StoreChanged.cs" />
     <Compile Include="Toolkit\CommandBase.cs" />
+    <Compile Include="Toolkit\IRange.cs" />
     <Compile Include="Toolkit\NavigateCommand.cs" />
+    <Compile Include="Toolkit\Range.cs" />
     <Compile Include="Toolkit\RelayCommand.cs" />
     <Compile Include="Toolkit\ViewModelBase.cs" />
   </ItemGroup>

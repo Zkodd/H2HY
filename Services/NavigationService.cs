@@ -14,6 +14,10 @@ namespace H2HY.Services
             _createViewModel = createViewModel;
         }
 
+        /// <summary>
+        /// Creates the given viewmodel using the given callback function
+        /// and sets it as the current viewmodel at the navigation store.
+        /// </summary>
         public void Navigate()
         {
             _navigationStore.CurrentViewModel = _createViewModel();
