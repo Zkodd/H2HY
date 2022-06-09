@@ -14,16 +14,28 @@ namespace H2HY.Provider
     {
         private readonly string _filename;
 
+        /// <summary>
+        /// creates a fileprovider. All items will be saved/loaded from the given filename.
+        /// </summary>
+        /// <param name="filename">filename</param>
         public FileProvider(string filename)
         {
             _filename = filename;
         }
 
+        /// <summary>
+        /// Adds a item
+        /// </summary>
+        /// <param name="item">item to ad</param>
         public void Add(T item)
         {
             AddRange(new List<T>() { item });
         }
 
+        /// <summary>
+        /// Adds a range of items
+        /// </summary>
+        /// <param name="items"></param>
         public void AddRange(IEnumerable<T> items)
         {
             List<T> newList = new List<T>(GetAll());
@@ -36,12 +48,19 @@ namespace H2HY.Provider
             SaveModel(_filename, newList);
         }
 
+        /// <summary>
+        /// clears the db file.
+        /// </summary>
         public void Clear()
         {
             List<T> emptyList = new List<T>();
             SaveModel(_filename, emptyList);
         }
 
+        /// <summary>
+        /// gets all items
+        /// </summary>
+        /// <returns>all read items.</returns>
         public IEnumerable<T> GetAll()
         {
             LoadModel(_filename, out List<T> loadedAreas);

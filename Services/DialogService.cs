@@ -4,21 +4,25 @@ using System.Windows;
 
 namespace H2HY.Services
 {
-    // - unused -
-    // How to use:
-    //  App.cs (Composing Root) Register Dialog to ViewModel:
-    //  DialogService.RegistertDialog<HazardLogChapterEditView, HazardLogChapterEditCaptionViewModel>();
-    //
-    // HazardLogChapterEditCaptionViewModel.cs, use Dialoagservice:
-    //
-    //      DialogService dialogService = new();
-    //      EditCaption = new RelayCommand(i =>
-    //      {
-    //          dialogService.ShowDialog(, x => { new HazardLogChapterEditCaptionViewModel(modalstore, this) });
-    //      });
-    //
-    //  Window Close is missing in wpf
-    //
+    /// <summary>
+    /// - unused -
+    /// How to use:
+    ///  App.cs (Composing Root) Register Dialog to ViewModel:
+    /// <![CDATA[ 
+    /// DialogService.RegistertDialog<HazardLogChapterEditView, HazardLogChapterEditCaptionViewModel>();
+    /// ]]>
+    ///
+    /// HazardLogChapterEditCaptionViewModel.cs, use Dialoagservice:
+    /// <![CDATA[
+    ///      DialogService dialogService = new();
+    ///      EditCaption = new RelayCommand(i =>
+    ///      {
+    ///          dialogService.ShowDialog(, x => { new HazardLogChapterEditCaptionViewModel(modalstore, this) });
+    ///      });
+    ///  ]]>
+    ///
+    ///  Window Close is missing in wpf
+    /// </summary>
     public class DialogService : IDialogService
     {
         private Window _currentDialog;
@@ -43,7 +47,7 @@ namespace H2HY.Services
             }
 
             Type viewType = _mappings[viewmodel.GetType()];
- 
+
             _currentDialog = new Window();
 
             void closeEventHandler(object s, EventArgs e)

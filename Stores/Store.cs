@@ -19,6 +19,9 @@ namespace H2HY.Stores
         private readonly Lazy<List<T>> _items;
         protected readonly IProvider<T> _provider;
 
+        /// <summary>
+        /// Is called on store changes.
+        /// </summary>
         public event Action<T, StoreChanged> Changed;
 
         public IEnumerable<T> Items => _items.Value;
@@ -36,6 +39,11 @@ namespace H2HY.Stores
             });
         }
 
+        /// <summary>
+        /// updates given item and calls StoreChanged.Changed on success.
+        /// </summary>
+        /// <param name="item">item to update</param>
+        /// <returns>success of operation</returns>
         public bool Update(T item)
         {
             if (_provider.Update(item))

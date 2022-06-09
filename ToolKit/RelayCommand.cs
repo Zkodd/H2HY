@@ -19,11 +19,19 @@ namespace H2HY
             _canExecute = canExecute;
         }
 
+        /// <summary>
+        /// Defines the method that determines whether the command can execute in its current state.
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns>true on default</returns>
         public bool CanExecute(object parameter)
         {
             return _canExecute == null || _canExecute((T)parameter);
         }
 
+        /// <summary>
+        /// Occurs when changes occur that affect whether or not the command should execute.
+        /// </summary>
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
