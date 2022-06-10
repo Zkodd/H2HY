@@ -4,8 +4,8 @@ namespace H2HY.Provider
 {
     /// <summary>
     /// Generic Providerinterface for all stores.
-    /// Not all provider are handling ids. So the ID interface is not needed for this interface.
-    /// But it is possible for some concret provider.
+    /// Not all provider are handling ids. So, the ID interface is not needed for this interface.
+    /// But it is maybe needed for some concret provider, like the file provider e.g.
     ///
     ///  <![CDATA[ IProvider<T> where T : IIDInterface ]]>
     ///

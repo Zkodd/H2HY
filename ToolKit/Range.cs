@@ -5,7 +5,7 @@ namespace H2HY.Toolkit
     /// <summary>
     /// Range class.
     /// </summary>
-    /// <typeparam name="T">Generic parameter. Must impliment IComparable</typeparam>
+    /// <typeparam name="T">Generic parameter. Must implement IComparable</typeparam>
     public class Range<T> : IRange<T> where T : IComparable<T>
     {
         /// <summary>

@@ -1,22 +1,28 @@
 ﻿namespace H2HY.Stores
 {
+    /// <summary>
+    /// Indicates store changes.
+    /// </summary>
     public enum StoreChanged
     {
-        //
-        // Summary:
-        //     An item was added to the store.
+        /// <summary>
+        /// An item was added to the store.
+        /// </summary>
         Add = 0,
-        //
-        // Summary:
-        //     An item was removed from the store.
+
+        /// <summary>
+        /// An item was removed from the store.
+        /// </summary>
         Remove = 1,
-        //
-        // Summary:
-        //     The contents of the store changed dramatically.
+
+        /// <summary>
+        /// The contents of the store changed dramatically.
+        /// </summary>
         Reset = 2,
-        //
-        // Summary:
-        //     An item has been updated.
+
+        /// <summary>
+        /// An item has been updated.
+        /// </summary>
         Changed = 3
     }
 }

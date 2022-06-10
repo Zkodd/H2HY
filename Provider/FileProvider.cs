@@ -67,6 +67,11 @@ namespace H2HY.Provider
             return loadedAreas;
         }
 
+        /// <summary>
+        /// removes given item using its ID.
+        /// </summary>
+        /// <param name="item">item to remove</param>
+        /// <returns>true on success</returns>
         public bool Remove(T item)
         {
             IEnumerable<T> loadedAreas = GetAll();
@@ -81,11 +86,20 @@ namespace H2HY.Provider
             return false;
         }
 
+        /// <summary>
+        /// saves all given items.
+        /// </summary>
+        /// <param name="items">items to save</param>
         public void SaveAll(IEnumerable<T> items)
         {
             SaveModel(_filename, new List<T>(items));
         }
 
+        /// <summary>
+        /// not implemented for file-provider. Dont use.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns>false</returns>
         public bool Update(T item)
         {
             return false;//we dont do updates using the file system.
