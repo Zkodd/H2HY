@@ -33,14 +33,14 @@ namespace H2HY.Provider
         /// <summary>
         /// Get all items.
         /// </summary>
-        /// <returns>readonly enumerable of type T</returns>
+        /// <returns>enumerable of type T of all items</returns>
         IEnumerable<T> GetAll();
 
         /// <summary>
         /// removes a item from the storage.
         /// </summary>
         /// <param name="item">item to remove</param>
-        /// <returns>success of remove process</returns>
+        /// <returns>true on success</returns>
         bool Remove(T item);
 
         /// <summary>

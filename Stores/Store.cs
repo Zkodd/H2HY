@@ -6,7 +6,7 @@ using System.Linq;
 namespace H2HY.Stores
 {
     /// <summary>
-    /// Usage Example:
+    /// Usage example with using a file provider:
     /// 
     /// <![CDATA[ 
     /// services.AddSingleton<FaultStore>();
@@ -17,6 +17,9 @@ namespace H2HY.Stores
     public class Store<T>
     {
         private readonly Lazy<List<T>> _items;
+        /// <summary>
+        /// the used provider for item managment.
+        /// </summary>
         protected readonly IProvider<T> _provider;
 
         /// <summary>
@@ -24,8 +27,15 @@ namespace H2HY.Stores
         /// </summary>
         public event Action<T, StoreChanged> Changed;
 
+        /// <summary>
+        /// All items. (is using lazy load)
+        /// </summary>
         public IEnumerable<T> Items => _items.Value;
 
+        /// <summary>
+        /// default constructior
+        /// </summary>
+        /// <param name="provider">provider to use for manage items.</param>
         public Store(IProvider<T> provider)
         {
             _provider = provider;
@@ -124,7 +134,7 @@ namespace H2HY.Stores
         }
 
         /// <summary>
-        /// Clears the entire list and calls Changed(item, StoreChanged.Reset)
+        /// Clears the entire store and calls Changed(item, StoreChanged.Reset)
         /// </summary>
         public void Clear()
         {

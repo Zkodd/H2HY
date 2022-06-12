@@ -9,7 +9,7 @@ namespace H2HY.Services
     /// How to use:
     ///  App.cs (Composing Root) Register Dialog to ViewModel:
     /// <![CDATA[ 
-    /// DialogService.RegistertDialog<HazardLogChapterEditView, HazardLogChapterEditCaptionViewModel>();
+    /// DialogService.RegistertDialog<HazardLogView, HazardLogViewModel>();
     /// ]]>
     ///
     /// HazardLogChapterEditCaptionViewModel.cs, use Dialoagservice:
@@ -17,11 +17,11 @@ namespace H2HY.Services
     ///      DialogService dialogService = new();
     ///      EditCaption = new RelayCommand(i =>
     ///      {
-    ///          dialogService.ShowDialog(, x => { new HazardLogChapterEditCaptionViewModel(modalstore, this) });
+    ///          dialogService.ShowDialog(, x => { new HazardLogViewModel(modalstore, this) });
     ///      });
     ///  ]]>
     ///
-    ///  Window Close is missing in wpf
+    ///  2do: Window Close is missing in wpf
     /// </summary>
     public class DialogService : IDialogService
     {
