@@ -1,5 +1,6 @@
 ﻿using H2HY.Stores;
 using System;
+using System.Windows.Input;
 
 namespace H2HY
 {
@@ -8,24 +9,22 @@ namespace H2HY
     /// <![CDATA[public MyMainViewModel(INavigationStore navigationStore, INavigationStoreModal navigationStoreModal) : base(navigationStore, navigationStoreModal) {}]]>
     /// and register it to your DI service:
     /// <![CDATA[services.AddSingleton<H2HYMainViewModel>();]]>
+    /// or
+    /// <![CDATA[services.AddSingleton<MyMainViewModel>();]]>
     /// 
     /// Create Bindings to:
-    /// <ContentControl Content="{Binding CurrentViewModel}" />
+    /// <![CDATA[<ContentControl Content="{Binding CurrentViewModel}" />]]>
     /// Now, Bind the viewmodelstype to the Views: add something like this to your MainView.xaml:
     /// <![CDATA[ 
     /// <Grid.Resources>
     ///    <DataTemplate DataType = "{x:Type viewmodels:HazardLogChapterEditCaptionViewModel}" >
-    ///        < views:HazardLogChapterEditView />
+    ///        <views:HazardLogChapterEditView />
     ///    </DataTemplate>
     /// </Grid.Resources>
     /// ]]>
     /// </summary>
     public class H2HYMainViewModel : ViewModelBase
     {
-        private readonly INavigationStore _navigationStore;
-
-        private readonly INavigationStoreModal _navigationStoreModal;
-
         /// <summary>
         /// Parameterless construtor is not allowed.
         /// </summary>
@@ -45,34 +44,49 @@ namespace H2HY
             INavigationStoreModal modalNavigationStore
         )
         {
-            _navigationStoreModal = modalNavigationStore;
-            _navigationStoreModal.CurrentViewModelChanged += OnCurrentModalViewModelChanged;
+            NavigationStoreModal = modalNavigationStore;
+            NavigationStoreModal.CurrentViewModelChanged += OnCurrentModalViewModelChanged;
 
-            _navigationStore = navigationStore;
-            _navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+            NavigationStore = navigationStore;
+            NavigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
+
+            ViewPortClosing = new RelayCommand(i => Dispose());
         }
 
-        public ViewModelBase CurrentModalViewModel => _navigationStoreModal.CurrentViewModel;
+        public ViewModelBase CurrentModalViewModel => NavigationStoreModal.CurrentViewModel;
 
         /// <summary>
         /// Returns the current viewmodel. This is bind to the Mainview/Mainwindow using:
         /// <![CDATA[ <ContentControl Content="{Binding CurrentViewModel}" /> ]]>
         /// </summary>
-        public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
+        public ViewModelBase CurrentViewModel => NavigationStore.CurrentViewModel;
 
-        public bool IsModalOpen => _navigationStoreModal.IsOpen;
+        public bool IsModalOpen => NavigationStoreModal.IsOpen;
 
-        protected INavigationStore NavigationStore => _navigationStore;
+        /// <summary>
+        /// Bind to view/window/port closing. Will call Dispose().
+        // using something like this:
+        /// <![CDATA[
+        /// <i:Interaction.Triggers>
+        ///   <i:EventTrigger EventName = "Closing" >
+        ///        <i:InvokeCommandAction Command = "{Binding ViewPortClosing}" />
+        ///   </i:EventTrigger>
+        /// </i:Interaction.Triggers>
+        ///]]>
+        /// </summary>
+        public ICommand ViewPortClosing { get; }
 
-        protected INavigationStoreModal NavigationStoreModal => _navigationStoreModal;
+        protected INavigationStore NavigationStore { get; }
+
+        protected INavigationStoreModal NavigationStoreModal { get; }
 
         /// <summary>
         /// Also calls Dispose on the current viewmodel.
         /// </summary>
         public override void Dispose()
         {
-            _navigationStoreModal.CurrentViewModelChanged -= OnCurrentModalViewModelChanged;
-            _navigationStore.CurrentViewModelChanged -= OnCurrentViewModelChanged;
+            NavigationStoreModal.CurrentViewModelChanged -= OnCurrentModalViewModelChanged;
+            NavigationStore.CurrentViewModelChanged -= OnCurrentViewModelChanged;
 
             CurrentViewModel.Dispose();
         }
