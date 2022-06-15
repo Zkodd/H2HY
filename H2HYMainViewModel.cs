@@ -50,7 +50,7 @@ namespace H2HY
             NavigationStore = navigationStore;
             NavigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
-            ViewPortClosing = new RelayCommand(i => Dispose());
+            ViewPortClosing = new RelayCommand(i => NavigationStore.CurrentViewModel = null);
         }
 
         public ViewModelBase CurrentModalViewModel => NavigationStoreModal.CurrentViewModel;
