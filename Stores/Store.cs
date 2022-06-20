@@ -28,11 +28,6 @@ namespace H2HY.Stores
         public event Action<T, StoreChanged> Changed;
 
         /// <summary>
-        /// All items have been loaded from the provider.
-        /// </summary>
-        public event Action<IEnumerable<T>> ItemsLoaded;
-
-        /// <summary>
         /// All items. (using lazy load)
         /// </summary>
         public IEnumerable<T> Items => _items.Value;
@@ -51,7 +46,7 @@ namespace H2HY.Stores
                 List<T> newList = new List<T>();
                 newList.AddRange(loadedItems);
 
-                ItemsLoaded?.Invoke(newList);
+                Loaded(newList);
                 return newList;
             });
         }
@@ -148,6 +143,15 @@ namespace H2HY.Stores
             _provider.Clear();
             _items.Value.Clear();
             Changed?.Invoke(default, StoreChanged.Reset);
+        }
+
+        /// <summary>
+        /// All items have been loaded from the provider.
+        /// virtual - NOP.
+        /// </summary>
+        protected virtual void Loaded(List<T> loadedItems)
+        {
+            // override me
         }
     }
 }
