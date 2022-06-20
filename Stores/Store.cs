@@ -23,19 +23,24 @@ namespace H2HY.Stores
         protected readonly IProvider<T> _provider;
 
         /// <summary>
-        /// Is called on store changes.
+        /// Called on store changes.
         /// </summary>
         public event Action<T, StoreChanged> Changed;
 
         /// <summary>
-        /// All items. (is using lazy load)
+        /// All items have been loaded from the provider.
+        /// </summary>
+        public event Action<IEnumerable<T>> ItemsLoaded;
+
+        /// <summary>
+        /// All items. (using lazy load)
         /// </summary>
         public IEnumerable<T> Items => _items.Value;
 
         /// <summary>
-        /// default constructior
+        /// default constructor
         /// </summary>
-        /// <param name="provider">provider to use for manage items.</param>
+        /// <param name="provider">provider to use to manage item load/save.</param>
         public Store(IProvider<T> provider)
         {
             _provider = provider;
@@ -45,12 +50,14 @@ namespace H2HY.Stores
                 IEnumerable<T> loadedItems = _provider.GetAll();
                 List<T> newList = new List<T>();
                 newList.AddRange(loadedItems);
+
+                ItemsLoaded?.Invoke(newList);
                 return newList;
             });
         }
 
         /// <summary>
-        /// updates given item and calls StoreChanged.Changed on success.
+        /// updates given item and calls <code>StoreChanged.Changed</code> on success.
         /// </summary>
         /// <param name="item">item to update</param>
         /// <returns>success of operation</returns>
@@ -134,7 +141,7 @@ namespace H2HY.Stores
         }
 
         /// <summary>
-        /// Clears the entire store and calls Changed(item, StoreChanged.Reset)
+        /// Clears the entire store and calls Changed(default, StoreChanged.Reset)
         /// </summary>
         public void Clear()
         {

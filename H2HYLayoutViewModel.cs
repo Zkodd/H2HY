@@ -3,7 +3,7 @@
 namespace H2HY
 {
     /// <summary>
-    /// No need to inherite from here.
+    /// No need to inherite from here. This class is used by <code>LayoutNavigationService</code>.
     /// 
     /// Create a Layout.xml and bind to: NavigationBarViewModel, ContentViewModel
     /// and use this as viewmodel : H2HYLayoutViewModel

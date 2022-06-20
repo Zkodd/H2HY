@@ -63,16 +63,9 @@ namespace H2HY
 
         public bool IsModalOpen => NavigationStoreModal.IsOpen;
 
+
         /// <summary>
-        /// Bind to view/window/port closing. Will call Dispose().
-        // using something like this:
-        /// <![CDATA[
-        /// <i:Interaction.Triggers>
-        ///   <i:EventTrigger EventName = "Closing" >
-        ///        <i:InvokeCommandAction Command = "{Binding ViewPortClosing}" />
-        ///   </i:EventTrigger>
-        /// </i:Interaction.Triggers>
-        ///]]>
+        /// 
         /// </summary>
         public ICommand ViewPortClosing { get; }
 
