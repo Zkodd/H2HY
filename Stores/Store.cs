@@ -147,6 +147,7 @@ namespace H2HY.Stores
 
         /// <summary>
         /// All items have been loaded from the provider.
+        /// Do not use Items-property inside. Modify loaded items instead.
         /// virtual - NOP.
         /// </summary>
         protected virtual void Loaded(List<T> loadedItems)
