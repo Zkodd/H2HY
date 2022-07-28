@@ -52,7 +52,7 @@ namespace H2HY.Stores
         }
 
         /// <summary>
-        /// updates given item and calls <code>StoreChanged.Changed</code> on success.
+        /// Updates given item using the provider. Calls <code>StoreChanged.Changed</code> on success.
         /// </summary>
         /// <param name="item">item to update</param>
         /// <returns>success of operation</returns>

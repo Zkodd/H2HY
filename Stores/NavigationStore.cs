@@ -10,7 +10,7 @@ namespace H2HY.Stores
         private ViewModelBase _currentViewModel;
 
         /// <summary>
-        /// Called after the current view model changed. So, the mainview model can 
+        /// Called after the current view model has changed. So, the mainview model can 
         /// call property changed.
         /// </summary>
         public event Action CurrentViewModelChanged;

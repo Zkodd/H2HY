@@ -8,6 +8,10 @@ namespace H2HY.Stores
         private ViewModelBase _currentViewModel;
         private readonly IDialogService _dialogService;
 
+        /// <summary>
+        /// Called after the current view model has changed. So, the mainview model can 
+        /// call property changed.
+        /// </summary>
         public event Action CurrentViewModelChanged;
 
         public NativeNavigationStoreModal(IDialogService dialogService)
