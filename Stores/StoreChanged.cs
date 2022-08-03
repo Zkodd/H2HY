@@ -21,7 +21,7 @@
         Reset = 2,
 
         /// <summary>
-        /// An item has been updated.
+        /// An item has updated.
         /// </summary>
         Changed = 3
     }

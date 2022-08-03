@@ -12,8 +12,6 @@ namespace H2HY.Provider
     public class MemoryProvider<T> : IProvider<T>
     {
         private readonly HashSet<T> _memoryList = new HashSet<T>();
-
-
         //
         // Summary:
         //     Adds the specified element to a set.
@@ -56,7 +54,7 @@ namespace H2HY.Provider
         /// Get all items.
         /// </summary>
         /// <returns>enumerable of type T of all items</returns>
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return _memoryList;
         }
@@ -75,7 +73,7 @@ namespace H2HY.Provider
         /// unsued in memory provider. NOP.
         /// </summary>
         /// <param name="items"></param>
-        public void SaveAll(IEnumerable<T> items)
+        public virtual void SaveAll(IEnumerable<T> items)
         {
             //NOP
         }

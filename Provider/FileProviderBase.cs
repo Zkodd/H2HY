@@ -1,24 +1,22 @@
 ﻿using H2HY.Models;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Xml.Serialization;
 
 namespace H2HY.Provider
 {
     /// <summary>
-    /// Provider for write and save model into xml files.
+    ///
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class FileProvider<T> : IProvider<T> where T : IIDInterface
+    public abstract class FileProviderBase<T> : IProvider<T> where T : IIDInterface
     {
         private readonly string _filename;
 
         /// <summary>
-        /// creates a fileprovider. All items will be saved/loaded from the given filename.
+        ///
         /// </summary>
-        /// <param name="filename">filename</param>
-        public FileProvider(string filename)
+        /// <param name="filename"></param>
+        public FileProviderBase(string filename)
         {
             _filename = filename;
         }
@@ -41,7 +39,7 @@ namespace H2HY.Provider
             List<T> newList = new List<T>(GetAll());
             foreach (T item in items)
             {
-                HandleId(item, newList);
+                FileProviderBase<T>.HandleId(item, newList);
                 newList.Add(item);
             }
 
@@ -63,8 +61,16 @@ namespace H2HY.Provider
         /// <returns>all read items.</returns>
         public IEnumerable<T> GetAll()
         {
-            LoadModel(_filename, out List<T> loadedAreas);
-            return loadedAreas;
+            LoadModel(_filename, out List<T>? loadedItems);
+
+            if (loadedItems is not null)
+            {
+                return loadedItems;
+            }
+            else
+            {
+                return new List<T>();
+            }
         }
 
         /// <summary>
@@ -74,13 +80,16 @@ namespace H2HY.Provider
         /// <returns>true on success</returns>
         public bool Remove(T item)
         {
-            IEnumerable<T> loadedAreas = GetAll();
-            List<T> newList = new List<T>(loadedAreas);
+            List<T> newList = GetAll().ToList();
 
-            if (newList.Remove(newList.FirstOrDefault(i => i.Id == item.Id)))
+            T? itemToRemove = newList.FirstOrDefault(i => i.Id == item.Id);
+            if (itemToRemove is not null)
             {
-                SaveModel(_filename, newList);
-                return true;
+                if (newList.Remove(itemToRemove))
+                {
+                    SaveModel(_filename, newList);
+                    return true;
+                }
             }
 
             return false;
@@ -103,54 +112,21 @@ namespace H2HY.Provider
         public bool Update(T item)
         {
             return false;//we dont do updates using the file system.
-            //IEnumerable<T> loadedAreas = GetAll();
-            //List<T> newList = new List<T>(loadedAreas);
-
-            //if (newList.Remove(newList.FirstOrDefault(i => i.Id == item.Id)))
-            //{
-            //    newList.Add(item);
-            //    SaveModel(_filename, newList);
-            //    return true;
-            //}
-
-            //return false;
         }
 
-        private static void LoadModel(string filename, out List<T> areas)
-        {
-            //An exception is thrown but handled by the XmlSerializer,
-            //so if you just ignore it everything should continue fine.
-            XmlSerializer reader = new XmlSerializer(typeof(List<T>));
+        protected abstract void LoadModel(string filename, out List<T>? list);
 
-            if (File.Exists(filename))
-            {
-                StreamReader file = new StreamReader(filename);
-                areas = reader.Deserialize(file) as List<T>;
-                file.Close();
-            }
-            else
-            {
-                areas = new List<T>();
-            }
-        }
+        protected abstract void SaveModel(string filename, List<T> list);
 
-        private static void SaveModel(string filename, List<T> areas)
-        {
-            XmlSerializer writer = new XmlSerializer(typeof(List<T>));
-            FileStream outputfile = File.Create(filename);
-            writer.Serialize(outputfile, areas);
-            outputfile.Close();
-        }
-
-        private void HandleId(T item, IEnumerable<T> usedItems)
+        private static void HandleId(T item, IEnumerable<T> usedItems)
         {
             List<int> ids = new List<int>();
             usedItems.ToList().ForEach(i => ids.Add(i.Id));
 
             item.Id = ids.Count() + 1;
-            while (ids.FirstOrDefault(i => i == item.Id) != default) 
+            while (ids.FirstOrDefault(i => i == item.Id) != default)
             {
-                item.Id++; 
+                item.Id++;
             }
         }
     }

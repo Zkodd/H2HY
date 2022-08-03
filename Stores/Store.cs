@@ -7,8 +7,8 @@ namespace H2HY.Stores
 {
     /// <summary>
     /// Usage example with using a file provider:
-    /// 
-    /// <![CDATA[ 
+    ///
+    /// <![CDATA[
     /// services.AddSingleton<FaultStore>();
     /// IProvider<T> where T : IIDInterface
     /// services.AddTransient<IProvider<FaultModel>>(s => new FileProvider<FaultModel>("Faults.xml")) ]]>
@@ -16,21 +16,12 @@ namespace H2HY.Stores
     /// <typeparam name="T"></typeparam>
     public class Store<T>
     {
-        private readonly Lazy<List<T>> _items;
         /// <summary>
         /// the used provider for item managment.
         /// </summary>
         protected readonly IProvider<T> _provider;
 
-        /// <summary>
-        /// Called on store changes.
-        /// </summary>
-        public event Action<T, StoreChanged> Changed;
-
-        /// <summary>
-        /// All items. (using lazy load)
-        /// </summary>
-        public IEnumerable<T> Items => _items.Value;
+        private readonly Lazy<List<T>> _items;
 
         /// <summary>
         /// default constructor
@@ -46,41 +37,20 @@ namespace H2HY.Stores
                 List<T> newList = new List<T>();
                 newList.AddRange(loadedItems);
 
-                Loaded(newList);
+                PreprocessLoadedList(newList);
                 return newList;
             });
         }
 
         /// <summary>
-        /// Updates given item using the provider. Calls <code>StoreChanged.Changed</code> on success.
+        /// Called on store changes.
         /// </summary>
-        /// <param name="item">item to update</param>
-        /// <returns>success of operation</returns>
-        public bool Update(T item)
-        {
-            if (_provider.Update(item))
-            {
-                Changed?.Invoke(item, StoreChanged.Changed);
-                return true;
-            }
-            return false;
-        }
+        public event Action<T, StoreChanged>? Changed;
 
         /// <summary>
-        /// Loads all items.
+        /// All items. (using lazy load)
         /// </summary>
-        public IEnumerable<T> LoadAll()
-        {
-            return Items;
-        }
-
-        /// <summary>
-        /// Saves the entire current list. 
-        /// </summary>
-        public void SaveAll()
-        {
-            _provider.SaveAll(Items);
-        }
+        public IEnumerable<T> Items => _items.Value;
 
         /// <summary>
         /// Add a item to the list and calls Changed(item, StoreChanged.Add)
@@ -106,6 +76,31 @@ namespace H2HY.Stores
             {
                 Changed?.Invoke(item, StoreChanged.Add);
             }
+        }
+
+        /// <summary>
+        /// Clears the entire store and calls Changed(default, StoreChanged.Reset)
+        /// </summary>
+        public void Clear()
+        {
+            _provider.Clear();
+            _items.Value.Clear();
+            Changed?.Invoke(default, StoreChanged.Reset);
+        }
+
+        /// <summary>
+        /// Loads the given items and rests the current store.
+        /// </summary>
+        /// <param name="items">list of new items</param>
+        public void LoadAll(IEnumerable<T> items)
+        {
+            _items.Value.Clear();
+
+            List<T> newItems = new(items);
+            PreprocessLoadedList(newItems);
+
+            _items.Value.AddRange(newItems);
+            Changed?.Invoke(default, StoreChanged.Reset);
         }
 
         /// <summary>
@@ -136,13 +131,35 @@ namespace H2HY.Stores
         }
 
         /// <summary>
-        /// Clears the entire store and calls Changed(default, StoreChanged.Reset)
+        /// Saves the current list.
         /// </summary>
-        public void Clear()
+        public void SaveAll()
         {
-            _provider.Clear();
-            _items.Value.Clear();
-            Changed?.Invoke(default, StoreChanged.Reset);
+            SaveAll(_provider);
+        }
+
+        /// <summary>
+        /// Saves the current list using the given provider.
+        /// </summary>
+        /// <param name="provider">Used provider, SaveAll(items) will be called.</param>
+        public void SaveAll(IProvider<T> provider)
+        {
+            provider.SaveAll(Items);
+        }
+
+        /// <summary>
+        /// Updates given item using the provider. Calls <code>StoreChanged.Changed</code> on success.
+        /// </summary>
+        /// <param name="item">item to update</param>
+        /// <returns>success of operation</returns>
+        public bool Update(T item)
+        {
+            if (_provider.Update(item))
+            {
+                Changed?.Invoke(item, StoreChanged.Changed);
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -150,9 +167,9 @@ namespace H2HY.Stores
         /// Do not use Items-property inside. Modify loaded items instead.
         /// virtual - NOP.
         /// </summary>
-        protected virtual void Loaded(List<T> loadedItems)
+        protected virtual void PreprocessLoadedList(List<T> newList)
         {
-            // override me
+            return;
         }
     }
 }
