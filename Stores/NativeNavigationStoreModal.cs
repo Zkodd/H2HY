@@ -5,7 +5,7 @@ namespace H2HY.Stores
 {
     public class NativeNavigationStoreModal : INavigationStoreModal
     {
-        private ViewModelBase _currentViewModel;
+        private ViewModelBase? _currentViewModel;
         private readonly IDialogService _dialogService;
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace H2HY.Stores
             _dialogService = dialogService;
         }
 
-        public ViewModelBase CurrentViewModel
+        public ViewModelBase? CurrentViewModel
         {
             get => _currentViewModel;
             set

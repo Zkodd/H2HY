@@ -45,7 +45,7 @@ namespace H2HY.Stores
         /// <summary>
         /// Called on store changes.
         /// </summary>
-        public event Action<T, StoreChanged>? Changed;
+        public event Action<T?, StoreChanged>? Changed;
 
         /// <summary>
         /// All items. (using lazy load)

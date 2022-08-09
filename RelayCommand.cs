@@ -12,7 +12,7 @@ namespace H2HY
     public class RelayCommand<T> : ICommand
     {
         private readonly Action<T> _execute;
-        private readonly Predicate<T> _canExecute;
+        private readonly Predicate<T>? _canExecute;
 
         /// <summary>
         /// standard constructor for command. CanExecute returns true.
@@ -28,7 +28,7 @@ namespace H2HY
         /// </summary>
         /// <param name="execute">action, which is executed</param>
         /// <param name="canExecute">callback, determinates if command is executable</param>
-        public RelayCommand(Action<T> execute, Predicate<T> canExecute)
+        public RelayCommand(Action<T> execute, Predicate<T>? canExecute)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
@@ -39,7 +39,7 @@ namespace H2HY
         /// </summary>
         /// <param name="parameter"></param>
         /// <returns>true on default</returns>
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             return _canExecute == null || _canExecute((T)parameter);
         }
@@ -47,7 +47,7 @@ namespace H2HY
         /// <summary>
         /// Occurs when changes occur that affect whether or not the command should execute.
         /// </summary>
-        public event EventHandler CanExecuteChanged
+        public event EventHandler? CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
@@ -57,7 +57,7 @@ namespace H2HY
         /// execute commmands. Is never call by ur code.
         /// </summary>
         /// <param name="parameter">parameter given by the WPF binding.</param>
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
             _execute((T)parameter);
         }

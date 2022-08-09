@@ -11,7 +11,7 @@ namespace H2HY
         /// <summary>
         /// Occurs when changes occur that affect whether or not the command should execute.
         /// </summary>
-        public event EventHandler CanExecuteChanged
+        public event EventHandler? CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
@@ -22,7 +22,7 @@ namespace H2HY
         /// </summary>
         /// <param name="parameter"></param>
         /// <returns>true on default</returns>
-        public virtual bool CanExecute(object parameter)
+        public virtual bool CanExecute(object? parameter)
         {
             return true;
         }
@@ -32,6 +32,6 @@ namespace H2HY
         /// abstract - u are forced to override it.
         /// </summary>
         /// <param name="parameter"></param>
-        public abstract void Execute(object parameter);
+        public abstract void Execute(object? parameter);
     }
 }

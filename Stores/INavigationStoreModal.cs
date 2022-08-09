@@ -4,9 +4,9 @@ namespace H2HY.Stores
 {
     public interface INavigationStoreModal
     {
-        event Action CurrentViewModelChanged;
+        event Action? CurrentViewModelChanged;
 
-        ViewModelBase CurrentViewModel { get; set; }
+        ViewModelBase? CurrentViewModel { get; set; }
 
         bool IsOpen { get; }
 

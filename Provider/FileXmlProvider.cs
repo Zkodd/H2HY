@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace H2HY.Provider
 {
     /// <summary>
-    /// Provider for write and save model into xml files.
+    /// Provider for write and save a model into xml a file. T have to be serialiseable.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class FileXmlProvider<T> : FileProviderBase<T> where T : IIDInterface
