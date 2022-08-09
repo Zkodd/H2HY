@@ -11,7 +11,7 @@ namespace H2HY
         /// <summary>
         /// Property Changed event.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// abstract forces every derivation to implement a dispose function to avoid memory leaks.

@@ -48,6 +48,11 @@ namespace H2HY.Stores
         public event Action<T?, StoreChanged>? Changed;
 
         /// <summary>
+        /// Callback validator. Is called for every added item.
+        /// </summary>
+        public Func<T, bool>? IsValid;
+
+        /// <summary>
         /// All items. (using lazy load)
         /// </summary>
         public IEnumerable<T> Items => _items.Value;
@@ -55,26 +60,56 @@ namespace H2HY.Stores
         /// <summary>
         /// Add a item to the list and calls Changed(item, StoreChanged.Add)
         /// </summary>
-        /// <param name="item"></param>
-        public void Add(T item)
+        /// <param name="newitem"></param>
+        public void Add(T newitem)
         {
-            _provider.Add(item);
-            _items.Value.Add(item);
-            Changed?.Invoke(item, StoreChanged.Add);
+            if (IsValid is null)
+            {
+                _provider.Add(newitem);
+                _items.Value.Add(newitem);
+                Changed?.Invoke(newitem, StoreChanged.Add);
+            }
+            else
+            {
+                if (IsValid(newitem))
+                {
+                    _provider.Add(newitem);
+                    _items.Value.Add(newitem);
+                    Changed?.Invoke(newitem, StoreChanged.Add);
+                }
+            }
         }
 
         /// <summary>
-        /// Adds a range of items and calls Changed(item, StoreChanged.Add) for each item.
+        /// Adds a range of items. Calls IsValid and calls Changed(item, StoreChanged.Add) for each item.
         /// </summary>
-        /// <param name="items"></param>
-        public void AddRange(IEnumerable<T> items)
+        /// <param name="newitems"></param>
+        public void AddRange(IEnumerable<T> newitems)
         {
-            _provider.AddRange(items);
-            _items.Value.AddRange(items);
-
-            foreach (T item in items)
+            if (IsValid is null)
             {
-                Changed?.Invoke(item, StoreChanged.Add);
+                _provider.AddRange(newitems);
+                _items.Value.AddRange(newitems);
+
+                foreach (T item in newitems)
+                {
+                    Changed?.Invoke(item, StoreChanged.Add);
+                }
+            }
+            else
+            {
+                List<T> validItems = new();
+                validItems.AddRange(from T item in newitems
+                                    where IsValid(item)
+                                    select item);
+
+                _provider.AddRange(validItems);
+                _items.Value.AddRange(validItems);
+
+                foreach (T item in validItems)
+                {
+                    Changed?.Invoke(item, StoreChanged.Add);
+                }
             }
         }
 
@@ -164,7 +199,7 @@ namespace H2HY.Stores
 
         /// <summary>
         /// All items have been loaded from the provider.
-        /// Do not use Items-property inside. Modify loaded items instead.
+        /// Do not use Items-property inside. Modify <code>newList</code> instead.
         /// virtual - NOP.
         /// </summary>
         protected virtual void PreprocessLoadedList(List<T> newList)
