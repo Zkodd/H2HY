@@ -8,6 +8,11 @@ namespace H2HY.Services
         private readonly INavigationStore _navigationStore;
         private readonly Func<TViewModel> _createViewModel;
 
+        /// <summary>
+        /// Navigates to the given viewmodel using the the given Navigationstore.
+        /// </summary>
+        /// <param name="navigationStore"></param>
+        /// <param name="createViewModel"></param>
         public NavigationService(INavigationStore navigationStore, Func<TViewModel> createViewModel)
         {
             _navigationStore = navigationStore;

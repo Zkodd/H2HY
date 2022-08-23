@@ -69,15 +69,16 @@ namespace H2HY
         /// <param name="fieldName">ref to field</param>
         /// <param name="newValue">New value</param>
         /// <param name="propertyName">Default [CallerMemberName]</param>
-        protected void SetProperty<T>(ref T fieldName, T newValue, [CallerMemberName] string propertyName = "")
+        protected bool SetProperty<T>(ref T fieldName, T newValue, [CallerMemberName] string propertyName = "")
         {
             if (Equals(fieldName, newValue))
             {
-                return;
+                return false;
             }
 
             fieldName = newValue;
             RaisePropertyChanged(propertyName);
+            return true;
         }
     }
 }
