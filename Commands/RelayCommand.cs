@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace H2HY
+namespace H2HY.Commands
 {
     /// <summary>
     /// provide a base implementation of the <code>ICommand</code> interface.
@@ -12,7 +12,7 @@ namespace H2HY
     public class RelayCommand<T> : ICommand
     {
         private readonly Action<T> _execute;
-        private readonly Predicate<T>? _canExecute;
+        private readonly Predicate<T?>? _canExecute;
 
         /// <summary>
         /// standard constructor for command. CanExecute returns true.
@@ -28,7 +28,7 @@ namespace H2HY
         /// </summary>
         /// <param name="execute">action, which is executed</param>
         /// <param name="canExecute">callback, determinates if command is executable</param>
-        public RelayCommand(Action<T> execute, Predicate<T>? canExecute)
+        public RelayCommand(Action<T> execute, Predicate<T?>? canExecute)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
@@ -41,7 +41,7 @@ namespace H2HY
         /// <returns>true on default</returns>
         public bool CanExecute(object? parameter)
         {
-            return _canExecute == null || _canExecute((T)parameter);
+            return _canExecute == null || _canExecute((T?)parameter);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace H2HY
         /// <param name="parameter">parameter given by the WPF binding.</param>
         public void Execute(object? parameter)
         {
-            _execute((T)parameter);
+            _execute((T?)parameter);
         }
     }
 

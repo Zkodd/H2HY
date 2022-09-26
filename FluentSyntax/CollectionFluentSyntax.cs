@@ -4,74 +4,8 @@ using System.Linq;
 
 namespace H2HY.FluentSyntax
 {
-    /// <summary>
-    /// Some Fluent-syntax for method chaining.
-    /// </summary>
-    public static class FluentSyntax
+    public static partial class FluentSyntax
     {
-        //public static void Then<T>(this T caller, Action<T> action)
-        //    => action?.Invoke(caller);
-
-        /// <summary>
-        /// Shorted if-then syntax
-        /// </summary>
-        /// <param name="condition"></param>
-        /// <param name="action"></param>
-        /// <returns></returns>
-        public static bool Then(this bool condition, Action action)
-        {
-            if (condition)
-            {
-                action();
-            }
-
-            return condition;
-        }
-
-        /// <summary>
-        /// shorted if-then-else syntax
-        /// </summary>
-        /// <param name="condition"></param>
-        /// <param name="action"></param>
-        /// <returns></returns>
-        public static bool Else(this bool condition, Action action)
-        {
-            if (!condition)
-            {
-                action();
-            }
-
-            return condition;
-        }
-
-
-        /// <summary>
-        /// shorted ForEach-syntax.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="collection"></param>
-        /// <param name="action"></param>
-        /// <returns></returns>
-        public static IEnumerable<T> ForEach<T>(this IEnumerable<T> collection, Action<T> action)
-        {
-            if (collection is IList<T> list)
-            {
-                for (int i = 0; i < list.Count; i++)
-                {
-                    action(list[i]);
-                }
-            }
-            else
-            {
-                foreach (var item in collection)
-                {
-                    action(item);
-                }
-            }
-
-            return collection;
-        }
-
         /// <summary>
         /// finally, a AddRange for a ICollection.. which is using a foreach-loop.
         /// </summary>

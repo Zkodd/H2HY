@@ -19,12 +19,29 @@ namespace H2HY.Services
         /// </summary>
         public string Extension { get => _fileDialog.DefaultExt; set => _fileDialog.DefaultExt = value; }
 
-        public string FileName { get; private set; }
+        /// <summary>
+        /// Empty on default. Will hold the result of Showdialog().
+        /// </summary>
+        public string FileName { get; private set; } = string.Empty;
 
+        /// <summary>
+        ///     Gets or sets the filter string that determines what types of files are displayed
+        ///     from either the Microsoft.Win32.OpenFileDialog or Microsoft.Win32.SaveFileDialog.
+        ///
+        /// Returns:
+        ///     A System.String that contains the filter. The default is System.String.Empty,
+        ///     which means that no filter is applied and all file types are displayed.
+        /// </summary>
         public string Filter { get => _fileDialog.Filter; set => _fileDialog.Filter = value; }
 
+        /// <summary>
+        /// ShowdDialog has return with a result in FileName.
+        /// </summary>
         public bool HasResult { get => FileName != string.Empty; }
 
+        /// <summary>
+        /// Openes the Filedialog. FileName contains result in case of success. Otherwise FileName is empty.
+        /// </summary>
         public void ShowDialog()
         {
             FileName = _fileDialog.ShowDialog() == true ? _fileDialog.FileName : string.Empty;

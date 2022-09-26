@@ -7,6 +7,9 @@ using System.Windows.Interop;
 
 namespace H2HY.Services
 {
+    /// <summary>
+    /// Opens a Folder-Pick popup window.
+    /// </summary>
     public class FolderPickerService
     {
         public virtual string ResultPath { get; protected set; } = string.Empty;
@@ -26,9 +29,9 @@ namespace H2HY.Services
             return options;
         }
 
-        public bool? ShowDialog(Window owner = null, bool throwOnError = false)
+        public bool? ShowDialog(Window? owner = null, bool throwOnError = false)
         {
-            owner = owner ?? Application.Current.MainWindow;
+            owner ??= Application.Current.MainWindow;
 
             return ShowDialog(owner != null ? new WindowInteropHelper(owner).Handle : IntPtr.Zero, throwOnError);
         }

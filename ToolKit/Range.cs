@@ -19,20 +19,20 @@ namespace H2HY.Toolkit
         public T High { get; set; }
 
         /// <summary>
-        /// Determines if the provided value is inside the range.
-        /// </summary>
+        /// Determines if the provided value is inside or equal the range.
+        /// /// </summary>
         /// <param name="otherValue">value to check</param>
-        /// <returns>true if value is or euqal the boundarys</returns>
+        /// <returns>true if value is inside or equal the boundarys</returns>
         public bool Includes(T otherValue)
         {
             return (Low.CompareTo(otherValue) <= 0) && (otherValue.CompareTo(High) <= 0);
         }
 
         /// <summary>
-        /// Determines if another range is inside the bounds of this range.
+        /// Determines if another range is inside or equal the bounds of this range.
         /// </summary>
         /// <param name="otherRange"></param>
-        /// <returns>true if otherRange is totaly in or euqal the boundarys</returns>
+        /// <returns>true if range is inside or equal the boundarys</returns>
         public bool Includes(IRange<T> otherRange)
         {
             return Includes(otherRange.Low) && Includes(otherRange.High);

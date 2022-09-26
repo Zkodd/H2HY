@@ -12,7 +12,7 @@ namespace H2HY.Stores
         /// Called after the current view model has changed. So, the mainview model can 
         /// call property changed.
         /// </summary>
-        public event Action CurrentViewModelChanged;
+        public event Action? CurrentViewModelChanged;
 
         public NativeNavigationStoreModal(IDialogService dialogService)
         {
@@ -37,15 +37,15 @@ namespace H2HY.Stores
 
         public void Close()
         {
-            CurrentViewModel.ViewClosed();
-            CurrentViewModel.ViewClosed(false);
+            CurrentViewModel?.ViewClosed();
+            CurrentViewModel?.ViewClosed(false);
             CurrentViewModel = null;
         }
 
         private void OnCurrentViewClosed(bool result)
         {
-            CurrentViewModel.ViewClosed();
-            CurrentViewModel.ViewClosed(result);
+            CurrentViewModel?.ViewClosed();
+            CurrentViewModel?.ViewClosed(result);
             CurrentViewModel = null;
         }
 

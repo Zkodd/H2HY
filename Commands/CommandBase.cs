@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace H2HY
+namespace H2HY.Commands
 {
     /// <summary>
     /// A standard ICommand realisation.

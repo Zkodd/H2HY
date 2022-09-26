@@ -45,7 +45,7 @@ namespace H2HY
         }
 
         /// <summary>
-        /// Viewmodel which is shown in the content row.
+        /// Current viewmodel which is shown in the content row.
         /// </summary>
         public ViewModelBase ContentViewModel { get; }
 

@@ -1,4 +1,5 @@
-﻿using H2HY.Stores;
+﻿using H2HY.Commands;
+using H2HY.Stores;
 using System;
 using System.Windows.Input;
 
@@ -51,17 +52,20 @@ namespace H2HY
         }
 
         /// <summary>
-        /// The MainViewModel(=MainWindow) is closing.
+        /// The ViewPort is closed. The MainViewModel(=MainWindow) is closing.
         /// </summary>
-        public event Action ViewPortClosed;
+        public event Action? ViewPortClosed;
 
-        public ViewModelBase CurrentModalViewModel => NavigationStoreModal.CurrentViewModel;
+        /// <summary>
+        /// Current ModalViewModel.
+        /// </summary>
+        public ViewModelBase? CurrentModalViewModel => NavigationStoreModal.CurrentViewModel;
 
         /// <summary>
         /// Returns the current viewmodel. This is bind to the Mainview/Mainwindow by using:
         /// <![CDATA[ <ContentControl Content="{Binding CurrentViewModel}" /> ]]>
         /// </summary>
-        public ViewModelBase CurrentViewModel => NavigationStore.CurrentViewModel;
+        public ViewModelBase? CurrentViewModel => NavigationStore.CurrentViewModel;
 
         public bool IsModalOpen => NavigationStoreModal.IsOpen;
 
@@ -75,17 +79,17 @@ namespace H2HY
         /// </i:Interaction.Triggers>
         /// ]]>
         /// </summary>
-        public ICommand ViewPortClosing { get; }
+        public ICommand ViewPortClosing { get; private set; }
 
         /// <summary>
         /// Used Navigationstore - used to, well, navigate.
         /// </summary>
-        protected INavigationStore NavigationStore { get; }
+        protected INavigationStore NavigationStore { get; private set; }
 
         /// <summary>
         /// Used Navigationstore for modals.
         /// </summary>
-        protected INavigationStoreModal NavigationStoreModal { get; }
+        protected INavigationStoreModal NavigationStoreModal { get; private set; }
 
         /// <summary>
         /// Dispose.

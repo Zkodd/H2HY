@@ -1,6 +1,6 @@
 ﻿using H2HY.Services;
 
-namespace H2HY.Toolkit
+namespace H2HY.Commands
 {
     /// <summary>
     /// Converts a INavigationService to an ICommand.
@@ -22,7 +22,7 @@ namespace H2HY.Toolkit
         /// calls Navigate() on the given Service.
         /// </summary>
         /// <param name="parameter">unsued.</param>
-        public override void Execute(object parameter)
+        public override void Execute(object? parameter)
         {
             _navigationService.Navigate();
         }

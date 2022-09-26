@@ -8,10 +8,7 @@ namespace H2HY.Services
     /// - unused -
     /// How to use:
     ///  App.cs (Composing Root) Register Dialog to ViewModel:
-    /// <![CDATA[ 
-    /// DialogService.RegistertDialog<HazardLogView, HazardLogViewModel>();
-    /// ]]>
-    ///
+    /// <![CDATA[DialogService.RegistertDialog<HazardLogView, HazardLogViewModel>();]]>
     /// HazardLogChapterEditCaptionViewModel.cs, use Dialoagservice:
     /// <![CDATA[
     ///      DialogService dialogService = new();
@@ -25,7 +22,7 @@ namespace H2HY.Services
     /// </summary>
     public class DialogService : IDialogService
     {
-        private Window _currentDialog;
+        private Window? _currentDialog;
 
         internal static Dictionary<Type, Type> _mappings = new Dictionary<Type, Type>();
 
@@ -49,10 +46,9 @@ namespace H2HY.Services
             Type viewType = _mappings[viewmodel.GetType()];
 
             _currentDialog = new Window();
-
             void closeEventHandler(object s, EventArgs e)
             {
-                bool result = _currentDialog?.DialogResult != default ? (bool)_currentDialog.DialogResult : false;
+                bool result = _currentDialog.DialogResult != default ? (bool)_currentDialog.DialogResult : false;
 
                 callback(result);
                 _currentDialog.Closed -= closeEventHandler;

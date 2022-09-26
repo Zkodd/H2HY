@@ -2,15 +2,15 @@
 <package>
   <metadata>
     <id>$id$</id>
-    <version>6.0.0.12</version>
+    <version>6.0.0.13</version>
     <title>Hope to Help Ya</title>
     <authors>Thorsten Appel</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <!-- <icon>icon.png</icon> -->
     <description>
-      Basic helper for MVVVM issues. Lightware - no schnickschnack.
-      INotifyPropertyChanged in Viewmodelbase, RelayCommand, ICommand/CommandManager, 
+      Handy-dandy basic helper for MVVVM issues. Lightware - no schnickschnack.
+      INotifyPropertyChanged in Viewmodelbase, RelayCommand, ICommand/CommandManager,
       Basic Stores, Provider, Filenopen/SaveService, FolderPicker, etc.
     </description>
     <releaseNotes></releaseNotes>
