@@ -1,5 +1,6 @@
 ﻿using H2HY.Provider;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,10 +15,15 @@ namespace H2HY.Stores
     /// services.AddTransient<IProvider<FaultModel>>(s => new FileProvider<FaultModel>("Faults.xml")) ]]>
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Store<T>
+    public class Store<T> : ICollection<T>
     {
         /// <summary>
-        /// the used provider for item managment.
+        /// Callback validator. Is called for every added item.
+        /// </summary>
+        public Func<T, bool>? IsValid;
+
+        /// <summary>
+        /// Used provider for item managment.
         /// </summary>
         protected readonly IProvider<T> _provider;
 
@@ -26,7 +32,7 @@ namespace H2HY.Stores
         /// <summary>
         /// default constructor
         /// </summary>
-        /// <param name="provider">provider to use to manage item load/save.</param>
+        /// <param name="provider">provider which manages items.</param>
         public Store(IProvider<T> provider)
         {
             _provider = provider;
@@ -46,17 +52,20 @@ namespace H2HY.Stores
         /// Called on store changes.
         /// </summary>
         public event Action<T?, StoreChanged>? Changed;
+        /// <summary>
+        /// The number of elements contained in the store.
+        /// </summary>
+        public int Count => _items.Value.Count;
 
         /// <summary>
-        /// Callback validator. Is called for every added item.
+        /// Is always false.
         /// </summary>
-        public Func<T, bool>? IsValid;
+        public bool IsReadOnly => false;
 
         /// <summary>
         /// All items. (using lazy load)
         /// </summary>
         public IEnumerable<T> Items => _items.Value;
-
         /// <summary>
         /// Add a item to the list and calls Changed(item, StoreChanged.Add)
         /// </summary>
@@ -124,7 +133,46 @@ namespace H2HY.Stores
         }
 
         /// <summary>
-        /// Loads the given items and rests the current store.
+        /// Determines whether an element is in the
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public bool Contains(T item)
+        {
+            return _items.Value.Contains(item);
+        }
+
+        /// <summary>
+        /// Copies the entire store to a compatible one-dimensional
+        ///  array, starting at the specified index of the target array.
+        /// </summary>
+        /// <param name="array">target array</param>
+        /// <param name="arrayIndex">target index</param>
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            _items.Value.CopyTo(array, arrayIndex);
+        }
+
+        /// <summary>
+        ///  Returns an enumerator that iterates through the store.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator<T> GetEnumerator()
+        {
+            return _items.Value.GetEnumerator();
+        }
+
+        /// <summary>
+        ///  Returns an enumerator that iterates through the store.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _items.Value.GetEnumerator();
+        }
+
+        /// <summary>
+        /// Clears the current store and loads the given items.
         /// </summary>
         /// <param name="items">list of new items</param>
         public void LoadAll(IEnumerable<T> items)
@@ -139,34 +187,7 @@ namespace H2HY.Stores
         }
 
         /// <summary>
-        /// Trys to removes the given item. Calls Changed(item, StoreChanged.Remove) on succsess.
-        /// </summary>
-        /// <param name="item"></param>
-        public void Remove(T item)
-        {
-            if (_items.Value.Remove(item))
-            {
-                _provider.Remove(item);
-                Changed?.Invoke(item, StoreChanged.Remove);
-            }
-        }
-
-        /// <summary>
-        /// Removes items where the given lambdafunction returns true.
-        /// Calls Changed(item, StoreChanged.Remove) for each item on succsess.
-        /// </summary>
-        /// <param name="predicate">Lambdafunction, returns true for removal.</param>
-        public void RemoveWhere(Func<T, bool> predicate)
-        {
-            IEnumerable<T> itemstoremove = Items.Where(i => predicate(i)).ToList();
-            foreach (T item in itemstoremove)
-            {
-                Remove(item);
-            }
-        }
-
-        /// <summary>
-        /// Saves the current list.
+        /// Saves all items.
         /// </summary>
         public void SaveAll()
         {
@@ -176,7 +197,7 @@ namespace H2HY.Stores
         /// <summary>
         /// Saves the current list using the given provider.
         /// </summary>
-        /// <param name="provider">Used provider, SaveAll(items) will be called.</param>
+        /// <param name="provider">Used provider. SaveAll(items) will be called.</param>
         public void SaveAll(IProvider<T> provider)
         {
             provider.SaveAll(Items);
@@ -205,6 +226,30 @@ namespace H2HY.Stores
         protected virtual void PreprocessLoadedList(List<T> newList)
         {
             return;
+        }
+
+        bool ICollection<T>.Remove(T item)
+        {
+            return Remove(item);
+        }
+
+        /// <summary>
+        /// Removes the first occurrence of a specific object from the store.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        bool Remove(T item)
+        {
+            if (_items.Value.Remove(item))
+            {
+                _provider.Remove(item);
+                Changed?.Invoke(item, StoreChanged.Remove);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

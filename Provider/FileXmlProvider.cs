@@ -32,7 +32,7 @@ namespace H2HY.Provider
             }
         }
 
-        protected override void SaveModel(string filename, List<T> list)
+        protected override void SaveModel(string filename, IEnumerable<T> list)
         {
             XmlSerializer writer = new XmlSerializer(typeof(List<T>));
             FileStream outputfile = File.Create(filename);

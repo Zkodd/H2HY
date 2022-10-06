@@ -10,6 +10,7 @@ namespace H2HY.Provider
     /// <typeparam name="T"></typeparam>
     public abstract class FileProviderBase<T> : IProvider<T> where T : IIDInterface
     {
+        private readonly HashSet<T> _memoryList = new();
         private readonly string _filename;
 
         /// <summary>
@@ -36,14 +37,11 @@ namespace H2HY.Provider
         /// <param name="items"></param>
         public void AddRange(IEnumerable<T> items)
         {
-            List<T> newList = new List<T>(GetAll());
             foreach (T item in items)
             {
-                FileProviderBase<T>.HandleId(item, newList);
-                newList.Add(item);
+                FileProviderBase<T>.HandleId(item, _memoryList);
+                _memoryList.Add(item);
             }
-
-            SaveModel(_filename, newList);
         }
 
         /// <summary>
@@ -51,8 +49,8 @@ namespace H2HY.Provider
         /// </summary>
         public void Clear()
         {
-            List<T> emptyList = new List<T>();
-            SaveModel(_filename, emptyList);
+            _memoryList.Clear();
+            SaveModel(_filename, _memoryList);
         }
 
         /// <summary>
@@ -61,16 +59,14 @@ namespace H2HY.Provider
         /// <returns>all read items.</returns>
         public IEnumerable<T> GetAll()
         {
+            _memoryList.Clear();
             LoadModel(_filename, out List<T>? loadedItems);
-
             if (loadedItems is not null)
             {
-                return loadedItems;
+                _memoryList.UnionWith(loadedItems);
             }
-            else
-            {
-                return new List<T>();
-            }
+
+            return _memoryList;
         }
 
         /// <summary>
@@ -80,16 +76,10 @@ namespace H2HY.Provider
         /// <returns>true on success</returns>
         public bool Remove(T item)
         {
-            List<T> newList = GetAll().ToList();
-
-            T? itemToRemove = newList.FirstOrDefault(i => i.Id == item.Id);
+            T? itemToRemove = _memoryList.FirstOrDefault(i => i.Id == item.Id);
             if (itemToRemove is not null)
             {
-                if (newList.Remove(itemToRemove))
-                {
-                    SaveModel(_filename, newList);
-                    return true;
-                }
+                return _memoryList.Remove(itemToRemove);
             }
 
             return false;
@@ -101,7 +91,7 @@ namespace H2HY.Provider
         /// <param name="items">items to save</param>
         public void SaveAll(IEnumerable<T> items)
         {
-            SaveModel(_filename, new List<T>(items));
+            SaveModel(_filename, items);
         }
 
         /// <summary>
@@ -116,14 +106,14 @@ namespace H2HY.Provider
 
         protected abstract void LoadModel(string filename, out List<T>? list);
 
-        protected abstract void SaveModel(string filename, List<T> list);
+        protected abstract void SaveModel(string filename, IEnumerable<T> list);
 
         private static void HandleId(T item, IEnumerable<T> usedItems)
         {
             List<int> ids = new List<int>();
             usedItems.ToList().ForEach(i => ids.Add(i.Id));
 
-            item.Id = ids.Count() + 1;
+            item.Id = ids.Count + 1;
             while (ids.FirstOrDefault(i => i == item.Id) != default)
             {
                 item.Id++;

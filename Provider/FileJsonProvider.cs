@@ -30,7 +30,7 @@ namespace H2HY.Provider
             }
         }
 
-        protected override void SaveModel(string filename, List<T> list)
+        protected override void SaveModel(string filename, IEnumerable<T> list)
         {
             FileStream outputfile = File.Create(filename);
             JsonSerializer.Serialize(outputfile, list);

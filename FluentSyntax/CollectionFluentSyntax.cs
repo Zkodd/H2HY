@@ -56,10 +56,10 @@ namespace H2HY.FluentSyntax
         /// <typeparam name="T"></typeparam>
         /// <param name="collection"></param>
         /// <param name="predicate"></param>
-        public static void RemoveWhere<T>(this ICollection<T> collection, Func<T, bool> predicate)
+        public static ICollection<T> RemoveWhere<T>(this ICollection<T> collection, Func<T, bool> predicate)
         {
             IEnumerable<T> itemstoremove = collection.Where(i => predicate(i)).ToList();
-            collection.RemoveRange(itemstoremove);
+            return collection.RemoveRange(itemstoremove);
         }
     }
 }
