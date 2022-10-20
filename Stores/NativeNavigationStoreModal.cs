@@ -27,7 +27,10 @@ namespace H2HY.Stores
                 _currentViewModel?.DisposeAll();
                 _currentViewModel = value;
 
-                _dialogService.ShowDialog(value, OnCurrentViewClosed);
+                if (value is not null)
+                {
+                    _dialogService.ShowDialog(value, OnCurrentViewClosed);
+                }
 
                 OnCurrentViewModelChanged();
             }
@@ -54,6 +57,9 @@ namespace H2HY.Stores
             CurrentViewModelChanged?.Invoke();
         }
 
+        /// <summary>
+        /// Dispose. No need to call.
+        /// </summary>
         ~NativeNavigationStoreModal()
         {
             CurrentViewModel = null;

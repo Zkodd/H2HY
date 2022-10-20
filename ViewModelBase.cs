@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace H2HY
 {
     /// <summary>
-    /// Base class for ALL Viewmodels. Realises INotifyPropertyChanged.
+    /// Base class for all viewmodels. Realises INotifyPropertyChanged.
     /// </summary>
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
@@ -71,7 +72,7 @@ namespace H2HY
         /// <param name="propertyName">Default [CallerMemberName]</param>
         protected bool SetProperty<T>(ref T fieldName, T newValue, [CallerMemberName] string propertyName = "")
         {
-            if (Equals(fieldName, newValue))
+            if (EqualityComparer<T>.Default.Equals(fieldName, newValue))
             {
                 return false;
             }

@@ -10,7 +10,7 @@ namespace H2HY.Services
         /// <summary>
         /// Created by the construtor. Is neither a FileOpen or an FileSaveDialog.
         /// </summary>
-        protected FileDialog _fileDialog;
+        protected FileDialog _fileDialog = default!;
 
         /// <summary>
         /// Gets or sets the current file name filter string, which determines the choices that appear in the 
