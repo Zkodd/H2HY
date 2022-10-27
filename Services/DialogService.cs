@@ -65,6 +65,7 @@ namespace H2HY.Services
                 {
                     viewmodel.ViewClosed(result);
                     callback(result);
+                    viewmodel.Dispose();
                 }
                 finally
                 {
@@ -108,6 +109,7 @@ namespace H2HY.Services
                 {
                     viewmodel.ViewClosed();
                     callback();
+                    viewmodel.Dispose();
                 }
                 finally
                 {

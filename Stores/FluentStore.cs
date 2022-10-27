@@ -25,9 +25,10 @@ namespace H2HY.Stores
         /// </summary>
         protected readonly IProvider<T>? _provider;
 
-        private readonly List<Action<T>> _added = new();
-        private readonly List<Action<IList<T>>> _cleared = new();
-        private readonly List<Action<T>> _removed = new();
+        private object? _lastSubscriber;
+        private readonly Dictionary<object, Action<T>> _added = new();
+        private readonly Dictionary<object, Action<IList<T>>> _cleared = new();
+        private readonly Dictionary<object, Action<T>> _removed = new();
 
         /// <summary>
         /// default constructor
@@ -47,6 +48,28 @@ namespace H2HY.Stores
                 Add(item);
             }
             _provider = provider;
+        }
+
+        /// <summary>
+        /// subscribe as observer - has to called bevor ever When.
+        /// </summary>
+        /// <param name="owner"></param>
+        /// <returns></returns>
+        public FluentStore<T> Subscripe(object owner)
+        {
+            _lastSubscriber = owner;
+            return this;
+        }
+
+        /// <summary>
+        /// Unsubscribe as observer. Unsubsricbes from all calls.
+        /// </summary>
+        /// <param name="owner"></param>
+        public void Unsubscribe(object owner)
+        {
+            _added.Remove(owner);
+            _cleared.Remove(owner);
+            _removed.Remove(owner);
         }
 
         /// <summary>
@@ -127,9 +150,14 @@ namespace H2HY.Stores
         /// <returns></returns>
         public FluentStore<T> WhenAdded(Action<T> added)
         {
+            if (_lastSubscriber is null)
+            {
+                throw new Exception("Subscriber is not set.");
+            }
+
             if (added != null)
             {
-                _added.Add(added);
+                _added.Add(_lastSubscriber, added);
             }
             return this;
         }
@@ -141,9 +169,14 @@ namespace H2HY.Stores
         /// <returns></returns>
         public FluentStore<T> WhenCleared(Action<IList<T>> cleared)
         {
+            if (_lastSubscriber is null)
+            {
+                throw new Exception("Subscriber is not set.");
+            }
+
             if (cleared != null)
             {
-                _cleared.Add(cleared);
+                _cleared.Add(_lastSubscriber, cleared);
             }
             return this;
         }
@@ -155,9 +188,14 @@ namespace H2HY.Stores
         /// <returns></returns>
         public FluentStore<T> WhenRemoved(Action<T> removed)
         {
+            if (_lastSubscriber is null)
+            {
+                throw new Exception("Subscriber is not set.");
+            }
+
             if (removed != null)
             {
-                _removed.Add(removed);
+                _removed.Add(_lastSubscriber, removed);
             }
             return this;
         }
@@ -210,9 +248,9 @@ namespace H2HY.Stores
         /// <param name="item"></param>
         protected virtual void NotifyOnItemAdded(T item)
         {
-            for (int i = 0; i < _added.Count; i++)
+            foreach (var action in _added)
             {
-                _added[i](item);
+                action.Value(item);
             }
         }
 
@@ -222,9 +260,9 @@ namespace H2HY.Stores
         /// <param name="item"></param>
         protected virtual void NotifyOnItemRemoved(T item)
         {
-            for (int i = 0; i < _removed.Count; i++)
+            foreach (var action in _removed)
             {
-                _removed[i](item);
+                action.Value(item);
             }
         }
 
@@ -234,9 +272,9 @@ namespace H2HY.Stores
         /// <param name="items"></param>
         protected virtual void NotifyOnItemsCleared(IList<T> items)
         {
-            for (int i = 0; i < _cleared.Count; i++)
+            foreach (var action in _cleared)
             {
-                _cleared[i](items);
+                action.Value(items);
             }
         }
 
