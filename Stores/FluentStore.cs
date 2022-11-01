@@ -10,6 +10,7 @@ namespace H2HY.Stores
     /// <summary>
     /// A Fluent Collection - giving a provider is optinal.
     /// (WPF) bindable
+    /// Using .Subscribe(this) bevor using any .When is mandatory.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class FluentStore<T> : Collection<T>, INotifyPropertyChanged, INotifyCollectionChanged

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace H2HY.FluentSyntax
 {
@@ -15,7 +16,18 @@ namespace H2HY.FluentSyntax
         /// <returns></returns>
         public static ICollection<T> AddRange<T>(this ICollection<T> collection, IEnumerable<T> items)
         {
-            items.ForEach(collection.Add);
+            if (items is List<T> list)
+            {
+                foreach (T item in CollectionsMarshal.AsSpan(list))
+                {
+                    collection.Add(item);
+                }
+            }
+            else
+            {
+                items.ForEach(collection.Add);
+            }
+
             return collection;
         }
 
