@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:h2hy="clr-namespace:H2HY"
-        d:DataContext="{d:DesignInstance Type=h2hy:ModalDialogBase}"
+        d:DataContext="{d:DesignInstance Type=h2hy:ViewModelDialogBase}"
         mc:Ignorable="d"
         WindowStyle="ToolWindow"
         Title="{Binding Title}"

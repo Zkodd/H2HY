@@ -1,6 +1,6 @@
 ﻿namespace H2HY
 {
-    public abstract class ModalDialogBase : ViewModelBase
+    public abstract class ViewModelDialogBase : ViewModelBase
     {
         private bool _isOkEnabled;
         private string _title = string.Empty;

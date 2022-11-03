@@ -35,9 +35,26 @@ namespace H2HY.Services
         ///  Shows given viewmodel in a modal dialog window.
         /// </summary>
         /// <param name="viewmodel"></param>
+        /// <param name="callback">callback on window close event. Can be true/false for modal - otherwise always false</param>
+        public void ShowDialog(ViewModelBase viewmodel, Action<bool> callback)
+        {
+            if (viewmodel is ViewModelDialogBase)
+            {
+                ShowModalDialog((ViewModelDialogBase)viewmodel, callback);
+            }
+            else
+            {
+                ShowWindowDialog(viewmodel, callback);
+            }
+        }
+
+        /// <summary>
+        ///  Shows given viewmodel in a modal dialog window.
+        /// </summary>
+        /// <param name="viewmodel"></param>
         /// <param name="callback">callback on window close event.</param>
         /// <exception cref="KeyNotFoundException"></exception>
-        public void ShowDialog(ViewModelBase viewmodel, Action<bool> callback)
+        private void ShowModalDialog(ViewModelDialogBase viewmodel, Action<bool> callback)
         {
             Type? viewType = _mappings.GetValueOrDefault(viewmodel.GetType());
             if (viewType is null)
@@ -88,7 +105,7 @@ namespace H2HY.Services
         /// <param name="viewmodel"></param>
         /// <param name="callback">callback on window close event.</param>
         /// <exception cref="KeyNotFoundException"></exception>
-        public void ShowWindow(ViewModelBase viewmodel, Action callback)
+        private void ShowWindowDialog(ViewModelBase viewmodel, Action<bool> callback)
         {
             Type? viewType = _mappings.GetValueOrDefault(viewmodel.GetType());
             if (viewType is null)
@@ -108,7 +125,7 @@ namespace H2HY.Services
                 try
                 {
                     viewmodel.ViewClosed();
-                    callback();
+                    callback(false);
                     viewmodel.Dispose();
                 }
                 finally

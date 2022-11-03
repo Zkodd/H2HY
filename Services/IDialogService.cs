@@ -13,12 +13,5 @@ namespace H2HY.Services
         /// <param name="viewmodel"></param>
         /// <param name="callback"></param>
         void ShowDialog(ViewModelBase viewmodel, Action<bool> callback);
-
-        /// <summary>
-        /// Opens given viewmodel as window. No dialog result available.
-        /// </summary>
-        /// <param name="viewmodel"></param>
-        /// <param name="callback">Closed callback</param>
-        void ShowWindow(ViewModelBase viewmodel, Action callback);
     }
 }

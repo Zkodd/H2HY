@@ -30,16 +30,11 @@ namespace H2HY
         /// Default constructor.
         /// </summary>
         /// <param name="navigationStore">Navigation store</param>
-        /// <param name="modalNavigationStore">Modal navigation store</param>
         public H2HYMainViewModel
         (
-            INavigationStore navigationStore,
-            INavigationStoreModal modalNavigationStore
+            INavigationStore navigationStore
         )
         {
-            NavigationStoreModal = modalNavigationStore;
-            NavigationStoreModal.CurrentViewModelChanged += OnCurrentModalViewModelChanged;
-
             NavigationStore = navigationStore;
             NavigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
 
@@ -57,17 +52,10 @@ namespace H2HY
         public event Action? ViewPortClosed;
 
         /// <summary>
-        /// Current ModalViewModel.
-        /// </summary>
-        public ViewModelBase? CurrentModalViewModel => NavigationStoreModal.CurrentViewModel;
-
-        /// <summary>
         /// Returns the current viewmodel. This is bind to the Mainview/Mainwindow by using:
         /// <![CDATA[ <ContentControl Content="{Binding CurrentViewModel}" /> ]]>
         /// </summary>
         public ViewModelBase? CurrentViewModel => NavigationStore.CurrentViewModel;
-
-        public bool IsModalOpen => NavigationStoreModal.IsOpen;
 
         /// <summary>
         /// Closes the current MainView(=Window) - can be bind in the view(window) like this:
@@ -87,23 +75,11 @@ namespace H2HY
         protected INavigationStore NavigationStore { get; private set; }
 
         /// <summary>
-        /// Used Navigationstore for modals.
-        /// </summary>
-        protected INavigationStoreModal NavigationStoreModal { get; private set; }
-
-        /// <summary>
         /// Dispose.
         /// </summary>
         public override void Dispose()
         {
-            NavigationStoreModal.CurrentViewModelChanged -= OnCurrentModalViewModelChanged;
             NavigationStore.CurrentViewModelChanged -= OnCurrentViewModelChanged;
-        }
-
-        private void OnCurrentModalViewModelChanged()
-        {
-            RaisePropertyChanged(nameof(CurrentModalViewModel));
-            RaisePropertyChanged(nameof(IsModalOpen));
         }
 
         private void OnCurrentViewModelChanged()
