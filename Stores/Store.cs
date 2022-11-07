@@ -228,17 +228,12 @@ namespace H2HY.Stores
             return;
         }
 
-        bool ICollection<T>.Remove(T item)
-        {
-            return Remove(item);
-        }
-
         /// <summary>
         /// Removes the first occurrence of a specific object from the store.
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        bool Remove(T item)
+        public bool Remove(T item)
         {
             if (_items.Value.Remove(item))
             {

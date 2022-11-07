@@ -82,7 +82,7 @@ namespace H2HY.Commands
         /// </summary>
         /// <param name="execute">action, which is executed</param>
         /// <param name="canExecute">callback, determinates if command is executable</param>
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute) : base(execute, canExecute)
+        public RelayCommand(Action<object> execute, Predicate<object?>? canExecute) : base(execute, canExecute)
         {
         }
     }

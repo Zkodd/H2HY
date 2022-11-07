@@ -36,7 +36,7 @@ namespace H2HY.Services
         /// </summary>
         /// <param name="viewmodel"></param>
         /// <param name="callback">callback on window close event. Can be true/false for modal - otherwise always false</param>
-        public void ShowDialog(ViewModelBase viewmodel, Action<bool> callback)
+        public void ShowDialog(ViewModelBase viewmodel, Action<ViewModelBase, bool> callback)
         {
             if (viewmodel is ViewModelDialogBase)
             {
@@ -54,7 +54,7 @@ namespace H2HY.Services
         /// <param name="viewmodel"></param>
         /// <param name="callback">callback on window close event.</param>
         /// <exception cref="KeyNotFoundException"></exception>
-        private void ShowModalDialog(ViewModelDialogBase viewmodel, Action<bool> callback)
+        private void ShowModalDialog(ViewModelDialogBase viewmodel, Action<ViewModelBase,bool> callback)
         {
             Type? viewType = _mappings.GetValueOrDefault(viewmodel.GetType());
             if (viewType is null)
@@ -81,7 +81,7 @@ namespace H2HY.Services
                 try
                 {
                     viewmodel.ViewClosed(result);
-                    callback(result);
+                    callback(viewmodel, result);
                     viewmodel.Dispose();
                 }
                 finally
@@ -105,7 +105,7 @@ namespace H2HY.Services
         /// <param name="viewmodel"></param>
         /// <param name="callback">callback on window close event.</param>
         /// <exception cref="KeyNotFoundException"></exception>
-        private void ShowWindowDialog(ViewModelBase viewmodel, Action<bool> callback)
+        private void ShowWindowDialog(ViewModelBase viewmodel, Action<ViewModelBase, bool> callback)
         {
             Type? viewType = _mappings.GetValueOrDefault(viewmodel.GetType());
             if (viewType is null)
@@ -125,7 +125,7 @@ namespace H2HY.Services
                 try
                 {
                     viewmodel.ViewClosed();
-                    callback(false);
+                    callback(viewmodel, false);
                     viewmodel.Dispose();
                 }
                 finally

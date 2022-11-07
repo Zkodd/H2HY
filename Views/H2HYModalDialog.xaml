@@ -4,12 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:h2hy="clr-namespace:H2HY"
+        xmlns:h2hyProp="clr-namespace:H2HY.Properties"
         d:DataContext="{d:DesignInstance Type=h2hy:ViewModelDialogBase}"
         mc:Ignorable="d"
         WindowStyle="ToolWindow"
         Title="{Binding Title}"
         Height="250"
-        Width="300">
+        Width="300"
+        h2hyProp:WindowCloser.EnableWindowClosing="True">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
