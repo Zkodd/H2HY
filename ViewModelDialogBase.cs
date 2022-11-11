@@ -6,6 +6,8 @@ namespace H2HY
     {
         private bool _isOkEnabled;
         private string _title = string.Empty;
+        private bool _areButtonsVisible = true;
+        private bool _isModal = true;
 
         /// <summary>
         /// Dialog window close methode is attached here. No need to touch.
@@ -26,6 +28,30 @@ namespace H2HY
             set
             {
                 SetProperty(ref _isOkEnabled, value);
+            }
+        }
+
+        /// <summary>
+        /// Shows dialag as modal(default)
+        /// </summary>
+        public bool IsModal
+        {
+            get => _isModal;
+            set
+            {
+                SetProperty(ref _isModal, value);
+            }
+        }
+
+        /// <summary>
+        /// Sets visibility for all buttons.
+        /// </summary>
+        public bool AreButtonsVisible
+        {
+            get => _areButtonsVisible;
+            set
+            {
+                SetProperty(ref _areButtonsVisible, value);
             }
         }
 

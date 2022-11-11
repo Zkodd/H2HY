@@ -38,9 +38,9 @@ namespace H2HY.Services
         /// <param name="callback">callback on window close event. Can be true/false for modal - otherwise always false</param>
         public void ShowDialog(ViewModelBase viewmodel, Action<ViewModelBase, bool> callback)
         {
-            if (viewmodel is ViewModelDialogBase)
+            if (viewmodel is ViewModelDialogBase viewModelDialogBase)
             {
-                ShowModalDialog((ViewModelDialogBase)viewmodel, callback);
+                ShowModalDialog(viewModelDialogBase, callback);
             }
             else
             {
@@ -54,7 +54,7 @@ namespace H2HY.Services
         /// <param name="viewmodel"></param>
         /// <param name="callback">callback on window close event.</param>
         /// <exception cref="KeyNotFoundException"></exception>
-        private void ShowModalDialog(ViewModelDialogBase viewmodel, Action<ViewModelBase,bool> callback)
+        private void ShowModalDialog(ViewModelDialogBase viewmodel, Action<ViewModelBase, bool> callback)
         {
             Type? viewType = _mappings.GetValueOrDefault(viewmodel.GetType());
             if (viewType is null)
@@ -96,7 +96,15 @@ namespace H2HY.Services
             dialog.DataContext = viewmodel;
 
             dialog.SizeToContent = SizeToContent.WidthAndHeight;
-            dialog.ShowDialog();
+
+            if (viewmodel.IsModal)
+            {
+                dialog.ShowDialog();
+            }
+            else
+            {
+                dialog.Show();
+            }
         }
 
         /// <summary>

@@ -27,6 +27,10 @@ namespace H2HY.Stores
             CurrentViewModel = null;
         }
 
+        /// <summary>
+        /// opens the set viewmodel as dialog
+        /// returns the last set viewmodel.
+        /// </summary>
         public ViewModelBase? CurrentViewModel
         {
             get => _lastViewModel;
@@ -47,6 +51,9 @@ namespace H2HY.Stores
             _openViews.Remove(sender);
         }
 
+        /// <summary>
+        /// closes all opens ViewModelDialogBase viewmodels.
+        /// </summary>
         public void Close()
         {
             Collection<ViewModelBase> openViews = new(_openViews.ToList());

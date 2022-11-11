@@ -12,6 +12,11 @@
         Height="250"
         Width="300"
         h2hyProp:WindowCloser.EnableWindowClosing="True">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -23,7 +28,8 @@
 
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"
-                    HorizontalAlignment="Right">
+                    HorizontalAlignment="Right"
+                    Visibility="{Binding AreButtonsVisible, Converter={StaticResource BoolToVis}}">
             <Button Grid.Row="2"
                     Content="Cancel"
                     Width="60"
