@@ -72,16 +72,10 @@ namespace H2HY.Services
             var dialog = new H2HYModalDialog();
             void closeEventHandler(object? s, EventArgs e)
             {
-                bool result = false;
-                if (dialog.DialogResult.HasValue)
-                {
-                    result = dialog.DialogResult.Value;
-                }
-
                 try
                 {
-                    viewmodel.ViewClosed(result);
-                    callback(viewmodel, result);
+                    viewmodel.ViewClosed(dialog.H2HYDialogResult);
+                    callback(viewmodel, dialog.H2HYDialogResult);
                     viewmodel.Dispose();
                 }
                 finally

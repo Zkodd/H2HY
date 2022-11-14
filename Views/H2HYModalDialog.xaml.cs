@@ -12,15 +12,17 @@ namespace H2HY.Views
             InitializeComponent();
         }
 
-        private void OkClick(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-            Close();
-        }
+        public bool H2HYDialogResult { get; private set; } = false;
 
         private void CancelClick(object sender, RoutedEventArgs e)
         {
-            DialogResult= false;
+            H2HYDialogResult = false;
+            Close();
+        }
+
+        private void OkClick(object sender, RoutedEventArgs e)
+        {
+            H2HYDialogResult = true;
             Close();
         }
     }
