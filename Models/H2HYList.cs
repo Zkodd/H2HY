@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace H2HY.Stores
+namespace H2HY.Models
 {
     /// <summary>
     /// Usage example with using a file provider:
@@ -15,7 +15,7 @@ namespace H2HY.Stores
     /// services.AddTransient<IProvider<FaultModel>>(s => new FileProvider<FaultModel>("Faults.xml")) ]]>
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Store<T> : ICollection<T>
+    public class H2HYList<T> : ICollection<T>
     {
         /// <summary>
         /// Callback validator. Is called for every added item.
@@ -33,7 +33,7 @@ namespace H2HY.Stores
         /// default constructor
         /// </summary>
         /// <param name="provider">provider which manages items.</param>
-        public Store(IProvider<T> provider)
+        public H2HYList(IProvider<T> provider)
         {
             _provider = provider;
 
@@ -51,7 +51,7 @@ namespace H2HY.Stores
         /// <summary>
         /// Called on store changes.
         /// </summary>
-        public event Action<T?, StoreChanged>? Changed;
+        public event Action<T?, H2HYListChanged>? Changed;
         /// <summary>
         /// The number of elements contained in the store.
         /// </summary>
@@ -76,7 +76,7 @@ namespace H2HY.Stores
             {
                 _provider.Add(newitem);
                 _items.Value.Add(newitem);
-                Changed?.Invoke(newitem, StoreChanged.Add);
+                Changed?.Invoke(newitem, H2HYListChanged.Add);
             }
             else
             {
@@ -84,7 +84,7 @@ namespace H2HY.Stores
                 {
                     _provider.Add(newitem);
                     _items.Value.Add(newitem);
-                    Changed?.Invoke(newitem, StoreChanged.Add);
+                    Changed?.Invoke(newitem, H2HYListChanged.Add);
                 }
             }
         }
@@ -102,7 +102,7 @@ namespace H2HY.Stores
 
                 foreach (T item in newitems)
                 {
-                    Changed?.Invoke(item, StoreChanged.Add);
+                    Changed?.Invoke(item, H2HYListChanged.Add);
                 }
             }
             else
@@ -117,7 +117,7 @@ namespace H2HY.Stores
 
                 foreach (T item in validItems)
                 {
-                    Changed?.Invoke(item, StoreChanged.Add);
+                    Changed?.Invoke(item, H2HYListChanged.Add);
                 }
             }
         }
@@ -129,7 +129,7 @@ namespace H2HY.Stores
         {
             _provider.Clear();
             _items.Value.Clear();
-            Changed?.Invoke(default, StoreChanged.Reset);
+            Changed?.Invoke(default, H2HYListChanged.Reset);
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace H2HY.Stores
             PreprocessLoadedList(newItems);
 
             _items.Value.AddRange(newItems);
-            Changed?.Invoke(default, StoreChanged.Reset);
+            Changed?.Invoke(default, H2HYListChanged.Reset);
         }
 
         /// <summary>
@@ -212,7 +212,7 @@ namespace H2HY.Stores
         {
             if (_provider.Update(item))
             {
-                Changed?.Invoke(item, StoreChanged.Changed);
+                Changed?.Invoke(item, H2HYListChanged.Changed);
                 return true;
             }
             return false;
@@ -238,7 +238,7 @@ namespace H2HY.Stores
             if (_items.Value.Remove(item))
             {
                 _provider.Remove(item);
-                Changed?.Invoke(item, StoreChanged.Remove);
+                Changed?.Invoke(item, H2HYListChanged.Remove);
                 return true;
             }
             else

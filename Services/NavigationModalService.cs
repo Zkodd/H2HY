@@ -3,6 +3,10 @@ using System;
 
 namespace H2HY.Services
 {
+    /// <summary>
+    /// Creating a viewmodel and navigates by using the given <code>navigationStoreModal</code> 
+    /// </summary>
+    /// <typeparam name="TViewModel"></typeparam>
     public class NavigationModalService<TViewModel> : INavigationService where TViewModel : ViewModelBase
     {
         private readonly INavigationModalStore _navigationStore;

@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace H2HY.Stores
+namespace H2HY.Models
 {
     /// <summary>
     /// A Fluent Collection - giving a provider is optinal.
@@ -13,7 +13,7 @@ namespace H2HY.Stores
     /// Using .Subscribe(this) bevor using any .When is mandatory.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class FluentStore<T> : Collection<T>, INotifyPropertyChanged, INotifyCollectionChanged
+    public class H2H2YFluentList<T> : Collection<T>, INotifyPropertyChanged, INotifyCollectionChanged
     {
         protected static readonly PropertyChangedEventArgs CountPropertyChanged = new PropertyChangedEventArgs("Count");
 
@@ -34,7 +34,7 @@ namespace H2HY.Stores
         /// <summary>
         /// default constructor
         /// </summary>
-        public FluentStore()
+        public H2H2YFluentList()
         {
         }
 
@@ -42,7 +42,7 @@ namespace H2HY.Stores
         /// default constructor
         /// </summary>
         /// <param name="provider">provider which manages items.</param>
-        public FluentStore(IProvider<T> provider) : base()
+        public H2H2YFluentList(IProvider<T> provider) : base()
         {
             foreach (var item in provider.GetAll())
             {
@@ -56,7 +56,7 @@ namespace H2HY.Stores
         /// </summary>
         /// <param name="owner"></param>
         /// <returns></returns>
-        public FluentStore<T> Subscripe(object owner)
+        public H2H2YFluentList<T> Subscripe(object owner)
         {
             _lastSubscriber = owner;
             return this;
@@ -149,7 +149,7 @@ namespace H2HY.Stores
         /// </summary>
         /// <param name="added">added item</param>
         /// <returns></returns>
-        public FluentStore<T> WhenAdded(Action<T> added)
+        public H2H2YFluentList<T> WhenAdded(Action<T> added)
         {
             if (_lastSubscriber is null)
             {
@@ -168,7 +168,7 @@ namespace H2HY.Stores
         /// </summary>
         /// <param name="cleared"></param>
         /// <returns></returns>
-        public FluentStore<T> WhenCleared(Action<IList<T>> cleared)
+        public H2H2YFluentList<T> WhenCleared(Action<IList<T>> cleared)
         {
             if (_lastSubscriber is null)
             {
@@ -187,7 +187,7 @@ namespace H2HY.Stores
         /// </summary>
         /// <param name="removed"></param>
         /// <returns></returns>
-        public FluentStore<T> WhenRemoved(Action<T> removed)
+        public H2H2YFluentList<T> WhenRemoved(Action<T> removed)
         {
             if (_lastSubscriber is null)
             {
