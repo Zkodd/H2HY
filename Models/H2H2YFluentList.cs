@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 
 namespace H2HY.Models
 {
@@ -210,17 +211,11 @@ namespace H2HY.Models
             base.ClearItems();
             _provider?.Clear();
 
-            if (_cleared.Count > 0)
+            foreach (var item in CollectionsMarshal.AsSpan(items))
             {
-                NotifyOnItemsCleared(items);
+                NotifyOnItemRemoved(item);
             }
-            else
-            {
-                for (int i = 0; i < items.Count; i++)
-                {
-                    NotifyOnItemRemoved(items[i]);
-                }
-            }
+            NotifyOnItemsCleared(items);
 
             OnPropertyChanged(CountPropertyChanged);
             OnPropertyChanged(IndexerPropertyChanged);
