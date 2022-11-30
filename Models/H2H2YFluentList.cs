@@ -22,11 +22,6 @@ namespace H2HY.Models
 
         protected static readonly NotifyCollectionChangedEventArgs ResetCollectionChanged = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
 
-        /// <summary>
-        /// the used provider for item managment.
-        /// </summary>
-        protected readonly IProvider<T>? _provider;
-
         private object? _lastSubscriber;
         private readonly Dictionary<object, Action<T>> _added = new();
         private readonly Dictionary<object, Action<IList<T>>> _cleared = new();
@@ -37,19 +32,6 @@ namespace H2HY.Models
         /// </summary>
         public H2H2YFluentList()
         {
-        }
-
-        /// <summary>
-        /// default constructor
-        /// </summary>
-        /// <param name="provider">provider which manages items.</param>
-        public H2H2YFluentList(IProvider<T> provider) : base()
-        {
-            foreach (var item in provider.GetAll())
-            {
-                Add(item);
-            }
-            _provider = provider;
         }
 
         /// <summary>
@@ -90,7 +72,6 @@ namespace H2HY.Models
         /// <param name="newitems"></param>
         public void AddRange(IEnumerable<T> newitems)
         {
-            _provider?.AddRange(newitems);
             foreach (var item in newitems)
             {
                 Add(item);
@@ -123,26 +104,6 @@ namespace H2HY.Models
 
             OnPropertyChanged(IndexerPropertyChanged);
             OnCollectionChanged(NotifyCollectionChangedAction.Move, prev, newIndex, oldIndex);
-        }
-
-        /// <summary>
-        /// Saves all items.
-        /// </summary>
-        public void SaveAll()
-        {
-            if (_provider is not null)
-            {
-                SaveAll(_provider);
-            }
-        }
-
-        /// <summary>
-        /// Saves the current list using the given provider.
-        /// </summary>
-        /// <param name="provider">Used provider. SaveAll(items) will be called.</param>
-        public void SaveAll(IProvider<T> provider)
-        {
-            provider.SaveAll(Items);
         }
 
         /// <summary>
@@ -209,7 +170,6 @@ namespace H2HY.Models
         {
             var items = new List<T>(this);
             base.ClearItems();
-            _provider?.Clear();
 
             foreach (var item in CollectionsMarshal.AsSpan(items))
             {
@@ -230,7 +190,6 @@ namespace H2HY.Models
         protected override void InsertItem(int index, T item)
         {
             base.InsertItem(index, item);
-            _provider?.Add(item);
 
             OnPropertyChanged(CountPropertyChanged);
             OnPropertyChanged(IndexerPropertyChanged);
@@ -296,7 +255,6 @@ namespace H2HY.Models
         {
             var item = base[index];
             base.RemoveItem(index);
-            _provider?.Remove(item);
 
             OnPropertyChanged(CountPropertyChanged);
             OnPropertyChanged(IndexerPropertyChanged);
@@ -313,9 +271,6 @@ namespace H2HY.Models
         {
             T prev = base[index];
             base.SetItem(index, item);
-
-            _provider?.Remove(prev);
-            _provider?.Add(item);
 
             OnPropertyChanged(IndexerPropertyChanged);
             OnCollectionChanged(NotifyCollectionChangedAction.Replace, prev, item, index);
