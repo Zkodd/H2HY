@@ -110,14 +110,15 @@ namespace H2HY.Provider
 
         private static void HandleId(T item, IEnumerable<T> usedItems)
         {
-            List<int> ids = new List<int>();
-            usedItems.ToList().ForEach(i => ids.Add(i.Id));
+            item.Id = usedItems.Max(i => i.Id) + 1;
+            //List<int> ids = new List<int>();
+            //usedItems.ToList().ForEach(i => ids.Add(i.Id));
 
-            item.Id = ids.Count + 1;
-            while (ids.FirstOrDefault(i => i == item.Id) != default)
-            {
-                item.Id++;
-            }
+            //item.Id = ids.Count + 1;
+            //while (ids.FirstOrDefault(i => i == item.Id) != default)
+            //{
+            //    item.Id++;
+            //}
         }
     }
 }
