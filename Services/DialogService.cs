@@ -49,6 +49,22 @@ namespace H2HY.Services
         }
 
         /// <summary>
+        /// Opens a modal messagebox.
+        /// </summary>
+        /// <param name="message">A string that specifies the text to display.</param>
+        /// <param name="caption">A string that specifies caption to display.</param>
+        /// <param name="buttons"></param>
+        /// <param name="icon"></param>
+        /// <returns></returns>
+        public MessageBoxResult ShowMessageBox(string message, string caption, MessageBoxButton buttons, MessageBoxIcon icon)
+        {
+            return (MessageBoxResult)MessageBox.Show(message,
+                                                     caption,
+                                                     (System.Windows.MessageBoxButton)buttons,
+                                                     (MessageBoxImage)icon);
+        }
+
+        /// <summary>
         ///  Shows given viewmodel in a modal dialog window.
         /// </summary>
         /// <param name="viewmodel"></param>
