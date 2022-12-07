@@ -16,6 +16,11 @@ namespace H2HY.Stores
         /// An item was removed from the collection.
         /// </summary>
         Remove = 1,
+
+        /// <summary>
+        /// The item has changed.
+        /// </summary>
+        Changed = 2,
     }
 
     /// <summary>
