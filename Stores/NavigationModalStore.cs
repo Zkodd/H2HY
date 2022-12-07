@@ -14,6 +14,10 @@ namespace H2HY.Stores
         private ViewModelBase? _lastViewModel;
         private readonly HashSet<ViewModelBase> _openViews = new();
 
+        /// <summary>
+        /// Dialog store vor multiple dialogs.
+        /// </summary>
+        /// <param name="dialogService"></param>
         public NavigationModalStore(IDialogService dialogService)
         {
             _dialogService = dialogService;
@@ -40,7 +44,7 @@ namespace H2HY.Stores
 
                 if (value is not null)
                 {
-                    _openViews.Add(value);  
+                    _openViews.Add(value);
                     _dialogService.ShowDialog(value, ViewClosedEvent);
                 }
             }
@@ -59,7 +63,7 @@ namespace H2HY.Stores
             Collection<ViewModelBase> openViews = new(_openViews.ToList());
             foreach (var item in openViews)
             {
-               if (item is ViewModelDialogBase vm)
+                if (item is ViewModelDialogBase vm)
                 {
                     vm.CloseDialog();
                 }
