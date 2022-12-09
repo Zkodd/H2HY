@@ -78,42 +78,44 @@ namespace H2HY.Services
                 throw new KeyNotFoundException($"DialogService: Key {viewmodel.GetType()} not found in dictionary.");
             }
 
-            object? view = Activator.CreateInstance(viewType);
-
-            if (view is FrameworkElement frameworkElement)
+            if (Activator.CreateInstance(viewType) is not FrameworkElement view)
             {
-                frameworkElement.DataContext = viewmodel;
+                throw new Exception($"Resolved View for {viewmodel.GetType()} is not a frameworkelement.");
             }
 
-            var dialog = new H2HYModalDialog();
+            view.DataContext = viewmodel;
+
+            var dialogWindow = new H2HYModalDialog();
+            dialogWindow.MaxHeight = view.MaxHeight;
+            dialogWindow.MaxWidth = view.MaxWidth;
             void closeEventHandler(object? s, EventArgs e)
             {
                 try
                 {
-                    viewmodel.ViewClosed(dialog.H2HYDialogResult);
-                    callback?.Invoke(viewmodel, dialog.H2HYDialogResult);
+                    viewmodel.ViewClosed(dialogWindow.H2HYDialogResult);
+                    callback?.Invoke(viewmodel, dialogWindow.H2HYDialogResult);
                     viewmodel.Dispose();
                 }
                 finally
                 {
-                    dialog.Closed -= closeEventHandler;
+                    dialogWindow.Closed -= closeEventHandler;
                 }
             }
 
-            dialog.Closed += closeEventHandler;
-            dialog.ViewContent.Content = view;
+            dialogWindow.Closed += closeEventHandler;
+            dialogWindow.ViewContent.Content = view;
 
-            dialog.DataContext = viewmodel;
+            dialogWindow.DataContext = viewmodel;
 
-            dialog.SizeToContent = SizeToContent.WidthAndHeight;
+            dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
 
             if (viewmodel.IsModal)
             {
-                dialog.ShowDialog();
+                dialogWindow.ShowDialog();
             }
             else
             {
-                dialog.Show();
+                dialogWindow.Show();
             }
         }
 
@@ -131,13 +133,16 @@ namespace H2HY.Services
                 throw new KeyNotFoundException($"DialogService: Key {viewmodel.GetType()} not found in dictionary.");
             }
 
-            object? view = Activator.CreateInstance(viewType);
-            if (view is FrameworkElement frameworkElement)
+            if (Activator.CreateInstance(viewType) is not FrameworkElement view)
             {
-                frameworkElement.DataContext = viewmodel;
+                throw new Exception($"Resolved View for {viewmodel.GetType()} is not a frameworkelement.");
             }
 
+            view.DataContext = viewmodel;
+
             var newWindow = new Window();
+            newWindow.MaxHeight = view.MaxHeight;
+            newWindow.MaxWidth = view.MaxWidth;
             void closeEventHandler(object? s, EventArgs e)
             {
                 try
