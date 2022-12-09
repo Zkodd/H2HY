@@ -40,7 +40,11 @@ namespace H2HY.FluentSyntax
         /// <returns></returns>
         public static ICollection<T> RemoveRange<T>(this ICollection<T> collection, IEnumerable<T> items)
         {
-            items.ForEach(v => collection.Remove(v));
+            foreach(var item in items)
+            {
+                collection.Remove(item);
+            }
+
             return collection;
         }
 

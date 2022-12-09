@@ -6,6 +6,9 @@ namespace H2HY.Stores
     {
         event Action CurrentViewModelChanged;
 
+        /// <summary>
+        /// Sets current viewmodel which will be shown in the corresponding store-target.
+        /// </summary>
         ViewModelBase? CurrentViewModel { get; set; }
 
         bool IsOpen { get; }

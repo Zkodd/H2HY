@@ -4,6 +4,10 @@ using System.Reflection;
 
 namespace H2HY.ToolKit
 {
+
+    /// <summary>
+    /// Collection of statics methods for working with properties.
+    /// </summary>
     public class CopyProperties
     {
         /// <summary>
@@ -12,10 +16,9 @@ namespace H2HY.ToolKit
         /// </summary>
         /// <param name="source"></param>
         /// <param name="destination"></param>
-        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception">Source or/and Destination Objects are null</exception>
         public static void Copy(object source, object destination)
         {
-            // If any this null throw an exception
             if (source is null || destination is null)
             {
                 throw new Exception("Source or/and Destination Objects are null");
