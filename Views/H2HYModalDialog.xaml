@@ -23,8 +23,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ContentControl Margin="3" Grid.Row="0"
-                        x:Name="ViewContent" />
+        <ContentControl Grid.Row="0"
+                        x:Name="ViewContent"/>
 
         <StackPanel Grid.Row="1"
                     Orientation="Horizontal"

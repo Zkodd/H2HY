@@ -31,8 +31,9 @@ namespace H2HY.Properties
                 {
                     if (window.DataContext is ICloseWindow vm)
                     {
+                        //add some events to the given viewmodel(datacontext):
                         vm.Close += () =>
-                        {
+                        {//i will execute window.close() if viewmodel.Close is invoked.
                             window.Close();
                         };
 

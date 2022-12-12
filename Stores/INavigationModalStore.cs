@@ -1,5 +1,8 @@
 ﻿namespace H2HY.Stores
 {
+    /// <summary>
+    /// Interface for a Modal-Navigation-Store.
+    /// </summary>
     public interface INavigationModalStore
     {
         /// <summary>

@@ -64,6 +64,15 @@ namespace H2HY.Services
                                                      (MessageBoxImage)icon);
         }
 
+        private static void SetupWindow(Window dialogWindow, FrameworkElement view)
+        {
+            dialogWindow.MaxHeight = view.MaxHeight + dialogWindow.BorderThickness.Top + dialogWindow.BorderThickness.Bottom;
+            dialogWindow.MaxWidth = view.MaxWidth + dialogWindow.BorderThickness.Left + dialogWindow.BorderThickness.Right;
+
+            dialogWindow.MinHeight = view.MinHeight + dialogWindow.BorderThickness.Top + dialogWindow.BorderThickness.Bottom;
+            dialogWindow.MinWidth = view.MinWidth + dialogWindow.BorderThickness.Left + dialogWindow.BorderThickness.Right;
+        }
+
         /// <summary>
         ///  Shows given viewmodel in a modal dialog window.
         /// </summary>
@@ -85,9 +94,8 @@ namespace H2HY.Services
 
             view.DataContext = viewmodel;
 
-            var dialogWindow = new H2HYModalDialog();
-            dialogWindow.MaxHeight = view.MaxHeight;
-            dialogWindow.MaxWidth = view.MaxWidth;
+            H2HYModalDialog dialogWindow = new();
+            SetupWindow(dialogWindow, view);
             void closeEventHandler(object? s, EventArgs e)
             {
                 try
@@ -105,6 +113,9 @@ namespace H2HY.Services
             dialogWindow.Closed += closeEventHandler;
             dialogWindow.ViewContent.Content = view;
 
+            //violating mvvm prinicples here! We know the view. 
+            //better create netes viewmodel and use databinding.
+
             dialogWindow.DataContext = viewmodel;
 
             dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
@@ -118,7 +129,6 @@ namespace H2HY.Services
                 dialogWindow.Show();
             }
         }
-
         /// <summary>
         /// Shows given viewmodel in a window. Dialoagresult will be false.
         /// </summary>
@@ -140,9 +150,8 @@ namespace H2HY.Services
 
             view.DataContext = viewmodel;
 
-            var newWindow = new Window();
-            newWindow.MaxHeight = view.MaxHeight;
-            newWindow.MaxWidth = view.MaxWidth;
+            var newWindow = new System.Windows.Window();
+            SetupWindow(newWindow, view);
             void closeEventHandler(object? s, EventArgs e)
             {
                 try
