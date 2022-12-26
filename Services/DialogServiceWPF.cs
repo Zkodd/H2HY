@@ -5,9 +5,22 @@ using System.Windows;
 
 namespace H2HY.Services
 {
+    /// <summary>
+    /// Example usage:
+    ///  App.xml or another dictionary:
+    /// <![CDATA[
+    ///     <DataTemplate DataType="{x:Type viewmodels:RenameViewModel}">
+    ///         <views:RenameView />
+    ///     </DataTemplate>
+    ///  ]]>
+    /// </summary>
     public class DialogServiceWPF : IDialogService
     {
-
+        /// <summary>
+        ///  Shows given viewmodel in a modal dialog window.
+        /// </summary>
+        /// <param name="viewmodel"></param>
+        /// <param name="callback">callback on window close event. Can be true/false for modal - otherwise always false</param>
         public void ShowDialog(ViewModelBase viewmodel, Action<ViewModelBase, bool> callback)
         {
             if (viewmodel is ViewModelDialogBase viewModelDialogBase)
@@ -20,22 +33,20 @@ namespace H2HY.Services
             }
         }
 
+        /// <summary>
+        /// Opens a modal messagebox.
+        /// </summary>
+        /// <param name="message">A string that specifies the text to display.</param>
+        /// <param name="caption">A string that specifies caption to display.</param>
+        /// <param name="buttons"></param>
+        /// <param name="icon"></param>
+        /// <returns></returns>
         public MessageBoxResult ShowMessageBox(string message, string caption, MessageBoxButton buttons, MessageBoxIcon icon)
         {
             return (MessageBoxResult)MessageBox.Show(message,
                                                caption,
                                                (System.Windows.MessageBoxButton)buttons,
                                                (MessageBoxImage)icon);
-        }
-
-
-        private static void SetupWindow(Window dialogWindow, FrameworkElement view)
-        {
-            dialogWindow.MaxHeight = view.MaxHeight + dialogWindow.BorderThickness.Top + dialogWindow.BorderThickness.Bottom;
-            dialogWindow.MaxWidth = view.MaxWidth + dialogWindow.BorderThickness.Left + dialogWindow.BorderThickness.Right;
-
-            dialogWindow.MinHeight = view.MinHeight + dialogWindow.BorderThickness.Top + dialogWindow.BorderThickness.Bottom;
-            dialogWindow.MinWidth = view.MinWidth + dialogWindow.BorderThickness.Left + dialogWindow.BorderThickness.Right;
         }
 
         /// <summary>
@@ -46,10 +57,7 @@ namespace H2HY.Services
         /// <exception cref="KeyNotFoundException"></exception>
         private void ShowModalDialog(ViewModelDialogBase viewmodel, Action<ViewModelBase, bool>? callback)
         {
-            H2HYDialog dialogWindow = new()
-            {
-                DataContext = viewmodel
-            };
+            H2HYDialog dialogWindow = new();
 
             void closeEventHandler(object? s, EventArgs e)
             {
@@ -66,9 +74,6 @@ namespace H2HY.Services
             }
             dialogWindow.Closed += closeEventHandler;
 
-            //violating mvvm prinicples here! We know the view. 
-            //better create nested viewmodel and use databinding.
-
             dialogWindow.DataContext = viewmodel;
             dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
 
@@ -81,6 +86,7 @@ namespace H2HY.Services
                 dialogWindow.Show();
             }
         }
+
         /// <summary>
         /// Shows given viewmodel in a window. Dialoagresult will be false.
         /// </summary>
@@ -89,10 +95,7 @@ namespace H2HY.Services
         /// <exception cref="KeyNotFoundException"></exception>
         private void ShowWindowDialog(ViewModelBase viewmodel, Action<ViewModelBase, bool> callback)
         {
-            var newWindow = new System.Windows.Window()
-            {
-                DataContext = viewmodel
-            };
+            var newWindow = new System.Windows.Window();
 
             void closeEventHandler(object? s, EventArgs e)
             {
@@ -107,9 +110,13 @@ namespace H2HY.Services
                     newWindow.Closed -= closeEventHandler;
                 }
             }
-
             newWindow.Closed += closeEventHandler;
+
+            newWindow.DataContext = viewmodel;
+            newWindow.Content = viewmodel;
+
             newWindow.SizeToContent = SizeToContent.WidthAndHeight;
+
             newWindow.Show();
         }
     }
