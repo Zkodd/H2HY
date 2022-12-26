@@ -114,10 +114,9 @@ namespace H2HY.Services
             dialogWindow.ViewContent.Content = view;
 
             //violating mvvm prinicples here! We know the view. 
-            //better create netes viewmodel and use databinding.
+            //better create nested viewmodel and use databinding.
 
             dialogWindow.DataContext = viewmodel;
-
             dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
 
             if (viewmodel.IsModal)

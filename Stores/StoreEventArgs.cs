@@ -21,6 +21,11 @@ namespace H2HY.Stores
         /// The item has changed.
         /// </summary>
         Changed = 2,
+
+        /// <summary>
+        /// The store has changed drasticly.
+        /// </summary>
+        Reset = 3,
     }
 
     /// <summary>
@@ -32,14 +37,14 @@ namespace H2HY.Stores
         /// <summary>
         /// Affected Value
         /// </summary>
-        public T Value { get; private set; }
+        public T? Value { get; private set; }
 
         /// <summary>
         ///
         /// </summary>
         /// <param name="val">affected value</param>
         /// <param name="action">performed action</param>
-        public StoreEventArgs(T val, NotifyStoreChangedAction action)
+        public StoreEventArgs(T? val, NotifyStoreChangedAction action)
         {
             Value = val;
             Action = action;

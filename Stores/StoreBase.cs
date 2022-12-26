@@ -6,7 +6,7 @@ namespace H2HY.Stores
     /// Base Store class
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class StoreBase<T>
+    public class StoreBase<T> : IStoreBase<T>
     {
         /// <summary>
         /// Store has changed.
@@ -44,5 +44,14 @@ namespace H2HY.Stores
         {
             Changed?.Invoke(new StoreEventArgs<T>(item, NotifyStoreChangedAction.Changed));
         }
+
+        /// <summary>
+        /// The current store chandeg dramaticly.
+        /// </summary>
+        protected void OnReset()
+        {
+            Changed?.Invoke(new StoreEventArgs<T>(default, NotifyStoreChangedAction.Reset));
+        }
+
     }
 }
