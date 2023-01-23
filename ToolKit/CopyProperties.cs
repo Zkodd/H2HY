@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace H2HY.ToolKit
+namespace H2HY.Toolkit
 {
 
     /// <summary>
