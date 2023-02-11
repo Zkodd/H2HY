@@ -11,7 +11,7 @@ namespace H2HY.Stores
         /// <summary>
         /// Store has changed.
         /// </summary>
-        public event Action<StoreEventArgs<T>>? Changed;
+        public event Action<StoreEventArgs<T>>? StoreChanged;
 
         /// <summary>
         /// Publish to property if needed.
@@ -24,7 +24,7 @@ namespace H2HY.Stores
         /// <param name="item"></param>
         protected void OnAdded(T item)
         {
-            Changed?.Invoke(new StoreEventArgs<T>(item, NotifyStoreChangedAction.Add));
+            StoreChanged?.Invoke(new StoreEventArgs<T>(item, NotifyStoreChangedAction.Add));
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace H2HY.Stores
         /// <param name="item"></param>
         protected void OnRemoved(T item)
         {
-            Changed?.Invoke(new StoreEventArgs<T>(item, NotifyStoreChangedAction.Remove));
+            StoreChanged?.Invoke(new StoreEventArgs<T>(item, NotifyStoreChangedAction.Remove));
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace H2HY.Stores
         /// <param name="item"></param>
         protected void OnChanged(T item)
         {
-            Changed?.Invoke(new StoreEventArgs<T>(item, NotifyStoreChangedAction.Changed));
+            StoreChanged?.Invoke(new StoreEventArgs<T>(item, NotifyStoreChangedAction.Changed));
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace H2HY.Stores
         /// </summary>
         protected void OnReset()
         {
-            Changed?.Invoke(new StoreEventArgs<T>(default, NotifyStoreChangedAction.Reset));
+            StoreChanged?.Invoke(new StoreEventArgs<T>(default, NotifyStoreChangedAction.Reset));
         }
 
     }
