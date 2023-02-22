@@ -21,38 +21,17 @@ namespace H2HY.Models
 
         protected static readonly NotifyCollectionChangedEventArgs ResetCollectionChanged = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
 
+        private readonly Lazy<Dictionary<object, Action<T>>> _added = new();
+        private readonly Lazy<Dictionary<object, Action<T>>> _changed = new();
+        private readonly Lazy<Dictionary<object, Action<IList<T>>>> _cleared = new();
+        private readonly Lazy<Dictionary<object, Action<T>>> _removed = new();
         private object? _lastSubscriber;
-        private readonly Dictionary<object, Action<T>> _added = new();
-        private readonly Dictionary<object, Action<IList<T>>> _cleared = new();
-        private readonly Dictionary<object, Action<T>> _removed = new();
 
         /// <summary>
         /// default constructor
         /// </summary>
         public H2H2YFluentList()
         {
-        }
-
-        /// <summary>
-        /// subscribe as observer - has to called bevor ever When.
-        /// </summary>
-        /// <param name="owner"></param>
-        /// <returns></returns>
-        public H2H2YFluentList<T> Subscripe(object owner)
-        {
-            _lastSubscriber = owner;
-            return this;
-        }
-
-        /// <summary>
-        /// Unsubscribe as observer. Unsubsricbes from all calls.
-        /// </summary>
-        /// <param name="owner"></param>
-        public void Unsubscribe(object owner)
-        {
-            _added.Remove(owner);
-            _cleared.Remove(owner);
-            _removed.Remove(owner);
         }
 
         /// <summary>
@@ -91,6 +70,15 @@ namespace H2HY.Models
         }
 
         /// <summary>
+        /// informs all subscriber about the changed item. 
+        /// </summary>
+        /// <param name="changedItem"></param>
+        public void Change(T changedItem)
+        {
+            NotifyOnItemChanged(changedItem);
+        }
+
+        /// <summary>
         /// moves the item from the given oldIndex to newIndex.
         /// </summary>
         /// <param name="oldIndex"></param>
@@ -106,6 +94,44 @@ namespace H2HY.Models
         }
 
         /// <summary>
+        /// subscribe as observer - has to called bevor ever When.
+        /// </summary>
+        /// <param name="owner"></param>
+        /// <returns></returns>
+        public H2H2YFluentList<T> Subscripe(object owner)
+        {
+            _lastSubscriber = owner;
+            return this;
+        }
+
+        /// <summary>
+        /// Unsubscribe as observer. Unsubsricbes from all calls.
+        /// </summary>
+        /// <param name="owner"></param>
+        public void Unsubscribe(object owner)
+        {
+            if (_added.IsValueCreated)
+            {
+                _added.Value.Remove(owner);
+            }
+
+            if (_cleared.IsValueCreated)
+            {
+                _cleared.Value.Remove(owner);
+            }
+
+            if (_removed.IsValueCreated)
+            {
+                _removed.Value.Remove(owner);
+            }
+
+            if (_changed.IsValueCreated)
+            {
+                _changed.Value.Remove(owner);
+            }
+        }
+
+        /// <summary>
         /// Occurs when a item has been added.
         /// </summary>
         /// <param name="added">added item</param>
@@ -117,9 +143,28 @@ namespace H2HY.Models
                 throw new Exception("Subscriber is not set.");
             }
 
-            if (added != null)
+            if (added is not null)
             {
-                _added.Add(_lastSubscriber, added);
+                _added.Value.Add(_lastSubscriber, added);
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// Occurs when a item has been changed.
+        /// </summary>
+        /// <param name="changed">added item</param>
+        /// <returns></returns>
+        public H2H2YFluentList<T> WhenChanged(Action<T> changed)
+        {
+            if (_lastSubscriber is null)
+            {
+                throw new Exception("Subscriber is not set.");
+            }
+
+            if (changed is not null)
+            {
+                _changed.Value.Add(_lastSubscriber, changed);
             }
             return this;
         }
@@ -136,9 +181,9 @@ namespace H2HY.Models
                 throw new Exception("Subscriber is not set.");
             }
 
-            if (cleared != null)
+            if (cleared is not null)
             {
-                _cleared.Add(_lastSubscriber, cleared);
+                _cleared.Value.Add(_lastSubscriber, cleared);
             }
             return this;
         }
@@ -155,9 +200,9 @@ namespace H2HY.Models
                 throw new Exception("Subscriber is not set.");
             }
 
-            if (removed != null)
+            if (removed is not null)
             {
-                _removed.Add(_lastSubscriber, removed);
+                _removed.Value.Add(_lastSubscriber, removed);
             }
             return this;
         }
@@ -202,9 +247,27 @@ namespace H2HY.Models
         /// <param name="item"></param>
         protected virtual void NotifyOnItemAdded(T item)
         {
-            foreach (var action in _added)
+            if (_added.IsValueCreated)
             {
-                action.Value(item);
+                foreach (var action in _added.Value)
+                {
+                    action.Value(item);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Calls all ItemChanged observer.
+        /// </summary>
+        /// <param name="item"></param>
+        protected virtual void NotifyOnItemChanged(T item)
+        {
+            if (_changed.IsValueCreated)
+            {
+                foreach (var action in _changed.Value)
+                {
+                    action.Value(item);
+                }
             }
         }
 
@@ -214,9 +277,12 @@ namespace H2HY.Models
         /// <param name="item"></param>
         protected virtual void NotifyOnItemRemoved(T item)
         {
-            foreach (var action in _removed)
+            if (_removed.IsValueCreated)
             {
-                action.Value(item);
+                foreach (var action in _removed.Value)
+                {
+                    action.Value(item);
+                }
             }
         }
 
@@ -226,9 +292,12 @@ namespace H2HY.Models
         /// <param name="items"></param>
         protected virtual void NotifyOnItemsCleared(IList<T> items)
         {
-            foreach (var action in _cleared)
+            if (_cleared.IsValueCreated)
             {
-                action.Value(items);
+                foreach (var action in _cleared.Value)
+                {
+                    action.Value(items);
+                }
             }
         }
 
