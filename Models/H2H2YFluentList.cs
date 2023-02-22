@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 namespace H2HY.Models
 {
     /// <summary>
-    /// A Fluent Collection - giving a provider is optinal.
+    /// A Fluent Collection
     /// (WPF) bindable
     /// Using .Subscribe(this) bevor using any .When is mandatory.
     /// </summary>
@@ -71,6 +71,7 @@ namespace H2HY.Models
 
         /// <summary>
         /// informs all subscriber about the changed item. 
+        /// Does call WhenChanged but not invoke CollectionChanged
         /// </summary>
         /// <param name="changedItem"></param>
         public void Change(T changedItem)
@@ -94,7 +95,7 @@ namespace H2HY.Models
         }
 
         /// <summary>
-        /// subscribe as observer - has to called bevor ever When.
+        /// subscribe as observer - mandatory to call bevor ever When.
         /// </summary>
         /// <param name="owner"></param>
         /// <returns></returns>
