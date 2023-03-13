@@ -4,6 +4,7 @@ namespace H2HY.Stores
 {
     /// <summary>
     /// Base Store class
+    /// Calls a typed StoreEventArgs.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class StoreBase<T> : IStoreBase<T>

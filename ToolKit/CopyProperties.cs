@@ -4,20 +4,33 @@ using System.Reflection;
 
 namespace H2HY.Toolkit
 {
-
     /// <summary>
-    /// Collection of statics methods for working with properties.
+    /// Collection of useful methods.
     /// </summary>
-    public class CopyProperties
+    public class Toolkit
     {
         /// <summary>
-        /// Copies all setable properties from one to another object. 
+        /// creates a random string containing only alphanumerical chars (A–Z, a–z and 0–9)
+        /// </summary>
+        /// <param name="length"></param>
+        /// <returns>random string</returns>
+        public static string RandomString(int length)
+        {
+            Random random = new();
+
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        /// <summary>
+        /// Copies all setable properties from one to another object.
         /// Source: https://stackoverflow.com/questions/930433/apply-properties-values-from-one-object-to-another-of-the-same-type-automaticall
         /// </summary>
         /// <param name="source"></param>
         /// <param name="destination"></param>
         /// <exception cref="Exception">Source or/and Destination Objects are null</exception>
-        public static void Copy(object source, object destination)
+        public static void CopyProperties(object source, object destination)
         {
             if (source is null || destination is null)
             {
@@ -40,5 +53,6 @@ namespace H2HY.Toolkit
                 props.targetProperty.SetValue(destination, props.sourceProperty.GetValue(source, null), null);
             }
         }
+
     }
 }
