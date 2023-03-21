@@ -10,7 +10,7 @@ namespace H2HY
         private bool _isModal = true;
 
         /// <summary>
-        /// Dialog window close methode is attached here. No need to touch.
+        /// The dialog windows close methode is attached here. No need to touch.
         /// </summary>
         public Action? Close { get; set; }
 

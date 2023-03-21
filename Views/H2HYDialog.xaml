@@ -3,12 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:H2HY.Views"
+        xmlns:h2hyProp="clr-namespace:H2HY.Properties"
         mc:Ignorable="d"
         WindowStyle="ToolWindow"
         Title="{Binding Title}"
         Height="450"
-        Width="500">
+        Width="500"
+        h2hyProp:WindowCloser.EnableWindowClosing="True">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />

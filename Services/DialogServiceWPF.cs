@@ -7,7 +7,7 @@ namespace H2HY.Services
 {
     /// <summary>
     /// Example usage:
-    ///  App.xml or another dictionary:
+    ///  Add to App.xml or another dictionary:
     /// <![CDATA[
     ///     <DataTemplate DataType="{x:Type viewmodels:RenameViewModel}">
     ///         <views:RenameView />
