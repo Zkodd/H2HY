@@ -54,6 +54,8 @@ namespace H2HY.Services
 
     /// <summary>
     /// Specifies the icon that is displayed by a message box.
+    /// Source:
+    /// https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.messageboxicon?view=windowsdesktop-7.0
     /// </summary>
     public enum MessageBoxIcon
     {

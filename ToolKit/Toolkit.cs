@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -9,6 +10,49 @@ namespace H2HY.Toolkit
     /// </summary>
     public class Toolkit
     {
+        /// <summary>
+        /// Ensures there is trailing directory separator in the path
+        /// Source:
+        /// https://stackoverflow.com/questions/20405965/how-to-ensure-there-is-trailing-directory-separator-in-paths
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static string AddPathDelimter(string path)
+        {
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
+
+            path = path.TrimEnd();
+
+            if (PathEndsWithDirectorySeparator())
+            {
+                return path;
+            }
+
+            return path + GetDirectorySeparatorUsedInPath();
+
+            bool PathEndsWithDirectorySeparator()
+            {
+                if (path.Length == 0)
+                    return false;
+
+                char lastChar = path[^1];// ^1 = path.Length - 1
+                return lastChar == Path.DirectorySeparatorChar
+                    || lastChar == Path.AltDirectorySeparatorChar;
+            }
+
+            char GetDirectorySeparatorUsedInPath()
+            {
+                if (path.Contains(Path.AltDirectorySeparatorChar))
+                    return Path.AltDirectorySeparatorChar;
+
+                return Path.DirectorySeparatorChar;
+            }
+        }
+
         /// <summary>
         /// creates a random string containing only alphanumerical chars (A–Z, a–z and 0–9)
         /// </summary>
