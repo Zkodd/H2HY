@@ -3,16 +3,15 @@
 namespace H2HY.Stores
 {
     /// <summary>
-    /// Base Store class
-    /// Calls a typed StoreEventArgs.
+    /// Store for a single element which calls:
+    /// Initialise, Set, Changed, Reset
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class StoreBase<T> : IStoreBase<T>
+    public class StoreSingleBase<T> : IStoreSingleBase<T>
     {
         /// <summary>
         /// Store has changed.
         /// </summary>
-        public event Action<StoreEventArgs<T>>? StoreChanged;
+        public event Action<StoreSingleEventArgs<T>>? StoreChanged;
 
         /// <summary>
         /// Publish to property if needed.
@@ -20,30 +19,29 @@ namespace H2HY.Stores
         protected T? _currentItem;
 
         /// <summary>
-        /// Item has been added.
+        /// An item needs intialisation.
         /// </summary>
         /// <param name="item"></param>
-        protected void OnAdded(T item)
+        protected void OnInitilise(T item)
         {
-            StoreChanged?.Invoke(new StoreEventArgs<T>(item, StoreChangedAction.Add));
+            StoreChanged?.Invoke(new StoreSingleEventArgs<T>(item, StoreSingleChangedAction.Initialise));
         }
 
         /// <summary>
-        /// item has been removed
+        /// A item has been set.
         /// </summary>
         /// <param name="item"></param>
-        protected void OnRemoved(T item)
+        protected void OnSet(T item)
         {
-            StoreChanged?.Invoke(new StoreEventArgs<T>(item, StoreChangedAction.Remove));
+            StoreChanged?.Invoke(new StoreSingleEventArgs<T>(item, StoreSingleChangedAction.Set));
         }
 
         /// <summary>
         /// the current item has changed
         /// </summary>
-        /// <param name="item"></param>
         protected void OnChanged(T item)
         {
-            StoreChanged?.Invoke(new StoreEventArgs<T>(item, StoreChangedAction.Changed));
+            StoreChanged?.Invoke(new StoreSingleEventArgs<T>(item, StoreSingleChangedAction.Changed));
         }
 
         /// <summary>
@@ -51,7 +49,7 @@ namespace H2HY.Stores
         /// </summary>
         protected void OnReset()
         {
-            StoreChanged?.Invoke(new StoreEventArgs<T>(default, StoreChangedAction.Reset));
+            StoreChanged?.Invoke(new StoreSingleEventArgs<T>(default, StoreSingleChangedAction.Reset));
         }
     }
 }
