@@ -11,10 +11,19 @@ namespace H2HY.Provider
     /// <typeparam name="T"></typeparam>
     public class FileXmlProvider<T> : FileProviderBase<T> where T : IIDInterface
     {
+        /// <summary>
+        /// Create a xml provider using the given filename.
+        /// </summary>
+        /// <param name="filename"></param>
         public FileXmlProvider(string filename) : base(filename)
         {
         }
 
+        /// <summary>
+        /// loads/deserialize a list<typeparamref name="T"/>
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="list"></param>
         protected override void LoadModel(string filename, out List<T>? list)
         {
             if (File.Exists(filename))
@@ -32,6 +41,11 @@ namespace H2HY.Provider
             }
         }
 
+        /// <summary>
+        /// serializes a list<typeparamref name="T"/>
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="list"></param>
         protected override void SaveModel(string filename, IEnumerable<T> list)
         {
             XmlSerializer writer = new XmlSerializer(typeof(List<T>));

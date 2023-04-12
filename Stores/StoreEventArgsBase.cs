@@ -2,6 +2,11 @@
 
 namespace H2HY.Stores
 {
+    /// <summary>
+    /// abstract base class for store event args.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="TAction"></typeparam>
     public abstract class StoreEventArgsBase<T, TAction> : EventArgs
     {
         /// <summary>

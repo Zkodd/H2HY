@@ -11,14 +11,14 @@ namespace H2HY.Commands
     /// <typeparam name="T"></typeparam>
     public class RelayCommand<T> : ICommand
     {
-        private readonly Action<T> _execute;
+        private readonly Action<T?> _execute;
         private readonly Predicate<T?>? _canExecute;
 
         /// <summary>
         /// standard constructor for command. CanExecute returns true.
         /// </summary>
         /// <param name="execute">action, which is executed</param>
-        public RelayCommand(Action<T> execute)
+        public RelayCommand(Action<T?> execute)
             : this(execute, null)
         {
         }
@@ -28,7 +28,7 @@ namespace H2HY.Commands
         /// </summary>
         /// <param name="execute">action, which is executed</param>
         /// <param name="canExecute">callback, determinates if command is executable</param>
-        public RelayCommand(Action<T> execute, Predicate<T?>? canExecute)
+        public RelayCommand(Action<T?> execute, Predicate<T?>? canExecute)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
@@ -73,7 +73,7 @@ namespace H2HY.Commands
         /// standard constructor for command. CanExecute returns true.
         /// </summary>
         /// <param name="execute">action, which is executed</param>
-        public RelayCommand(Action<object> execute) : base(execute)
+        public RelayCommand(Action<object?> execute) : base(execute)
         {
         }
 
@@ -82,7 +82,7 @@ namespace H2HY.Commands
         /// </summary>
         /// <param name="execute">action, which is executed</param>
         /// <param name="canExecute">callback, determinates if command is executable</param>
-        public RelayCommand(Action<object> execute, Predicate<object?>? canExecute) : base(execute, canExecute)
+        public RelayCommand(Action<object?> execute, Predicate<object?>? canExecute) : base(execute, canExecute)
         {
         }
     }

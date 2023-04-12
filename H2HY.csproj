@@ -11,10 +11,12 @@
     <DocumentationFile>
     </DocumentationFile>
     <DebugType>full</DebugType>
+    <FileAlignment>2048</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DocumentationFile>bin\Release\H2HY.xml</DocumentationFile>
     <DebugType>none</DebugType>
+    <FileAlignment>2048</FileAlignment>
   </PropertyGroup>
   <PropertyGroup>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -22,6 +24,6 @@
 INotifyPropertyChanged in Viewmodelbase, RelayCommand, ICommand/CommandManager,
 Basic Stores, Fluent, Provider, Filenopen/SaveService, FolderPicker, etc.</Description>
     <Title>Hope to Help Ya</Title>
-    <Version>6.0.0.76</Version>
+    <Version>6.0.0.77</Version>
   </PropertyGroup>
 </Project>

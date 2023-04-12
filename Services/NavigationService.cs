@@ -3,13 +3,18 @@ using System;
 
 namespace H2HY.Services
 {
+    /// <summary>
+    /// simple navigation service. navigates to the given viewmodel using the given
+    /// navigationstore.
+    /// </summary>
+    /// <typeparam name="TViewModel"></typeparam>
     public class NavigationService<TViewModel> : INavigationService where TViewModel : ViewModelBase
     {
         private readonly INavigationStore _navigationStore;
         private readonly Func<TViewModel> _createViewModel;
 
         /// <summary>
-        /// Navigates to the given viewmodel using the the given Navigationstore.
+        /// Navigates to the given viewmodel using the the given navigationstore.
         /// </summary>
         /// <param name="navigationStore"></param>
         /// <param name="createViewModel"></param>

@@ -14,7 +14,7 @@ namespace H2HY.Provider
         private readonly string _filename;
 
         /// <summary>
-        ///
+        /// creates a provider using the given filename.
         /// </summary>
         /// <param name="filename"></param>
         public FileProviderBase(string filename)
@@ -104,8 +104,19 @@ namespace H2HY.Provider
             return false;//we dont do updates using the file system.
         }
 
+
+        /// <summary>
+        /// loads a list<typeparamref name="T"/> from the given file.
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="list"></param>
         protected abstract void LoadModel(string filename, out List<T>? list);
 
+        /// <summary>
+        /// saves a list<typeparamref name="T"/> to the given file.
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="list"></param>
         protected abstract void SaveModel(string filename, IEnumerable<T> list);
 
         private static void HandleId(T item, IEnumerable<T> usedItems)

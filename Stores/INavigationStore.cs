@@ -2,8 +2,14 @@
 
 namespace H2HY.Stores
 {
+    /// <summary>
+    /// basic navigation store interface.
+    /// </summary>
     public interface INavigationStore
     {
+        /// <summary>
+        /// Is callen current viewmodel has changed.
+        /// </summary>
         event Action CurrentViewModelChanged;
 
         /// <summary>
@@ -11,8 +17,14 @@ namespace H2HY.Stores
         /// </summary>
         ViewModelBase? CurrentViewModel { get; set; }
 
+        /// <summary>
+        ///  true if an current viewmodel is set.
+        /// </summary>
         bool IsOpen { get; }
 
+        /// <summary>
+        /// closes the current viewm(model)
+        /// </summary>
         void Close();
     }
 }
