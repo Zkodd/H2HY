@@ -38,7 +38,7 @@ namespace H2HY.Stores
         }
 
         /// <summary>
-        /// the current item has changed
+        /// the given item has changed
         /// </summary>
         /// <param name="item"></param>
         protected void OnChanged(T item)
