@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Hope to Help Ya</title>
+    <authors>Thorsten Appel</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <!-- <icon>icon.png</icon> -->
+    <description>
+      Handy-dandy basic helper for MVVVM issues. Lightware - no schnickschnack.
+      INotifyPropertyChanged in Viewmodelbase, RelayCommand, ICommand/CommandManager,
+      Basic Stores, Fluent, Provider, Filenopen/SaveService, FolderPicker, etc.
+    </description>
+    <releaseNotes></releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags></tags>
+    <repository type="git" url="git@github.com:Zkodd/H2HY.git"/>
+	<dependencies>
+      <group targetFramework="net6.0" />
+    </dependencies>
+  </metadata>
+</package>
