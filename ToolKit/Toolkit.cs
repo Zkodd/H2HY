@@ -11,6 +11,35 @@ namespace H2HY.Toolkit
     public class Toolkit
     {
         /// <summary>
+        /// Get a password from a console app using asterix instead of char.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetConsolePassword()
+        {
+            var pass = string.Empty;
+            ConsoleKey key;
+            do
+            {
+                var keyInfo = Console.ReadKey(intercept: true);
+                key = keyInfo.Key;
+
+                if (key == ConsoleKey.Backspace && pass.Length > 0)
+                {
+                    Console.Write("\b \b");
+                    pass = pass[0..^1];
+                }
+                else if (!char.IsControl(keyInfo.KeyChar))
+                {
+                    Console.Write("*");
+                    pass += keyInfo.KeyChar;
+                }
+            } while (key != ConsoleKey.Enter);
+
+            Console.Write(Environment.NewLine);
+            return pass;
+        }
+
+        /// <summary>
         /// Ensures there is trailing directory separator in the path
         /// Source:
         /// https://stackoverflow.com/questions/20405965/how-to-ensure-there-is-trailing-directory-separator-in-paths
@@ -97,6 +126,5 @@ namespace H2HY.Toolkit
                 props.targetProperty.SetValue(destination, props.sourceProperty.GetValue(source, null), null);
             }
         }
-
     }
 }
