@@ -24,10 +24,10 @@ namespace H2HY.Commands
         }
 
         /// <summary>
-        /// standard constructor for command and canExecute-callback
+        /// standard constructor for command and canExecute-call back
         /// </summary>
         /// <param name="execute">action, which is executed</param>
-        /// <param name="canExecute">callback, determinates if command is executable</param>
+        /// <param name="canExecute">call back, determinates if command is executable</param>
         public RelayCommand(Action<T?> execute, Predicate<T?>? canExecute)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
@@ -54,7 +54,7 @@ namespace H2HY.Commands
         }
 
         /// <summary>
-        /// execute commmands. Is never call by ur code.
+        /// execute command. Is never call by ur code.
         /// </summary>
         /// <param name="parameter">parameter given by the WPF binding.</param>
         public void Execute(object? parameter)
@@ -64,7 +64,7 @@ namespace H2HY.Commands
     }
 
     /// <summary>
-    /// specialised Relaycommand:
+    /// specialised Relay command:
     ///  ///  <![CDATA[ RelayCommand : RelayCommand<object> ]]>
     /// </summary>
     public class RelayCommand : RelayCommand<object>
@@ -78,10 +78,10 @@ namespace H2HY.Commands
         }
 
         /// <summary>
-        /// standard constructor for command and canExecute-callback
+        /// standard constructor for command and canExecute-call back
         /// </summary>
         /// <param name="execute">action, which is executed</param>
-        /// <param name="canExecute">callback, determinates if command is executable</param>
+        /// <param name="canExecute">call back, determinates if command is executable</param>
         public RelayCommand(Action<object?> execute, Predicate<object?>? canExecute) : base(execute, canExecute)
         {
         }
