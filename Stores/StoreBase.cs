@@ -47,7 +47,7 @@ namespace H2HY.Stores
         }
 
         /// <summary>
-        /// The current store chandeg dramaticly.
+        /// The current store changed dramatically.
         /// </summary>
         protected void OnReset()
         {

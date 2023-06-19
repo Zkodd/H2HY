@@ -1,7 +1,7 @@
 ﻿namespace H2HY.Stores
 {
     /// <summary>
-    /// Indicates a perfomed action on an single item.
+    /// Indicates a performed action on an single item.
     /// </summary>
     public enum StoreSingleChangedAction
     {
@@ -18,7 +18,7 @@
         /// </summary>
         Changed = 2,
         /// <summary>
-        /// item has been reseted to default.
+        /// item has been rested to default.
         /// </summary>
         Reset = 3,
     }

@@ -1,7 +1,7 @@
 ﻿namespace H2HY.Stores
 {
     /// <summary>
-    /// Indicates a perfomed action on an item.
+    /// Indicates a performend action on an item.
     /// </summary>
     public enum StoreChangedAction
     {
@@ -21,7 +21,7 @@
         Changed = 2,
 
         /// <summary>
-        /// The store has changed drasticly.
+        /// The store has changed drastically.
         /// </summary>
         Reset = 3,
     }

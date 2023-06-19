@@ -8,22 +8,22 @@ namespace H2HY.Stores
     public interface INavigationStore
     {
         /// <summary>
-        /// Is callen current viewmodel has changed.
+        /// Is called when current view model has changed.
         /// </summary>
         event Action CurrentViewModelChanged;
 
         /// <summary>
-        /// Sets current viewmodel which will be shown in the corresponding store-target.
+        /// Sets current view model which will be shown in the corresponding store-target.
         /// </summary>
         ViewModelBase? CurrentViewModel { get; set; }
 
         /// <summary>
-        ///  true if an current viewmodel is set.
+        ///  true if an current view model is set.
         /// </summary>
         bool IsOpen { get; }
 
         /// <summary>
-        /// closes the current viewm(model)
+        /// closes the current view (model)
         /// </summary>
         void Close();
     }
