@@ -6,7 +6,7 @@ using System.Linq;
 namespace H2HY.Stores
 {
     /// <summary>
-    /// using the given Dialogservice to open an MODAL dialoag.
+    /// using the given Dialogservice to open an MODAL dialog.
     /// </summary>
     public class NavigationModalStore : INavigationModalStore
     {
@@ -32,8 +32,8 @@ namespace H2HY.Stores
         }
 
         /// <summary>
-        /// opens the set viewmodel as dialog
-        /// returns the last set viewmodel.
+        /// opens the set view model as dialog
+        /// returns the last set view model.
         /// </summary>
         public ViewModelBase? CurrentViewModel
         {

@@ -6,7 +6,7 @@ using System.Windows.Input;
 namespace H2HY
 {
     /// <summary>
-    /// usage as MainViewModel: inherite and define a construtor like this:
+    /// usage as MainViewModel: inherit and define a constructor like this:
     /// <![CDATA[public MyMainViewModel(INavigationStore navigationStore, INavigationStoreModal navigationStoreModal) : base(navigationStore, navigationStoreModal) {}]]>
     /// and register it to your DI service:
     /// <![CDATA[services.AddSingleton<H2HYMainViewModel>();]]>
@@ -52,7 +52,7 @@ namespace H2HY
         public event Action? ViewPortClosed;
 
         /// <summary>
-        /// Returns the current viewmodel. This is bind to the Mainview/Mainwindow by using:
+        /// Returns the current view model. This is bind to the Mainview/Mainwindow by using:
         /// <![CDATA[ <ContentControl Content="{Binding CurrentViewModel}" /> ]]>
         /// </summary>
         public ViewModelBase? CurrentViewModel => NavigationStore.CurrentViewModel;
@@ -70,7 +70,7 @@ namespace H2HY
         public ICommand ViewPortClosing { get; private set; }
 
         /// <summary>
-        /// Used Navigationstore - used to, well, navigate.
+        /// Used Navigation store - used to, well, navigate.
         /// </summary>
         protected INavigationStore NavigationStore { get; private set; }
 
@@ -82,9 +82,6 @@ namespace H2HY
             NavigationStore.CurrentViewModelChanged -= OnCurrentViewModelChanged;
         }
 
-        private void OnCurrentViewModelChanged()
-        {
-            RaisePropertyChanged(nameof(CurrentViewModel));
-        }
+        private void OnCurrentViewModelChanged() => RaisePropertyChanged(nameof(CurrentViewModel));
     }
 }

@@ -18,8 +18,7 @@ namespace H2HY.Stores
         }
 
         /// <summary>
-        /// Called after the current view model has changed. So, the main view model can
-        /// call property changed.
+        /// Called after the current view model has changed.
         /// </summary>
         public event Action? CurrentViewModelChanged;
 
