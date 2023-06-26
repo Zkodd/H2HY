@@ -15,7 +15,7 @@ namespace H2HY
     ///
     /// Create Bindings to:
     /// <![CDATA[<ContentControl Content="{Binding CurrentViewModel}" />]]>
-    /// Now, Bind the viewmodelstype to the Views: add something like this to your MainView.xaml:
+    /// Now, Bind the view model type to the Views: add something like this to your MainView.xaml:
     /// <![CDATA[
     /// <Grid.Resources>
     ///    <DataTemplate DataType = "{x:Type viewmodels:HazardLogChapterEditCaptionViewModel}" >

@@ -66,8 +66,8 @@ namespace H2HY.FluentSyntax
         }
 
         /// <summary>
-        /// Removes items where the given lambdafunction returns true.
-        /// Calls Changed(item, StoreChanged.Remove) for each item on succsess.
+        /// Removes items where the given lambda function returns true.
+        /// Calls Changed(item, StoreChanged.Remove) for each item on success.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="collection"></param>

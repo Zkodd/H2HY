@@ -23,7 +23,7 @@ namespace H2HY.Models
         public Func<T, bool>? IsValid;
 
         /// <summary>
-        /// Used provider for item managment.
+        /// Used provider for item management.
         /// </summary>
         protected readonly IProvider<T> _provider;
 
@@ -43,7 +43,7 @@ namespace H2HY.Models
                 List<T> newList = new List<T>();
                 newList.AddRange(loadedItems);
 
-                PreprocessLoadedList(newList);
+                ReprocessLoadedList(newList);
                 return newList;
             });
         }
@@ -69,22 +69,22 @@ namespace H2HY.Models
         /// <summary>
         /// Add a item to the list and calls Changed(item, StoreChanged.Add)
         /// </summary>
-        /// <param name="newitem"></param>
-        public void Add(T newitem)
+        /// <param name="newItem"></param>
+        public void Add(T newItem)
         {
             if (IsValid is null)
             {
-                _provider.Add(newitem);
-                _items.Value.Add(newitem);
-                Changed?.Invoke(newitem, H2HYListChanged.Add);
+                _provider.Add(newItem);
+                _items.Value.Add(newItem);
+                Changed?.Invoke(newItem, H2HYListChanged.Add);
             }
             else
             {
-                if (IsValid(newitem))
+                if (IsValid(newItem))
                 {
-                    _provider.Add(newitem);
-                    _items.Value.Add(newitem);
-                    Changed?.Invoke(newitem, H2HYListChanged.Add);
+                    _provider.Add(newItem);
+                    _items.Value.Add(newItem);
+                    Changed?.Invoke(newItem, H2HYListChanged.Add);
                 }
             }
         }
@@ -92,15 +92,15 @@ namespace H2HY.Models
         /// <summary>
         /// Adds a range of items. Calls IsValid and calls Changed(item, StoreChanged.Add) for each item.
         /// </summary>
-        /// <param name="newitems"></param>
-        public void AddRange(IEnumerable<T> newitems)
+        /// <param name="newItems"></param>
+        public void AddRange(IEnumerable<T> newItems)
         {
             if (IsValid is null)
             {
-                _provider.AddRange(newitems);
-                _items.Value.AddRange(newitems);
+                _provider.AddRange(newItems);
+                _items.Value.AddRange(newItems);
 
-                foreach (T item in newitems)
+                foreach (T item in newItems)
                 {
                     Changed?.Invoke(item, H2HYListChanged.Add);
                 }
@@ -108,7 +108,7 @@ namespace H2HY.Models
             else
             {
                 List<T> validItems = new();
-                validItems.AddRange(from T item in newitems
+                validItems.AddRange(from T item in newItems
                                     where IsValid(item)
                                     select item);
 
@@ -180,7 +180,7 @@ namespace H2HY.Models
             _items.Value.Clear();
 
             List<T> newItems = new(items);
-            PreprocessLoadedList(newItems);
+            ReprocessLoadedList(newItems);
 
             _items.Value.AddRange(newItems);
             Changed?.Invoke(default, H2HYListChanged.Reset);
@@ -223,7 +223,7 @@ namespace H2HY.Models
         /// Do not use Items-property inside. Modify <code>newList</code> instead.
         /// virtual - NOP.
         /// </summary>
-        protected virtual void PreprocessLoadedList(List<T> newList)
+        protected virtual void ReprocessLoadedList(List<T> newList)
         {
             return;
         }

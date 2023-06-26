@@ -34,7 +34,7 @@
         bool HasResult { get; }
 
         /// <summary>
-        /// Openes the Filedialog. FileName contains result in case of success. Otherwise FileName is empty.
+        /// Opens the Filedialog. FileName contains result in case of success. Otherwise FileName is empty.
         /// </summary>
         void ShowDialog();
     }

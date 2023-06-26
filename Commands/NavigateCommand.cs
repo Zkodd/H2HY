@@ -10,7 +10,7 @@ namespace H2HY.Commands
         private readonly INavigationService _navigationService;
 
         /// <summary>
-        /// Used Navigationservice.
+        /// Used navigation service.
         /// </summary>
         /// <param name="navigationService"></param>
         public NavigateCommand(INavigationService navigationService)
@@ -21,7 +21,7 @@ namespace H2HY.Commands
         /// <summary>
         /// calls Navigate() on the given Service.
         /// </summary>
-        /// <param name="parameter">unsued.</param>
+        /// <param name="parameter">unused.</param>
         public override void Execute(object? parameter)
         {
             _navigationService.Navigate();

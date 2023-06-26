@@ -11,7 +11,7 @@ namespace H2HY.Stores
         /// <summary>
         /// Store has changed.
         /// </summary>
-        public event Action<StoreSingleEventArgs<T>>? StoreChanged;
+        public event Action<object, StoreSingleEventArgs<T>>? StoreChanged;
 
         /// <summary>
         /// Publish to property if needed.
@@ -19,12 +19,12 @@ namespace H2HY.Stores
         protected T? _currentItem;
 
         /// <summary>
-        /// An item needs intialisation.
+        /// An item needs initialisation.
         /// </summary>
         /// <param name="item"></param>
-        protected void OnInitilise(T item)
+        protected void OnInitialise(T item)
         {
-            StoreChanged?.Invoke(new StoreSingleEventArgs<T>(item, StoreSingleChangedAction.Initialise));
+            StoreChanged?.Invoke(this, new StoreSingleEventArgs<T>(item, StoreSingleChangedAction.Initialise));
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace H2HY.Stores
         /// <param name="item"></param>
         protected void OnSet(T item)
         {
-            StoreChanged?.Invoke(new StoreSingleEventArgs<T>(item, StoreSingleChangedAction.Set));
+            StoreChanged?.Invoke(this, new StoreSingleEventArgs<T>(item, StoreSingleChangedAction.Set));
         }
 
         /// <summary>
@@ -41,15 +41,15 @@ namespace H2HY.Stores
         /// </summary>
         protected void OnChanged(T item)
         {
-            StoreChanged?.Invoke(new StoreSingleEventArgs<T>(item, StoreSingleChangedAction.Changed));
+            StoreChanged?.Invoke(this, new StoreSingleEventArgs<T>(item, StoreSingleChangedAction.Changed));
         }
 
         /// <summary>
-        /// The current store chandeg dramaticly.
+        /// The current store changed dramatically.
         /// </summary>
         protected void OnReset()
         {
-            StoreChanged?.Invoke(new StoreSingleEventArgs<T>(default, StoreSingleChangedAction.Reset));
+            StoreChanged?.Invoke(this, new StoreSingleEventArgs<T>(default, StoreSingleChangedAction.Reset));
         }
     }
 }

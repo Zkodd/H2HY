@@ -20,13 +20,13 @@ namespace H2HY.Toolkit
         /// Determines if the provided value is inside or equal the range.
         /// /// </summary>
         /// <param name="otherValue">value to check</param>
-        /// <returns>true if value is inside or equal the boundarys</returns>
+        /// <returns>true if value is inside or equal the boundaries</returns>
         bool Includes(T otherValue);
         /// <summary>
         /// Determines if another range is inside or equal the bounds of this range.
         /// </summary>
         /// <param name="otherRange"></param>
-        /// <returns>true if range is inside or equal the boundarys</returns>
+        /// <returns>true if range is inside or equal the boundaries</returns>
         bool Includes(IRange<T> otherRange);
     }
 }

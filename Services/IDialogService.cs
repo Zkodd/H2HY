@@ -26,7 +26,7 @@ namespace H2HY.Services
     }
 
     /// <summary>
-    /// The messagebox result.
+    /// The message box result.
     /// </summary>
     public enum MessageBoxResult
     {
@@ -99,21 +99,21 @@ namespace H2HY.Services
 
 
     /// <summary>
-    /// Opens viewmodels in windows or dialogs.
+    /// Opens view models in windows or dialogs.
     /// </summary>
     public interface IDialogService
     {
         /// <summary>
-        /// Opens given viewmodel as Dialog. Result on close will be true or false.
+        /// Opens given view model as Dialog. Result on close will be true or false.
         /// </summary>
         /// <param name="viewmodel"></param>
-        /// <param name="callback">callback will return dialog result in case of an modal window.</param>
+        /// <param name="callback">call back will return dialog result in case of an modal window.</param>
         void ShowDialog(ViewModelBase viewmodel, Action<ViewModelBase, bool> callback);
 
         /// <summary>
-        /// Opens a windows like confirmationbox.
+        /// Opens a windows like confirmation box.
         /// </summary>
-        /// <param name="message">Message, writen inside the box</param>
+        /// <param name="message">Message, written inside the box</param>
         /// <param name="caption">Messagebox caption</param>
         /// <param name="buttons">shown buttons</param>
         /// <param name="icon">used icon</param>

@@ -17,10 +17,10 @@ namespace H2HY.Services
     public class DialogServiceWPF : IDialogService
     {
         /// <summary>
-        ///  Shows given viewmodel in a modal dialog window.
+        ///  Shows given view Model in a modal dialog window.
         /// </summary>
         /// <param name="viewmodel"></param>
-        /// <param name="callback">callback on window close event. Can be true/false for modal - otherwise always false</param>
+        /// <param name="callback">call back on window close event. Can be true/false for modal - otherwise always false</param>
         public void ShowDialog(ViewModelBase viewmodel, Action<ViewModelBase, bool> callback)
         {
             if (viewmodel is ViewModelDialogBase viewModelDialogBase)
@@ -34,7 +34,7 @@ namespace H2HY.Services
         }
 
         /// <summary>
-        /// Opens a modal messagebox.
+        /// Opens a modal message box.
         /// </summary>
         /// <param name="message">A string that specifies the text to display.</param>
         /// <param name="caption">A string that specifies caption to display.</param>
@@ -50,12 +50,12 @@ namespace H2HY.Services
         }
 
         /// <summary>
-        ///  Shows given viewmodel in a modal dialog window.
+        ///  Shows given view model in a modal dialog window.
         /// </summary>
-        /// <param name="viewmodel"></param>
-        /// <param name="callback">callback on window close event.</param>
+        /// <param name="viewModel"></param>
+        /// <param name="callback">call back on window close event.</param>
         /// <exception cref="KeyNotFoundException"></exception>
-        private void ShowModalDialog(ViewModelDialogBase viewmodel, Action<ViewModelBase, bool>? callback)
+        private void ShowModalDialog(ViewModelDialogBase viewModel, Action<ViewModelBase, bool>? callback)
         {
             H2HYDialog dialogWindow = new();
 
@@ -63,9 +63,9 @@ namespace H2HY.Services
             {
                 try
                 {
-                    viewmodel.ViewClosed(dialogWindow.H2HYDialogResult);
-                    callback?.Invoke(viewmodel, dialogWindow.H2HYDialogResult);
-                    viewmodel.Dispose();
+                    viewModel.ViewClosed(dialogWindow.H2HYDialogResult);
+                    callback?.Invoke(viewModel, dialogWindow.H2HYDialogResult);
+                    viewModel.Dispose();
                 }
                 finally
                 {
@@ -74,10 +74,10 @@ namespace H2HY.Services
             }
             dialogWindow.Closed += closeEventHandler;
 
-            dialogWindow.DataContext = viewmodel;
+            dialogWindow.DataContext = viewModel;
             dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
 
-            if (viewmodel.IsModal)
+            if (viewModel.IsModal)
             {
                 dialogWindow.ShowDialog();
             }
@@ -88,10 +88,10 @@ namespace H2HY.Services
         }
 
         /// <summary>
-        /// Shows given viewmodel in a window. Dialoagresult will be false.
+        /// Shows given view model in a window. Dialog result will be false.
         /// </summary>
         /// <param name="viewmodel"></param>
-        /// <param name="callback">callback on window close event.</param>
+        /// <param name="callback">call back on window close event.</param>
         /// <exception cref="KeyNotFoundException"></exception>
         private void ShowWindowDialog(ViewModelBase viewmodel, Action<ViewModelBase, bool> callback)
         {

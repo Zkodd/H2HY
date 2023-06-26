@@ -6,7 +6,7 @@ using System.Text.Json;
 namespace H2HY.Provider
 {
     /// <summary>
-    /// Provider for write and save a model into a json file. T has to be serialiseable.
+    /// Provider for write and save a model into a json file. T has to be serializable.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class FileJsonProvider<T> : FileProviderBase<T> where T : IIDInterface

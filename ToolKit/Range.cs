@@ -22,7 +22,7 @@ namespace H2HY.Toolkit
         /// Determines if the provided value is inside or equal the range.
         /// /// </summary>
         /// <param name="otherValue">value to check</param>
-        /// <returns>true if value is inside or equal the boundarys</returns>
+        /// <returns>true if value is inside or equal the boundaries</returns>
         public bool Includes(T otherValue)
         {
             return (Low.CompareTo(otherValue) <= 0) && (otherValue.CompareTo(High) <= 0);
@@ -32,7 +32,7 @@ namespace H2HY.Toolkit
         /// Determines if another range is inside or equal the bounds of this range.
         /// </summary>
         /// <param name="otherRange"></param>
-        /// <returns>true if range is inside or equal the boundarys</returns>
+        /// <returns>true if range is inside or equal the boundaries</returns>
         public bool Includes(IRange<T> otherRange)
         {
             return Includes(otherRange.Low) && Includes(otherRange.High);

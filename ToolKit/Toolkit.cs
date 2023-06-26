@@ -11,7 +11,7 @@ namespace H2HY.Toolkit
     public class Toolkit
     {
         /// <summary>
-        /// Get a password from a console app using asterix instead of char.
+        /// Get a password from a console app using Asterix instead of char.
         /// </summary>
         /// <returns></returns>
         public static string GetConsolePassword()
@@ -47,7 +47,7 @@ namespace H2HY.Toolkit
         /// <param name="path"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static string AddPathDelimter(string path)
+        public static string AddPathDelimiter(string path)
         {
             if (path == null)
             {

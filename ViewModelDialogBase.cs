@@ -2,6 +2,9 @@
 
 namespace H2HY
 {
+    /// <summary>
+    /// View model base for a dialog based view model.
+    /// </summary>
     public abstract class ViewModelDialogBase : ViewModelBase, ICloseWindow
     {
         private bool _isOkEnabled;
@@ -10,12 +13,12 @@ namespace H2HY
         private bool _isModal = true;
 
         /// <summary>
-        /// The dialog windows close methode is attached here. No need to touch.
+        /// The dialog windows close method is attached here. No need to touch.
         /// </summary>
         public Action? Close { get; set; }
 
         /// <summary>
-        /// Assigend after the window is closed and holds the dialogresult. Default is false.
+        /// Assigned after the window is closed and holds the dialog result. Default is false.
         /// </summary>
         public bool DialogResult { get; set; }
 
@@ -32,7 +35,7 @@ namespace H2HY
         }
 
         /// <summary>
-        /// Shows dialag as modal(default)
+        /// Shows dialog as modal(default)
         /// </summary>
         public bool IsModal
         {
@@ -68,7 +71,7 @@ namespace H2HY
         }
 
         /// <summary>
-        /// Handles the Can-close behaivor. Default is true.
+        /// Handles the Can-close behaviour. Default is true.
         /// </summary>
         public bool CanCloseWindow { get; set; } = true;
 

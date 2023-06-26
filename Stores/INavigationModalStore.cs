@@ -6,7 +6,7 @@
     public interface INavigationModalStore
     {
         /// <summary>
-        /// set the currentviewmodel opens a new window using the given viewmodel.
+        /// set the current view model opens a new window using the given view model.
         /// </summary>
         ViewModelBase? CurrentViewModel { get; set; }
         /// <summary>

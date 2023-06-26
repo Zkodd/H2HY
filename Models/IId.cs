@@ -6,8 +6,9 @@
     public interface IIDInterface
     {
         /// <summary>
-        /// Unique Identifer.
+        /// Unique Identifier.
         /// </summary>
         int Id { get; set; }
     }
 }
+

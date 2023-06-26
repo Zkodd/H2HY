@@ -4,7 +4,7 @@ using System;
 namespace H2HY.Services
 {
     /// <summary>
-    /// Creating a viewmodel and navigates by using the given <code>navigationStoreModal</code> 
+    /// Creating a view model and navigates by using the given <code>navigationStoreModal</code> 
     /// </summary>
     /// <typeparam name="TViewModel"></typeparam>
     public class NavigationModalService<TViewModel> : INavigationService where TViewModel : ViewModelBase
@@ -13,7 +13,7 @@ namespace H2HY.Services
         private readonly Func<TViewModel> _createViewModel;
 
         /// <summary>
-        /// Navigates to the given viewmodel using the the given Navigationstore.
+        /// Navigates to the given view model using the the given Navigation store.
         /// </summary>
         /// <param name="navigationStoreModal"></param>
         /// <param name="createViewModel"></param>
@@ -24,8 +24,8 @@ namespace H2HY.Services
         }
 
         /// <summary>
-        /// Creates the given viewmodel using the given callback function
-        /// and sets it as the current viewmodel at the navigation store.
+        /// Creates the given view model using the given call back function
+        /// and sets it as the current view model at the navigation store.
         /// </summary>
         public void Navigate()
         {

@@ -5,7 +5,7 @@ namespace H2HY.Provider
     /// <summary>
     /// Generic Providerinterface for all stores.
     /// Not all provider are handling ids. So, the ID interface is not needed for this interface.
-    /// But it is maybe needed for some concret provider, like the file provider e.g.
+    /// But it is maybe needed for some concert provider, like the file provider e.g.
     ///
     ///  <![CDATA[ IProvider<T> where T : IIDInterface ]]>
     ///
@@ -50,7 +50,7 @@ namespace H2HY.Provider
         void SaveAll(IEnumerable<T> items);
 
         /// <summary>
-        /// updates given item. Recomendation: use IIDInterface to identify items by using the id.
+        /// updates given item. Recommendation: use IIDInterface to identify items by using the id.
         /// </summary>
         /// <param name="item">item to update</param>
         /// <returns>success of update process</returns>

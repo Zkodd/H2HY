@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace H2HY.Provider
 {
     /// <summary>
-    /// Provider for write and save a model into xml a file. T have to be serialiseable.
+    /// Provider for write and save a model into xml a file. T have to be serializable.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class FileXmlProvider<T> : FileProviderBase<T> where T : IIDInterface
@@ -49,9 +49,9 @@ namespace H2HY.Provider
         protected override void SaveModel(string filename, IEnumerable<T> list)
         {
             XmlSerializer writer = new XmlSerializer(typeof(List<T>));
-            FileStream outputfile = File.Create(filename);
-            writer.Serialize(outputfile, list);
-            outputfile.Close();
+            FileStream outputFile = File.Create(filename);
+            writer.Serialize(outputFile, list);
+            outputFile.Close();
         }
     }
 }

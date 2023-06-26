@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 namespace H2HY
 {
     /// <summary>
-    /// Base class for all viewmodels. Realises INotifyPropertyChanged.
+    /// Base class for all view models. Realises INotifyPropertyChanged.
     /// </summary>
     public abstract class ViewModelBase : INotifyPropertyChanged
     {

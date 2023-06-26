@@ -3,10 +3,10 @@
 namespace H2HY
 {
     /// <summary>
-    /// No need to inherite from here. This class is used by <code>LayoutNavigationService</code>.
+    /// No need to inherit from here. This class is used by <code>LayoutNavigationService</code>.
     /// 
     /// Create a Layout.xml and bind to: NavigationBarViewModel, ContentViewModel
-    /// and use this as viewmodel : H2HYLayoutViewModel
+    /// and use this as view model : H2HYLayoutViewModel
     /// 
     /// Also u've to create a NavigationBarViewModel and register it like that:
     /// 
@@ -16,7 +16,7 @@ namespace H2HY
     ///  ]]>
     /// 
     /// now, create a view : NavigationBar.xml
-    /// and register it to your mainwindow:
+    /// and register it to your main window:
     /// <![CDATA[     
     /// <DataTemplate DataType="{x:Type h2hy:H2HYLayoutViewModel}">
     ///    <components:Layout />
@@ -36,8 +36,8 @@ namespace H2HY
         /// <summary>
         /// The H2HYLayoutViewModel is recreated on every navigation.
         /// </summary>
-        /// <param name="navigationBarViewModel">navigation viewmodel</param>
-        /// <param name="contentViewModel">current content viewmodel</param>
+        /// <param name="navigationBarViewModel">navigation view model</param>
+        /// <param name="contentViewModel">current content view model</param>
         public H2HYLayoutViewModel(H2HYNavigationBar navigationBarViewModel, ViewModelBase contentViewModel)
         {
             NavigationBarViewModel = navigationBarViewModel;
@@ -45,12 +45,12 @@ namespace H2HY
         }
 
         /// <summary>
-        /// Current viewmodel which is shown in the content row.
+        /// Current view model which is shown in the content row.
         /// </summary>
         public ViewModelBase ContentViewModel { get; }
 
         /// <summary>
-        /// Viewmodel for the navigationbar, containing navigation commands.
+        /// View model for the navigation bar, containing navigation commands.
         /// </summary>
         public H2HYNavigationBar NavigationBarViewModel { get; }
 

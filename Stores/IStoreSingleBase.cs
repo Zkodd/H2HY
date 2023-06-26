@@ -12,6 +12,6 @@ namespace H2HY.Stores
         /// <summary>
         /// Invoked whenever the store changed.
         /// </summary>
-        event Action<StoreSingleEventArgs<T>>? StoreChanged;
+        event Action<object, StoreSingleEventArgs<T>>? StoreChanged;
     }
 }

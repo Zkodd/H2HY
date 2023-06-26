@@ -40,7 +40,7 @@ namespace H2HY.Models
         public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
         /// <summary>
-        /// Occvurs when a property changes.
+        /// Occurs when a property changes.
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -99,14 +99,14 @@ namespace H2HY.Models
         /// </summary>
         /// <param name="owner"></param>
         /// <returns></returns>
-        public H2H2YFluentList<T> Subscripe(object owner)
+        public H2H2YFluentList<T> Subscribe(object owner)
         {
             _lastSubscriber = owner;
             return this;
         }
 
         /// <summary>
-        /// Unsubscribe as observer. Unsubsricbes from all calls.
+        /// Unsubscribe as observer. Unsubscribes from all calls.
         /// </summary>
         /// <param name="owner"></param>
         public void Unsubscribe(object owner)
@@ -243,7 +243,7 @@ namespace H2HY.Models
         }
 
         /// <summary>
-        /// Calls al itemadded observer.
+        /// Calls al item added observer.
         /// </summary>
         /// <param name="item"></param>
         protected virtual void NotifyOnItemAdded(T item)
@@ -273,7 +273,7 @@ namespace H2HY.Models
         }
 
         /// <summary>
-        /// Calls all itemremoved observer.
+        /// Calls all item removed observer.
         /// </summary>
         /// <param name="item"></param>
         protected virtual void NotifyOnItemRemoved(T item)
@@ -288,7 +288,7 @@ namespace H2HY.Models
         }
 
         /// <summary>
-        /// Calls all clearedobserver.
+        /// Calls all cleared observer.
         /// </summary>
         /// <param name="items"></param>
         protected virtual void NotifyOnItemsCleared(IList<T> items)

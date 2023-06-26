@@ -8,7 +8,7 @@ namespace H2HY.Services
     public class FileDialogServiceBase
     {
         /// <summary>
-        /// Created by the construtor. Is neither a FileOpen or an FileSaveDialog.
+        /// Created by the constructor. Is neither a FileOpen or an FileSaveDialog.
         /// </summary>
         protected FileDialog _fileDialog = default!;
 
@@ -51,7 +51,7 @@ namespace H2HY.Services
         }
 
         /// <summary>
-        /// Openes the Filedialog. FileName contains result in case of success. Otherwise FileName is empty.
+        /// Opens the Filedialog. FileName contains result in case of success. Otherwise FileName is empty.
         /// </summary>
         public void ShowDialog()
         {

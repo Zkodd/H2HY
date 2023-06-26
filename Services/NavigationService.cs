@@ -5,7 +5,7 @@ namespace H2HY.Services
 {
     /// <summary>
     /// simple navigation service. navigates to the given view model using the given
-    /// navigationstore.
+    /// navigation store.
     /// </summary>
     /// <typeparam name="TViewModel"></typeparam>
     public class NavigationService<TViewModel> : INavigationService where TViewModel : ViewModelBase
@@ -14,7 +14,7 @@ namespace H2HY.Services
         private readonly Func<TViewModel> _createViewModel;
 
         /// <summary>
-        /// Navigates to the given view model using the the given navigationstore.
+        /// Navigates to the given view model using the the given navigation store.
         /// </summary>
         /// <param name="navigationStore"></param>
         /// <param name="createViewModel"></param>

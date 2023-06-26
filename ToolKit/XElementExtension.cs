@@ -12,7 +12,7 @@ namespace H2HY.Toolkit
         /// Finds and returns the value of an child-element as string.
         /// </summary>
         /// <param name="e"></param>
-        /// <param name="elementName">elementname of the child</param>
+        /// <param name="elementName">element name of the child</param>
         /// <returns>returns values as string or string.Empty</returns>
         public static string GetElementValue(this XElement e, string elementName)
         {
@@ -28,11 +28,11 @@ namespace H2HY.Toolkit
         }
 
         /// <summary>
-        /// Finds and returns the given attribit from the current Element.
+        /// Finds and returns the given attribute from the current Element.
         /// </summary>
         /// <param name="e"></param>
-        /// <param name="elementAttributName">attribut name</param>
-        /// <returns>returns attribut as string or string.Empty</returns>
+        /// <param name="elementAttributName">attribute name</param>
+        /// <returns>returns attribute as string or string.Empty</returns>
         public static string GetElementAttribut(this XElement e, string elementAttributName)
         {
             var c = e.Attributes().FirstOrDefault(i => i.Name == elementAttributName);
