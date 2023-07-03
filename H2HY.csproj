@@ -26,5 +26,12 @@ Basic Stores, Fluent, Provider, Filenopen/SaveService, FolderPicker, etc.</Descr
     <Title>Hope to Help Ya</Title>
     <Version>6.0.0.81</Version>
     <Authors>Zkodd</Authors>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 </Project>
