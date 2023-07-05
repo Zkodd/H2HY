@@ -8,48 +8,24 @@ namespace H2HY.Services
     public enum MessageBoxButton
     {
         /// <summary>
-        /// The message box displays an OK button.  
+        /// The message box displays an OK button.
         /// </summary>
         OK = 0,
+
         /// <summary>
         /// The message box displays OK and Cancel buttons.
         /// </summary>
         OKCancel = 1,
+
         /// <summary>
         /// The message box displays Yes, No, and Cancel buttons.
         /// </summary>
         YesNoCancel = 3,
+
         /// <summary>
         /// The message box displays Yes and No buttons.
         /// </summary>
         YesNo = 4,
-    }
-
-    /// <summary>
-    /// The message box result.
-    /// </summary>
-    public enum MessageBoxResult
-    {
-        /// <summary>
-        ///     The message box returns no result.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        ///   The result value of the message box is OK.
-        /// </summary>
-        OK = 1,
-        /// <summary>
-        ///     The result value of the message box is Cancel.
-        /// </summary>
-        Cancel = 2,
-        /// <summary>
-        ///     The result value of the message box is Yes.
-        /// </summary>
-        Yes = 6,
-        /// <summary>
-        ///     The result value of the message box is No.
-        /// </summary>
-        No = 7,
     }
 
     /// <summary>
@@ -63,48 +39,85 @@ namespace H2HY.Services
         /// No icon is displayed.
         /// </summary>
         None = 0,
+
         /// <summary>
         /// The message box contains a symbol consisting of white X in a circle with a red background.
         /// </summary>
         Error = 16,
+
         /// <summary>
         /// The message box contains a symbol consisting of a white X in a circle with a red background.
         /// </summary>
         Hand = 16,
+
         /// <summary>
         /// The message box contains a symbol consisting of white X in a circle with a red background.
         /// </summary>
         Stop = 16,
+
         /// <summary>
         /// The message box contains a symbol consisting of a question mark in a circle.
         /// </summary>
         Question = 32,
+
         /// <summary>
         /// The message box contains a symbol consisting of an exclamation point in a triangle with a yellow background.
         /// </summary>
         Exclamation = 48,
+
         /// <summary>
         /// The message box contains a symbol consisting of an exclamation point in a triangle with a yellow background.
         /// </summary>
         Warning = 48,
+
         /// <summary>
         /// The message box contains a symbol consisting of a lowercase letter i in a circle.
         /// </summary>
         Information = 64,
+
         /// <summary>
         /// The message box contains a symbol consisting of a lowercase letter i in a circle.
         /// </summary>
         Asterisk = 64,
     }
 
+    /// <summary>
+    /// The message box result.
+    /// </summary>
+    public enum MessageBoxResult
+    {
+        /// <summary>
+        ///     The message box returns no result.
+        /// </summary>
+        None = 0,
 
+        /// <summary>
+        ///   The result value of the message box is OK.
+        /// </summary>
+        OK = 1,
+
+        /// <summary>
+        ///     The result value of the message box is Cancel.
+        /// </summary>
+        Cancel = 2,
+
+        /// <summary>
+        ///     The result value of the message box is Yes.
+        /// </summary>
+        Yes = 6,
+
+        /// <summary>
+        ///     The result value of the message box is No.
+        /// </summary>
+        No = 7,
+    }
     /// <summary>
     /// Opens view models in windows or dialogs.
     /// </summary>
     public interface IDialogService
     {
         /// <summary>
-        /// Opens given view model as Dialog. Result on close will be true or false.
+        /// Opens given view model as a dialog. Result on close will be true or false.
         /// </summary>
         /// <param name="viewmodel"></param>
         /// <param name="callback">call back will return dialog result in case of an modal window.</param>
@@ -119,5 +132,12 @@ namespace H2HY.Services
         /// <param name="icon">used icon</param>
         /// <returns></returns>
         MessageBoxResult ShowMessageBox(string message, string caption, MessageBoxButton buttons, MessageBoxIcon icon);
+
+        /// <summary>
+        ///  Opens given view model as a modal dialog. Result on close will be true or false.
+        /// </summary>
+        /// <param name="viewmodel"></param>
+        /// <param name="callback"></param>
+        void ShowModalDialog(ViewModelBase viewmodel, Action<ViewModelBase, bool> callback);
     }
 }

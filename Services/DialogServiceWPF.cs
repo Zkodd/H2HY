@@ -55,7 +55,7 @@ namespace H2HY.Services
         /// <param name="viewModel"></param>
         /// <param name="callback">call back on window close event.</param>
         /// <exception cref="KeyNotFoundException"></exception>
-        private void ShowModalDialog(ViewModelDialogBase viewModel, Action<ViewModelBase, bool>? callback)
+        public void ShowModalDialog(ViewModelBase viewModel, Action<ViewModelBase, bool>? callback)
         {
             H2HYDialog dialogWindow = new();
 
@@ -77,14 +77,7 @@ namespace H2HY.Services
             dialogWindow.DataContext = viewModel;
             dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
 
-            if (viewModel.IsModal)
-            {
-                dialogWindow.ShowDialog();
-            }
-            else
-            {
-                dialogWindow.Show();
-            }
+            dialogWindow.ShowDialog();
         }
 
         /// <summary>
@@ -95,7 +88,7 @@ namespace H2HY.Services
         /// <exception cref="KeyNotFoundException"></exception>
         private void ShowWindowDialog(ViewModelBase viewmodel, Action<ViewModelBase, bool> callback)
         {
-            var newWindow = new System.Windows.Window();
+            var newWindow = new Window();
 
             void closeEventHandler(object? s, EventArgs e)
             {

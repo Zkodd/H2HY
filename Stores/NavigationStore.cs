@@ -5,7 +5,7 @@ namespace H2HY.Stores
     /// <summary>
     /// A Navigation store for the main view model.
     /// </summary>
-    public class NavigationStore : INavigationStore, INavigationModalStore
+    public class NavigationStore : INavigationStore
     {
         private ViewModelBase? _currentViewModel;
 
@@ -41,7 +41,7 @@ namespace H2HY.Stores
         /// <summary>
         /// true if an current view model is set.
         /// </summary>
-        public bool IsOpen => CurrentViewModel != null;
+        public bool IsOpen => CurrentViewModel is not null;
 
         /// <summary>
         /// closes the current content view.

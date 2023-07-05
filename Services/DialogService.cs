@@ -79,14 +79,9 @@ namespace H2HY.Services
         /// <param name="viewModel"></param>
         /// <param name="callback">call back on window close event.</param>
         /// <exception cref="KeyNotFoundException"></exception>
-        private void ShowModalDialog(ViewModelDialogBase viewModel, Action<ViewModelBase, bool>? callback)
+        public void ShowModalDialog(ViewModelBase viewModel, Action<ViewModelBase, bool>? callback)
         {
-            Type? viewType = _mappings.GetValueOrDefault(viewModel.GetType());
-            if (viewType is null)
-            {
-                throw new KeyNotFoundException($"DialogService: Key {viewModel.GetType()} not found in dictionary.");
-            }
-
+            Type? viewType = _mappings.GetValueOrDefault(viewModel.GetType()) ?? throw new KeyNotFoundException($"DialogService: Key {viewModel.GetType()} not found in dictionary.");
             if (Activator.CreateInstance(viewType) is not FrameworkElement view)
             {
                 throw new Exception($"Resolved View for {viewModel.GetType()} is not a framework element.");
@@ -113,21 +108,15 @@ namespace H2HY.Services
             dialogWindow.Closed += closeEventHandler;
             dialogWindow.ViewContent.Content = view;
 
-            //violating mvvm principles here! We know the view. 
+            //violating mvvm principles here! We know the view.
             //better create nested view model and use databinding.
 
             dialogWindow.DataContext = viewModel;
             dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
 
-            if (viewModel.IsModal)
-            {
-                dialogWindow.ShowDialog();
-            }
-            else
-            {
-                dialogWindow.Show();
-            }
+            dialogWindow.ShowDialog();
         }
+
         /// <summary>
         /// Shows given view model in a window. Dialog result will be false.
         /// </summary>

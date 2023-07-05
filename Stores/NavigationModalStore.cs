@@ -1,7 +1,4 @@
 ﻿using H2HY.Services;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace H2HY.Stores
 {
@@ -11,8 +8,7 @@ namespace H2HY.Stores
     public class NavigationModalStore : INavigationModalStore
     {
         private readonly IDialogService _dialogService;
-        private ViewModelBase? _lastViewModel;
-        private readonly HashSet<ViewModelBase> _openViews = new();
+        private ViewModelBase? _currentViewModel;
 
         /// <summary>
         /// Dialog store vor multiple dialogs.
@@ -37,37 +33,21 @@ namespace H2HY.Stores
         /// </summary>
         public ViewModelBase? CurrentViewModel
         {
-            get => _lastViewModel;
+            get => _currentViewModel;
             set
             {
-                _lastViewModel = value;
+                _currentViewModel = value;
 
                 if (value is not null)
                 {
-                    _openViews.Add(value);
-                    _dialogService.ShowDialog(value, ViewClosedEvent);
+                    _dialogService.ShowModalDialog(value, ViewClosedEvent);
                 }
             }
         }
 
         private void ViewClosedEvent(ViewModelBase sender, bool result)
         {
-            _openViews.Remove(sender);
-        }
-
-        /// <summary>
-        /// closes all opens ViewModelDialogBase viewmodels.
-        /// </summary>
-        public void Close()
-        {
-            Collection<ViewModelBase> openViews = new(_openViews.ToList());
-            foreach (var item in openViews)
-            {
-                if (item is ViewModelDialogBase vm)
-                {
-                    vm.CloseDialog();
-                }
-            }
+           //unused
         }
     }
 }
