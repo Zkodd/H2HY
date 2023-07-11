@@ -1,4 +1,4 @@
-﻿namespace H2HY.Stores
+﻿namespace H2HY.Navigation
 {
     /// <summary>
     /// Interface for a Modal-Navigation-Store.

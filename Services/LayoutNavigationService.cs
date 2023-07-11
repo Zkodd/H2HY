@@ -1,4 +1,4 @@
-﻿using H2HY.Stores;
+﻿using H2HY.Navigation;
 using System;
 
 namespace H2HY.Services

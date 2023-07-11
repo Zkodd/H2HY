@@ -1,7 +1,7 @@
 ﻿namespace H2HY
 {
     /// <summary>
-    /// Dialoginterface for open dialog.
+    /// Dialog interface for open dialog.
     /// Can be used for FileOpenDialogService
     /// </summary>
     public interface IFileOpenDialog
@@ -14,7 +14,7 @@
         string Extension { get; set; }
 
         /// <summary>
-        /// Empty by default. Will hold the result of Showdialog().
+        /// Empty by default. Will hold the result of ShowDialog().
         /// </summary>
         string FileName { get; }
 
@@ -29,12 +29,12 @@
         string Filter { get; set; }
 
         /// <summary>
-        /// ShowdDialog has return with a result in FileName.
+        /// ShowDialog has return with a result in FileName.
         /// </summary>
         bool HasResult { get; }
 
         /// <summary>
-        /// Opens the Filedialog. FileName contains result in case of success. Otherwise FileName is empty.
+        /// Opens the File dialog. FileName contains result in case of success. Otherwise FileName is empty.
         /// </summary>
         void ShowDialog();
     }

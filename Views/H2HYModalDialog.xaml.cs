@@ -7,11 +7,17 @@ namespace H2HY.Views
     /// </summary>
     public partial class H2HYModalDialog : Window
     {
+        /// <summary>
+        /// initialize component.
+        /// </summary>
         public H2HYModalDialog()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// dialog result.
+        /// </summary>
         public bool H2HYDialogResult { get; private set; } = false;
 
         private void CancelClick(object sender, RoutedEventArgs e)

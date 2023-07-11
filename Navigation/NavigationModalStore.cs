@@ -1,9 +1,9 @@
 ﻿using H2HY.Services;
 
-namespace H2HY.Stores
+namespace H2HY.Navigation
 {
     /// <summary>
-    /// using the given Dialogservice to open an MODAL dialog.
+    /// using the given dialog service to open an MODAL dialog.
     /// </summary>
     public class NavigationModalStore : INavigationModalStore
     {
@@ -47,7 +47,7 @@ namespace H2HY.Stores
 
         private void ViewClosedEvent(ViewModelBase sender, bool result)
         {
-           //unused
+            //unused
         }
     }
 }

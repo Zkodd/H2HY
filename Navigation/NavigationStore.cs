@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace H2HY.Stores
+namespace H2HY.Navigation
 {
     /// <summary>
     /// A Navigation store for the main view model.

@@ -4,17 +4,27 @@ namespace H2HY.Properties
 {
 
     /// <summary>
-    /// Usage: attach to window like this:
+    /// Usage: attach to view window like this:
     /// <code>h2hyProp:WindowCloser.EnableWindowClosing="True"</code>
-    /// Implement <code>ICloseWindow</code> to a viewmodel.
+    /// Add interface <code>ICloseWindow</code> to the used view model.
     /// </summary>
     public class WindowCloser
     {
+        /// <summary>
+        /// Getter for EnableWindowClosing
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static bool GetEnableWindowClosing(DependencyObject obj)
         {
             return (bool)obj.GetValue(EnableWindowClosingProperty);
         }
 
+        /// <summary>
+        /// Setter for EnableWindowClosing
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="value"></param>
         public static void SetEnableWindowClosing(DependencyObject obj, bool value)
         {
             obj.SetValue(EnableWindowClosingProperty, value);
@@ -31,9 +41,9 @@ namespace H2HY.Properties
                 {
                     if (window.DataContext is ICloseWindow vm)
                     {
-                        //add some events to the given viewmodel(datacontext):
+                        //add some events to the given view model(data context):
                         vm.Close += () =>
-                        {//i will execute window.close() if viewmodel.Close is invoked.
+                        {//i will execute window.close() if view model.Close is invoked.
                             window.Close();
                         };
 

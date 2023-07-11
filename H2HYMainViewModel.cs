@@ -1,5 +1,5 @@
 ﻿using H2HY.Commands;
-using H2HY.Stores;
+using H2HY.Navigation;
 using System;
 using System.Windows.Input;
 
