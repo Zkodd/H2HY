@@ -1,11 +1,12 @@
 ﻿using H2HY.Services;
+using System;
 
 namespace H2HY.Navigation
 {
     /// <summary>
     /// using the given dialog service to open an MODAL dialog.
     /// </summary>
-    public class NavigationModalStore : INavigationModalStore
+    public class NavigationModalStore : INavigationStore
     {
         private readonly IDialogService _dialogService;
         private ViewModelBase? _currentViewModel;
@@ -42,8 +43,16 @@ namespace H2HY.Navigation
                 {
                     _dialogService.ShowModalDialog(value, ViewClosedEvent);
                 }
+
+                CurrentViewModelChanged?.Invoke();
             }
         }
+
+
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        public event Action? CurrentViewModelChanged;
 
         private void ViewClosedEvent(ViewModelBase sender, bool result)
         {

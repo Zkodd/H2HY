@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Xml.Linq;
 
-namespace H2HY.Toolkit
+namespace H2HY.Tools
 {
     /// <summary>
     /// Extends XElement for simplified value access.
@@ -31,11 +31,11 @@ namespace H2HY.Toolkit
         /// Finds and returns the given attribute from the current Element.
         /// </summary>
         /// <param name="e"></param>
-        /// <param name="elementAttributName">attribute name</param>
+        /// <param name="elementAttributeName">attribute name</param>
         /// <returns>returns attribute as string or string.Empty</returns>
-        public static string GetElementAttribut(this XElement e, string elementAttributName)
+        public static string GetElementAttribute(this XElement e, string elementAttributeName)
         {
-            var c = e.Attributes().FirstOrDefault(i => i.Name == elementAttributName);
+            var c = e.Attributes().FirstOrDefault(i => i.Name == elementAttributeName);
             if (c is not null)
             {
                 return c.Value;

@@ -3,12 +3,12 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace H2HY.Toolkit
+namespace H2HY.Tools
 {
     /// <summary>
     /// Collection of useful methods.
     /// </summary>
-    public class Toolkit
+    public class Tools
     {
         /// <summary>
         /// Get a password from a console app using Asterix instead of char.

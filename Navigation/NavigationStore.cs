@@ -39,11 +39,6 @@ namespace H2HY.Navigation
         }
 
         /// <summary>
-        /// true if an current view model is set.
-        /// </summary>
-        public bool IsOpen => CurrentViewModel is not null;
-
-        /// <summary>
         /// closes the current content view.
         /// </summary>
         public void Close()

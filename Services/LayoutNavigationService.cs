@@ -10,10 +10,10 @@ namespace H2HY.Services
     /// <code><![CDATA[
     /// private INavigationService CreateFaultListNavigation(IServiceProvider serviceProvider)
     ///    {
-    ///        return new LayoutNavigationService<FaultListViewModel>(//Content viewmodel
+    ///        return new LayoutNavigationService<FaultListViewModel>(//Content view model
     ///           serviceProvider.GetRequiredService<INavigationStore>(),//INavigationStore or INavigationStoreModal
-    ///           () => serviceProvider.GetRequiredService<FaultListViewModel>(),//Content viewmodel
-    ///           () => serviceProvider.GetRequiredService<NavigationBarViewModel>()//Navigation bar viewmodel
+    ///           () => serviceProvider.GetRequiredService<FaultListViewModel>(),//Content view model
+    ///           () => serviceProvider.GetRequiredService<NavigationBarViewModel>()//Navigation bar view model
     ///           );
     ///    }
     /// ]]></code>

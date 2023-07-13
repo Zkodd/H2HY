@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace H2HY.ToolKit
+namespace H2HY.Tools
 {
 
     /// <summary>
