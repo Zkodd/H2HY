@@ -5,13 +5,17 @@ Overall:
 Stores:
 -> use of mediator pattern
 
-
-
 Version changes
+
+6.0.0.85
+
+	- added NavigationDialogService
+	- fixed typos
 
 6.0.0.84
 
 	- added parameter construtor for SplitnavigationStore.
+	- fixed typos
 
 6.0.0.83
 

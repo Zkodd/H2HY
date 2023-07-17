@@ -3,6 +3,7 @@ using System;
 
 namespace H2HY.Services
 {
+
     /// <summary>
     /// simple navigation service. navigates to the given view model using the given
     /// navigation store.
@@ -14,7 +15,7 @@ namespace H2HY.Services
         private readonly Func<TViewModel> _createViewModel;
 
         /// <summary>
-        /// Navigates to the given view model using the the given navigation store.
+        /// Creates a navigation service which navigates to the given view model by using the given navigation store.
         /// </summary>
         /// <param name="navigationStore"></param>
         /// <param name="createViewModel"></param>

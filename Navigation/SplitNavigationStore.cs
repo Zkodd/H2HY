@@ -19,7 +19,7 @@ namespace H2HY.Navigation
             _second = null;
         }
 
-        /// <summary>
+        /// <summary>   
         /// constructor using predefined views.
         /// </summary>
         /// <param name="firstView"></param>
