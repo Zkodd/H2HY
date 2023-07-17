@@ -119,15 +119,15 @@ namespace H2HY.Services
         /// <summary>
         /// Opens given view model as a dialog. Result on close will be true or false.
         /// </summary>
-        /// <param name="viewmodel"></param>
-        /// <param name="callback">call back will return dialog result in case of an modal window.</param>
-        void ShowDialog(ViewModelBase viewmodel, Action<ViewModelBase, bool> callback);
+        /// <param name="viewModel"></param>
+        /// <param name="callBack">call back will return dialog result in case of an modal window.</param>
+        void ShowDialog(ViewModelBase viewModel, Action<ViewModelBase, bool> callBack);
 
         /// <summary>
         /// Opens a windows like confirmation box.
         /// </summary>
         /// <param name="message">Message, written inside the box</param>
-        /// <param name="caption">Messagebox caption</param>
+        /// <param name="caption">Message box caption</param>
         /// <param name="buttons">shown buttons</param>
         /// <param name="icon">used icon</param>
         /// <returns></returns>
@@ -136,8 +136,8 @@ namespace H2HY.Services
         /// <summary>
         ///  Opens given view model as a modal dialog. Result on close will be true or false.
         /// </summary>
-        /// <param name="viewmodel"></param>
-        /// <param name="callback"></param>
-        void ShowModalDialog(ViewModelBase viewmodel, Action<ViewModelBase, bool> callback);
+        /// <param name="viewModel"></param>
+        /// <param name="callBack"></param>
+        void ShowModalDialog(ViewModelBase viewModel, Action<ViewModelBase, bool> callBack);
     }
 }

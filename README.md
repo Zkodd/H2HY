@@ -9,6 +9,9 @@ Stores:
 
 Version changes
 
+6.0.0.84
+
+	- added parameter construtor for SplitnavigationStore.
 
 6.0.0.83
 

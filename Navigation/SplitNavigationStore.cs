@@ -11,7 +11,27 @@ namespace H2HY.Navigation
         private ViewModelBase? _second;
 
         /// <summary>
-        /// current first side 
+        /// default constructor using empty views.
+        /// </summary>
+        public SplitNavigationStore()
+        {
+            _first = null;
+            _second = null;
+        }
+
+        /// <summary>
+        /// constructor using predefined views.
+        /// </summary>
+        /// <param name="firstView"></param>
+        /// <param name="secondView"></param>
+        public SplitNavigationStore(ViewModelBase firstView, ViewModelBase secondView)
+        {
+            _first ??= firstView;
+            _second ??= secondView;
+        }
+
+        /// <summary>
+        /// current first side
         /// </summary>
         public ViewModelBase? First
         {
