@@ -11,6 +11,31 @@ namespace H2HY.Tools
     public class Tools
     {
         /// <summary>
+        /// Use the method to create a valid file name from a given string:
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static string MakeValidFileName(string name)
+        {
+            char[] invalidChars = Path.GetInvalidFileNameChars();
+
+            foreach (char invalidChar in invalidChars)
+            {
+                name = name.Replace(invalidChar, ' ');
+            }
+
+            name = name.Trim();
+
+            int maxFileNameLength = 260;
+            if (name.Length > maxFileNameLength)
+            {
+                name = name.Substring(0, maxFileNameLength);
+            }
+
+            return name;
+        }
+
+        /// <summary>
         /// Get a password from a console app using Asterix instead of char.
         /// </summary>
         /// <returns></returns>
@@ -97,7 +122,7 @@ namespace H2HY.Tools
         }
 
         /// <summary>
-        /// Copies all setable properties from one to another object.
+        /// Copies all set able properties from one to another object.
         /// Source: https://stackoverflow.com/questions/930433/apply-properties-values-from-one-object-to-another-of-the-same-type-automaticall
         /// </summary>
         /// <param name="source"></param>

@@ -7,6 +7,14 @@ Stores:
 
 Version changes
 
+6.0.0.87
+
+	- add MakeValidFileName
+
+6.0.0.86
+
+	- seperate ViewModel base and INotifyPropertyChanged
+
 6.0.0.85
 
 	- added NavigationDialogService
