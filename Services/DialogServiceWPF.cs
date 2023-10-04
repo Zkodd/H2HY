@@ -17,7 +17,7 @@ namespace H2HY.Services
     public class DialogServiceWPF : IDialogService
     {
         /// <summary>
-        ///  Shows given view Model in a modal dialog window.
+        ///  Shows given view Model in a dialog window.
         /// </summary>
         /// <param name="viewModel"></param>
         /// <param name="callBack">call back on window close event. Can be true/false for modal - otherwise always false</param>
@@ -25,7 +25,14 @@ namespace H2HY.Services
         {
             if (viewModel is ViewModelDialogBase viewModelDialogBase)
             {
-                ShowModalDialog(viewModelDialogBase, callBack);
+                if (viewModelDialogBase.IsModal)
+                {
+                    ShowModalDialog(viewModelDialogBase, callBack);
+                }
+                else
+                {
+                    ShowWindowExDialog(viewModelDialogBase, callBack);
+                }
             }
             else
             {
@@ -50,14 +57,50 @@ namespace H2HY.Services
         }
 
         /// <summary>
+        ///  Shows given view model in a non modal dialog window.
+        ///  using the H2HYModalDialog.view
+        /// </summary>
+        /// <param name="viewModelDialogBase"></param>
+        /// <param name="callBack"></param>
+        private void ShowWindowExDialog(ViewModelDialogBase viewModelDialogBase, Action<ViewModelBase, bool> callBack)
+        {
+            H2HYModalDialog dialogWindow = new();
+
+            dialogWindow.Closed += closeEventHandler;
+            dialogWindow.DataContext = viewModelDialogBase;
+            dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
+            dialogWindow.Show();
+
+            void closeEventHandler(object? s, EventArgs e)
+            {
+                try
+                {
+                    viewModelDialogBase.ViewClosed(dialogWindow.H2HYDialogResult);
+                    callBack?.Invoke(viewModelDialogBase, dialogWindow.H2HYDialogResult);
+                    viewModelDialogBase.Dispose();
+                }
+                finally
+                {
+                    dialogWindow.Closed -= closeEventHandler;
+                }
+            }
+        }
+
+        /// <summary>
         ///  Shows given view model in a modal dialog window.
+        /// using the H2HYModalDialog.view
         /// </summary>
         /// <param name="viewModel"></param>
         /// <param name="callBack">call back on window close event.</param>
         /// <exception cref="KeyNotFoundException"></exception>
         public void ShowModalDialog(ViewModelBase viewModel, Action<ViewModelBase, bool>? callBack)
         {
-            H2HYDialog dialogWindow = new();
+            H2HYModalDialog dialogWindow = new();
+
+            dialogWindow.Closed += closeEventHandler;
+            dialogWindow.DataContext = viewModel;
+            dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
+            dialogWindow.ShowDialog();
 
             void closeEventHandler(object? s, EventArgs e)
             {
@@ -72,16 +115,11 @@ namespace H2HY.Services
                     dialogWindow.Closed -= closeEventHandler;
                 }
             }
-            dialogWindow.Closed += closeEventHandler;
-
-            dialogWindow.DataContext = viewModel;
-            dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
-
-            dialogWindow.ShowDialog();
         }
 
         /// <summary>
         /// Shows given view model in a window. Dialog result will be false.
+        /// using a plain window.
         /// </summary>
         /// <param name="viewModel"></param>
         /// <param name="callBack">call back on window close event.</param>
@@ -89,6 +127,13 @@ namespace H2HY.Services
         private void ShowWindowDialog(ViewModelBase viewModel, Action<ViewModelBase, bool> callBack)
         {
             var newWindow = new Window();
+
+            newWindow.Closed += closeEventHandler;
+            newWindow.DataContext = viewModel;
+            newWindow.Content = viewModel;
+            newWindow.SizeToContent = SizeToContent.WidthAndHeight;
+
+            newWindow.Show();
 
             void closeEventHandler(object? s, EventArgs e)
             {
@@ -103,14 +148,6 @@ namespace H2HY.Services
                     newWindow.Closed -= closeEventHandler;
                 }
             }
-            newWindow.Closed += closeEventHandler;
-
-            newWindow.DataContext = viewModel;
-            newWindow.Content = viewModel;
-
-            newWindow.SizeToContent = SizeToContent.WidthAndHeight;
-
-            newWindow.Show();
         }
     }
 }

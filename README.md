@@ -7,13 +7,18 @@ Stores:
 
 Version changes
 
+6.0.0.88
+
+	- fixed modal/dialog behaviour in DialogServiceWPF
+	- typo in DialogService(RegisterDialog)
+
 6.0.0.87
 
 	- add MakeValidFileName
 
 6.0.0.86
 
-	- seperate ViewModel base and INotifyPropertyChanged
+	- separate ViewModel base and INotifyPropertyChanged
 
 6.0.0.85
 
@@ -22,7 +27,7 @@ Version changes
 
 6.0.0.84
 
-	- added parameter construtor for SplitnavigationStore.
+	- added parameter constructor for SplitnavigationStore.
 	- fixed typos
 
 6.0.0.83
@@ -32,7 +37,7 @@ Version changes
 
 6.0.0.82
 
-	- created namepsace Navigation, moved all navigation stores
+	- created namespace Navigation, moved all navigation stores
 	- added split navigation
 	- fixed typos
 	- removed modal namespace
