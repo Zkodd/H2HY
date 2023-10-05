@@ -8,7 +8,7 @@ namespace H2HY.Services
     /// <summary>
     /// Example usage:
     ///  App.cs (Composing Root) Register Dialog to ViewModel:
-    /// <![CDATA[DialogService.RegistertDialog<DesiredView, DesiredViewModel>();
+    /// <![CDATA[DialogService.RegisterDialog<DesiredView, DesiredViewModel>();
     ///
     ///      DialogService dialogService = new();
     ///      EditCaption = new RelayCommand(i =>

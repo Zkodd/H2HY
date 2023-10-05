@@ -29,7 +29,7 @@ namespace H2HY.Tools
             int maxFileNameLength = 260;
             if (name.Length > maxFileNameLength)
             {
-                name = name.Substring(0, maxFileNameLength);
+                name = name[..maxFileNameLength];
             }
 
             return name;

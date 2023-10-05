@@ -24,7 +24,7 @@
 INotifyPropertyChanged in Viewmodelbase, RelayCommand, ICommand/CommandManager,
 Basic Stores, Fluent, Provider, Filenopen/SaveService, FolderPicker, etc.</Description>
     <Title>Hope to Help Ya</Title>
-    <Version>6.0.0.88</Version>
+    <Version>6.0.0.90</Version>
     <Authors>Zkodd</Authors>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>

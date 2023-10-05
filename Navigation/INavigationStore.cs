@@ -10,7 +10,7 @@ namespace H2HY.Navigation
         /// <summary>
         /// Called when current view model has changed.
         /// </summary>
-        event Action CurrentViewModelChanged;
+        event Action? CurrentViewModelChanged;
 
         /// <summary>
         /// Sets current view model which will be shown in the corresponding store-target.

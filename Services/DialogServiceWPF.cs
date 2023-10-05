@@ -65,9 +65,9 @@ namespace H2HY.Services
         private void ShowWindowExDialog(ViewModelDialogBase viewModelDialogBase, Action<ViewModelBase, bool> callBack)
         {
             H2HYModalDialog dialogWindow = new();
-
             dialogWindow.Closed += closeEventHandler;
             dialogWindow.DataContext = viewModelDialogBase;
+            dialogWindow.Content = viewModelDialogBase;
             dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
             dialogWindow.Show();
 
@@ -99,6 +99,7 @@ namespace H2HY.Services
 
             dialogWindow.Closed += closeEventHandler;
             dialogWindow.DataContext = viewModel;
+            dialogWindow.Content = viewModel;
             dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
             dialogWindow.ShowDialog();
 

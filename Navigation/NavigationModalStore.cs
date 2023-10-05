@@ -6,7 +6,7 @@ namespace H2HY.Navigation
     /// <summary>
     /// using the given dialog service to open an MODAL dialog.
     /// </summary>
-    public class NavigationModalStore : INavigationStore
+    public class NavigationModalStore : INavigationModalStore
     {
         private readonly IDialogService _dialogService;
         private ViewModelBase? _currentViewModel;

@@ -7,11 +7,16 @@ Stores:
 
 Version changes
 
+6.0.0.89
+
+	- typo in DialogService(RegisterDialog)
+	- added INavigationDialogStore
+	- removed NavigationDialogService(use NavigationService instead)
+
 6.0.0.88
 
 	- fixed modal/dialog behaviour in DialogServiceWPF
-	- typo in DialogService(RegisterDialog)
-
+	
 6.0.0.87
 
 	- add MakeValidFileName
