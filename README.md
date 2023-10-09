@@ -7,6 +7,10 @@ Stores:
 
 Version changes
 
+6.0.0.91
+ 
+	- fixed bug in showModelDialog
+
 6.0.0.89
 
 	- typo in DialogService(RegisterDialog)

@@ -24,6 +24,7 @@
         </Grid.RowDefinitions>
 
         <ContentControl Grid.Row="0"
+                        Content="{Binding}"
                         x:Name="ViewContent"/>
 
         <StackPanel Grid.Row="1"

@@ -67,7 +67,6 @@ namespace H2HY.Services
             H2HYModalDialog dialogWindow = new();
             dialogWindow.Closed += closeEventHandler;
             dialogWindow.DataContext = viewModelDialogBase;
-            dialogWindow.Content = viewModelDialogBase;
             dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
             dialogWindow.Show();
 
@@ -99,7 +98,6 @@ namespace H2HY.Services
 
             dialogWindow.Closed += closeEventHandler;
             dialogWindow.DataContext = viewModel;
-            dialogWindow.Content = viewModel;
             dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
             dialogWindow.ShowDialog();
 
