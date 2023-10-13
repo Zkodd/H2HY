@@ -19,6 +19,9 @@
     <FileAlignment>2048</FileAlignment>
   </PropertyGroup>
   <PropertyGroup>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+  <PropertyGroup>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Description>Handy-dandy basic helper for MVVVM issues. Lightware - no schnickschnack.
 INotifyPropertyChanged in Viewmodelbase, RelayCommand, ICommand/CommandManager,
@@ -27,6 +30,9 @@ Basic Stores, Fluent, Provider, Filenopen/SaveService, FolderPicker, etc.</Descr
     <Version>6.0.0.91</Version>
     <Authors>Zkodd</Authors>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <RepositoryUrl>https://github.com/Zkodd/H2HY</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Zkodd/H2HY</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
     <None Update="README.md">
