@@ -1,13 +1,12 @@
-﻿namespace H2HY.Services
+﻿namespace H2HY.Services;
+
+/// <summary>
+/// Interface for simple navigation.
+/// </summary>
+public interface INavigationService
 {
     /// <summary>
-    /// Interface for simple navigation.
+    /// Navigates to the given control.
     /// </summary>
-    public interface INavigationService
-    {
-        /// <summary>
-        /// Navigates to the given control.
-        /// </summary>
-        void Navigate();
-    }
+    void Navigate();
 }

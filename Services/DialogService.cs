@@ -26,7 +26,7 @@ namespace H2HY.Services
         /// </summary>
         /// <typeparam name="TView"></typeparam>
         /// <typeparam name="TViewModel"></typeparam>
-        public static void RegistertDialog<TView, TViewModel>() where TViewModel : ViewModelBase
+        public static void RegisterDialog<TView, TViewModel>() where TViewModel : ViewModelBase
         {
             _mappings.Add(typeof(TViewModel), typeof(TView));
         }
@@ -108,7 +108,7 @@ namespace H2HY.Services
             dialogWindow.Closed += closeEventHandler;
             dialogWindow.ViewContent.Content = view;
 
-            //violating mvvm principles here! We know the view.
+            //violating MVVM principles here! We know the view.
             //better create nested view model and use databinding.
 
             dialogWindow.DataContext = viewModel;
@@ -133,7 +133,7 @@ namespace H2HY.Services
 
             if (Activator.CreateInstance(viewType) is not FrameworkElement view)
             {
-                throw new Exception($"Resolved View for {viewModel.GetType()} is not a frameworkelement.");
+                throw new Exception($"Resolved View for {viewModel.GetType()} is not a FrameworkElement.");
             }
 
             view.DataContext = viewModel;
