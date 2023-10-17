@@ -1,11 +1,11 @@
 # H2HY
 
-Overall:
-
-Stores:
--> use of mediator pattern
-
 Version changes
+
+6.0.0.92
+
+	- added NavigationServiceDI
+	- added dependency Microsoft.Extensions.DependencyInjection
 
 6.0.0.91
  
