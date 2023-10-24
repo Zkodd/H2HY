@@ -2,6 +2,11 @@
 
 Version changes
 
+6.9.0.93
+
+	- H2HYFluentCollection added
+	- H2H2YFluentList: removed AddRange and LoadAll
+
 6.0.0.92
 
 	- added NavigationServiceDI

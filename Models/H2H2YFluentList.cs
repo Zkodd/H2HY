@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 namespace H2HY.Models
 {
     /// <summary>
-    /// A Fluent Collection
+    /// A Fluent List
     /// (WPF) bindable
     /// Using .Subscribe(this) bevor using any .When is mandatory.
     /// </summary>
@@ -43,31 +43,6 @@ namespace H2HY.Models
         /// Occurs when a property changes.
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        /// <summary>
-        /// Adds a range of items.
-        /// </summary>
-        /// <param name="newitems"></param>
-        public void AddRange(IEnumerable<T> newitems)
-        {
-            foreach (var item in newitems)
-            {
-                Add(item);
-            }
-        }
-
-        /// <summary>
-        /// Clears the current store and loads the given items.
-        /// </summary>
-        /// <param name="loadedItems">list of new items</param>
-        public void LoadAll(IEnumerable<T> loadedItems)
-        {
-            Clear();
-            foreach (var item in loadedItems)
-            {
-                Add(item);
-            }
-        }
 
         /// <summary>
         /// informs all subscriber about the changed item. 
