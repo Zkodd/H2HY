@@ -1,5 +1,19 @@
 # H2HY
 
+My personal handy-dandy basic helper for MVVVM issues. Light ware - no schnickschnack.
+INotifyPropertyChanged in view model base, RelayCommand, ICommand/CommandManager,
+Basic Stores, Fluent-Syntax, Provider, file open/save service, FolderPicker, etc.
+
+
+Project Settings:
+
+<Nullable>enable</Nullable>
+<TargetFramework>net6.0-windows</TargetFramework>
+<OutputType>Library</OutputType>
+<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+<UseWPF>true</UseWPF>
+<ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+
 Version changes
 
 6.9.0.93

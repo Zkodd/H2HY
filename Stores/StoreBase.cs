@@ -15,7 +15,7 @@ namespace H2HY.Stores
         public event Action<object, StoreEventArgs<T>>? StoreChanged;
 
         /// <summary>
-        /// Publish to property if needed.
+        /// Publish - if needed.
         /// </summary>
         protected T? _currentItem;
 

@@ -52,7 +52,7 @@ namespace H2HY
         public event Action? ViewPortClosed;
 
         /// <summary>
-        /// Returns the current view model. This is bind to the Mainview/Mainwindow by using:
+        /// Returns the current view model. This is bind to the main view/main window by using:
         /// <![CDATA[ <ContentControl Content="{Binding CurrentViewModel}" /> ]]>
         /// </summary>
         public ViewModelBase? CurrentViewModel => NavigationStore.CurrentViewModel;

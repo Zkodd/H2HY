@@ -15,10 +15,19 @@ namespace H2HY.Models
     /// <typeparam name="T"></typeparam>
     public class H2H2YFluentList<T> : Collection<T>, INotifyPropertyChanged, INotifyCollectionChanged
     {
+        /// <summary>
+        /// Static instance of PropertyChangedEventArgs for the "Count" property.
+        /// </summary>
         protected static readonly PropertyChangedEventArgs CountPropertyChanged = new PropertyChangedEventArgs("Count");
 
+        /// <summary>
+        /// Static instance of PropertyChangedEventArgs for the indexer property.
+        /// </summary>
         protected static readonly PropertyChangedEventArgs IndexerPropertyChanged = new PropertyChangedEventArgs("Item[]");
 
+        /// <summary>
+        /// Static instance of NotifyCollectionChangedEventArgs for a reset action.
+        /// </summary>
         protected static readonly NotifyCollectionChangedEventArgs ResetCollectionChanged = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
 
         private readonly Lazy<Dictionary<object, Action<T>>> _added = new();

@@ -25,15 +25,7 @@ namespace H2HY
     ///</summary>
     public class H2HYLayoutViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Parameterless constructor is now allowed.
-        /// </summary>
-        public H2HYLayoutViewModel()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
+         /// <summary>
         /// The H2HYLayoutViewModel is recreated on every navigation.
         /// </summary>
         /// <param name="navigationBarViewModel">navigation view model</param>

@@ -2,7 +2,6 @@
 
 namespace H2HY.Properties
 {
-
     /// <summary>
     /// Usage: attach to view window like this:
     /// <code>h2hyProp:WindowCloser.EnableWindowClosing="True"</code>
@@ -30,6 +29,9 @@ namespace H2HY.Properties
             obj.SetValue(EnableWindowClosingProperty, value);
         }
 
+        /// <summary>
+        /// enables or disables the windows close property
+        /// </summary>
         public static readonly DependencyProperty EnableWindowClosingProperty =
             DependencyProperty.RegisterAttached("EnableWindowClosing", typeof(bool), typeof(WindowCloser), new PropertyMetadata(false, OnEnableWindowClosingChanged));
 
@@ -55,9 +57,5 @@ namespace H2HY.Properties
                 };
             }
         }
-
-
-
-
     }
 }

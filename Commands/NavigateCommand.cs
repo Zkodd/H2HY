@@ -10,9 +10,9 @@ namespace H2HY.Commands
         private readonly INavigationService _navigationService;
 
         /// <summary>
-        /// Used navigation service.
+        ///
         /// </summary>
-        /// <param name="navigationService"></param>
+        /// <param name="navigationService"> Used navigation service.</param>
         public NavigateCommand(INavigationService navigationService)
         {
             _navigationService = navigationService;

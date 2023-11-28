@@ -11,11 +11,11 @@ namespace H2HY.Tools
         /// <summary>
         /// minimum/start of range.
         /// </summary>
-        T Low { get; }
+        T? Low { get; }
         /// <summary>
         /// maximum/end of range.
         /// </summary>
-        T High { get; }
+        T? High { get; }
         /// <summary>
         /// Determines if the provided value is inside or equal the range.
         /// /// </summary>
