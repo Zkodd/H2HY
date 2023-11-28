@@ -10,11 +10,11 @@ namespace H2HY.Services
     ///
     ///   if (openFileDialog.HasResult)
     ///   {
-    ///      something.SaveToFile(openFileDialog.FileName);
+    ///      something.LoadFromFile(openFileDialog.FileName);
     ///   }
     /// ]]>
     /// </summary>
-    public class FileOpenDialogService : FileDialogServiceBase
+    public class FileOpenDialogService : FileDialogServiceBase, IFileOpenDialog
     {
         /// <summary>
         /// constructor for creating a OpenFileDialog
@@ -27,6 +27,10 @@ namespace H2HY.Services
         /// <summary>
         /// Gets or sets a value indicating whether the dialog box allows multiple files to be selected.
         /// </summary>
-        public bool MultiSelect { get => (_fileDialog as OpenFileDialog).Multiselect; set => (_fileDialog as OpenFileDialog).Multiselect = value; }
+        public bool MultiSelect 
+        { 
+            get => (_fileDialog as OpenFileDialog)!.Multiselect; 
+            set => (_fileDialog as OpenFileDialog)!.Multiselect = value; 
+        }
     }
 }

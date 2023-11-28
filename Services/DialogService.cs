@@ -1,32 +1,24 @@
-﻿using System;
+﻿using H2HY.Views;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 
 namespace H2HY.Services
 {
     /// <summary>
-    /// - unused -
-    /// How to use:
+    /// Example usage:
     ///  App.cs (Composing Root) Register Dialog to ViewModel:
-    /// <![CDATA[ 
-    /// DialogService.RegistertDialog<HazardLogView, HazardLogViewModel>();
-    /// ]]>
+    /// <![CDATA[DialogService.RegisterDialog<DesiredView, DesiredViewModel>();
     ///
-    /// HazardLogChapterEditCaptionViewModel.cs, use Dialoagservice:
-    /// <![CDATA[
     ///      DialogService dialogService = new();
     ///      EditCaption = new RelayCommand(i =>
     ///      {
-    ///          dialogService.ShowDialog(, x => { new HazardLogViewModel(modalstore, this) });
+    ///          dialogService.ShowWindow(desiredViewModel, () => { DoSomething(); });
     ///      });
     ///  ]]>
-    ///
-    ///  2do: Window Close is missing in wpf
     /// </summary>
     public class DialogService : IDialogService
     {
-        private Window _currentDialog;
-
         internal static Dictionary<Type, Type> _mappings = new Dictionary<Type, Type>();
 
         /// <summary>
@@ -34,37 +26,138 @@ namespace H2HY.Services
         /// </summary>
         /// <typeparam name="TView"></typeparam>
         /// <typeparam name="TViewModel"></typeparam>
-        public static void RegistertDialog<TView, TViewModel>()
+        public static void RegisterDialog<TView, TViewModel>() where TViewModel : ViewModelBase
         {
             _mappings.Add(typeof(TViewModel), typeof(TView));
         }
 
-        public void ShowDialog(ViewModelBase viewmodel, Action<bool> callback)
+        /// <summary>
+        ///  Shows given view model in a modal dialog window.
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <param name="callback">call back on window close event. Can be true/false for modal - otherwise always false</param>
+        public void ShowDialog(ViewModelBase viewModel, Action<ViewModelBase, bool> callback)
         {
-            if (viewmodel == null)
+            if (viewModel is ViewModelDialogBase viewModelDialogBase)
             {
-                return;
+                ShowModalDialog(viewModelDialogBase, callback);
+            }
+            else
+            {
+                ShowWindowDialog(viewModel, callback);
+            }
+        }
+
+        /// <summary>
+        /// Opens a modal message box.
+        /// </summary>
+        /// <param name="message">A string that specifies the text to display.</param>
+        /// <param name="caption">A string that specifies caption to display.</param>
+        /// <param name="buttons"></param>
+        /// <param name="icon"></param>
+        /// <returns></returns>
+        public MessageBoxResult ShowMessageBox(string message, string caption, MessageBoxButton buttons, MessageBoxIcon icon)
+        {
+            return (MessageBoxResult)MessageBox.Show(message,
+                                                     caption,
+                                                     (System.Windows.MessageBoxButton)buttons,
+                                                     (MessageBoxImage)icon);
+        }
+
+        private static void SetupWindow(Window dialogWindow, FrameworkElement view)
+        {
+            dialogWindow.MaxHeight = view.MaxHeight + dialogWindow.BorderThickness.Top + dialogWindow.BorderThickness.Bottom;
+            dialogWindow.MaxWidth = view.MaxWidth + dialogWindow.BorderThickness.Left + dialogWindow.BorderThickness.Right;
+
+            dialogWindow.MinHeight = view.MinHeight + dialogWindow.BorderThickness.Top + dialogWindow.BorderThickness.Bottom;
+            dialogWindow.MinWidth = view.MinWidth + dialogWindow.BorderThickness.Left + dialogWindow.BorderThickness.Right;
+        }
+
+        /// <summary>
+        ///  Shows given view model in a modal dialog window.
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <param name="callback">call back on window close event.</param>
+        /// <exception cref="KeyNotFoundException"></exception>
+        public void ShowModalDialog(ViewModelBase viewModel, Action<ViewModelBase, bool>? callback)
+        {
+            Type? viewType = _mappings.GetValueOrDefault(viewModel.GetType()) ?? throw new KeyNotFoundException($"DialogService: Key {viewModel.GetType()} not found in dictionary.");
+            if (Activator.CreateInstance(viewType) is not FrameworkElement view)
+            {
+                throw new Exception($"Resolved View for {viewModel.GetType()} is not a framework element.");
             }
 
-            Type viewType = _mappings[viewmodel.GetType()];
+            view.DataContext = viewModel;
 
-            _currentDialog = new Window();
-
-            void closeEventHandler(object s, EventArgs e)
+            H2HYModalDialog dialogWindow = new();
+            SetupWindow(dialogWindow, view);
+            void closeEventHandler(object? s, EventArgs e)
             {
-                bool result = _currentDialog?.DialogResult != default ? (bool)_currentDialog.DialogResult : false;
-
-                callback(result);
-                _currentDialog.Closed -= closeEventHandler;
+                try
+                {
+                    viewModel.ViewClosed(dialogWindow.H2HYDialogResult);
+                    callback?.Invoke(viewModel, dialogWindow.H2HYDialogResult);
+                    viewModel.Dispose();
+                }
+                finally
+                {
+                    dialogWindow.Closed -= closeEventHandler;
+                }
             }
-            _currentDialog.Closed += closeEventHandler;
 
-            object content = Activator.CreateInstance(viewType);
-            (content as FrameworkElement).DataContext = viewmodel;
+            dialogWindow.Closed += closeEventHandler;
+            dialogWindow.ViewContent.Content = view;
 
-            _currentDialog.Content = content;
-            _currentDialog.SizeToContent = SizeToContent.WidthAndHeight;
-            _currentDialog.Show();
+            //violating MVVM principles here! We know the view.
+            //better create nested view model and use databinding.
+
+            dialogWindow.DataContext = viewModel;
+            dialogWindow.SizeToContent = SizeToContent.WidthAndHeight;
+
+            dialogWindow.ShowDialog();
+        }
+
+        /// <summary>
+        /// Shows given view model in a window. Dialog result will be false.
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <param name="callback">call back on window close event.</param>
+        /// <exception cref="KeyNotFoundException"></exception>
+        private void ShowWindowDialog(ViewModelBase viewModel, Action<ViewModelBase, bool> callback)
+        {
+            Type? viewType = _mappings.GetValueOrDefault(viewModel.GetType());
+            if (viewType is null)
+            {
+                throw new KeyNotFoundException($"DialogService: Key {viewModel.GetType()} not found in dictionary.");
+            }
+
+            if (Activator.CreateInstance(viewType) is not FrameworkElement view)
+            {
+                throw new Exception($"Resolved View for {viewModel.GetType()} is not a FrameworkElement.");
+            }
+
+            view.DataContext = viewModel;
+
+            var newWindow = new System.Windows.Window();
+            SetupWindow(newWindow, view);
+            void closeEventHandler(object? s, EventArgs e)
+            {
+                try
+                {
+                    viewModel.ViewClosed();
+                    callback(viewModel, false);
+                    viewModel.Dispose();
+                }
+                finally
+                {
+                    newWindow.Closed -= closeEventHandler;
+                }
+            }
+
+            newWindow.Closed += closeEventHandler;
+            newWindow.Content = view;
+            newWindow.SizeToContent = SizeToContent.WidthAndHeight;
+            newWindow.Show();
         }
     }
 }

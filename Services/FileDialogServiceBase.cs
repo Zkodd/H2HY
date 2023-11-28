@@ -8,23 +8,51 @@ namespace H2HY.Services
     public class FileDialogServiceBase
     {
         /// <summary>
-        /// Created by the construtor. Is neither a FileOpen or an FileSaveDialog.
+        /// Created by the constructor. Is neither a FileOpen or an FileSaveDialog.
         /// </summary>
-        protected FileDialog _fileDialog;
+        protected FileDialog _fileDialog = default!;
 
         /// <summary>
-        /// Gets or sets the current file name filter string, which determines the choices that appear in the 
+        /// Gets or sets the current file name filter string, which determines the choices that appear in the
         /// "Save as file type" or "Files of type" box in the dialog box.
         /// Example: "txt files (*.txt)|*.txt|All files (*.*)|*.*";
         /// </summary>
-        public string Extension { get => _fileDialog.DefaultExt; set => _fileDialog.DefaultExt = value; }
+        public string Extension
+        {
+            get => _fileDialog.DefaultExt;
+            set => _fileDialog.DefaultExt = value;
+        }
 
-        public string FileName { get; private set; }
+        /// <summary>
+        /// Empty by default. Will hold the result of Showdialog().
+        /// </summary>
+        public string FileName { get; private set; } = string.Empty;
 
-        public string Filter { get => _fileDialog.Filter; set => _fileDialog.Filter = value; }
+        /// <summary>
+        ///     Gets or sets the filter string that determines what types of files are displayed
+        ///     from either the Microsoft.Win32.OpenFileDialog or Microsoft.Win32.SaveFileDialog.
+        ///
+        /// Returns:
+        ///     A System.String that contains the filter. The default is System.String.Empty,
+        ///     which means that no filter is applied and all file types are displayed.
+        /// </summary>
+        public string Filter
+        {
+            get => _fileDialog.Filter;
+            set => _fileDialog.Filter = value;
+        }
 
-        public bool HasResult { get => FileName != string.Empty; }
+        /// <summary>
+        /// ShowdDialog has return with a result in FileName.
+        /// </summary>
+        public bool HasResult
+        {
+            get => FileName != string.Empty;
+        }
 
+        /// <summary>
+        /// Opens the Filedialog. FileName contains result in case of success. Otherwise FileName is empty.
+        /// </summary>
         public void ShowDialog()
         {
             FileName = _fileDialog.ShowDialog() == true ? _fileDialog.FileName : string.Empty;

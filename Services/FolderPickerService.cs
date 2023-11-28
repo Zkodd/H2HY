@@ -7,15 +7,18 @@ using System.Windows.Interop;
 
 namespace H2HY.Services
 {
+    /// <summary>
+    /// Opens a Folder-Pick popup window.
+    /// </summary>
     public class FolderPickerService
     {
-        public virtual string ResultPath { get; protected set; }
-        public virtual string ResultName { get; protected set; }
-        public virtual string InputPath { get; set; }
+        public virtual string ResultPath { get; protected set; } = string.Empty;
+        public virtual string ResultName { get; protected set; } = string.Empty;
+        public virtual string InputPath { get; set; } = string.Empty;
         public virtual bool ForceFileSystem { get; set; }
-        public virtual string Title { get; set; }
-        public virtual string OkButtonLabel { get; set; }
-        public virtual string FileNameLabel { get; set; }
+        public virtual string Title { get; set; } = string.Empty;
+        public virtual string OkButtonLabel { get; set; } = string.Empty;
+        public virtual string FileNameLabel { get; set; } = string.Empty;
 
         protected virtual int SetOptions(int options)
         {
@@ -26,9 +29,9 @@ namespace H2HY.Services
             return options;
         }
 
-        public bool? ShowDialog(Window owner = null, bool throwOnError = false)
+        public bool? ShowDialog(Window? owner = null, bool throwOnError = false)
         {
-            owner = owner ?? Application.Current.MainWindow;
+            owner ??= Application.Current.MainWindow;
 
             return ShowDialog(owner != null ? new WindowInteropHelper(owner).Handle : IntPtr.Zero, throwOnError);
         }

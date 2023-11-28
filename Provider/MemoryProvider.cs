@@ -3,7 +3,7 @@
 namespace H2HY.Provider
 {
     /// <summary>
-    /// Plain memory store. Is using a hashset for storing items.
+    /// Plain memory provider. Is using a hash set for storing items.
     /// HashSet T class is mainly designed to do high-performance set operations, such as the intersection 
     /// of two sets intersection, the set of differences and so on. The collection contains a set of elements 
     /// that do not repeat and have no attribute order, and the HashSet rejects duplicate object.
@@ -12,8 +12,6 @@ namespace H2HY.Provider
     public class MemoryProvider<T> : IProvider<T>
     {
         private readonly HashSet<T> _memoryList = new HashSet<T>();
-
-
         //
         // Summary:
         //     Adds the specified element to a set.
@@ -56,7 +54,7 @@ namespace H2HY.Provider
         /// Get all items.
         /// </summary>
         /// <returns>enumerable of type T of all items</returns>
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return _memoryList;
         }
@@ -72,16 +70,16 @@ namespace H2HY.Provider
         }
 
         /// <summary>
-        /// unsued in memory provider. NOP.
+        /// unused in memory provider. NOP.
         /// </summary>
         /// <param name="items"></param>
-        public void SaveAll(IEnumerable<T> items)
+        public virtual void SaveAll(IEnumerable<T> items)
         {
             //NOP
         }
 
         /// <summary>
-        /// unsued in memory provider. NOP.
+        /// unused in memory provider. NOP.
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>

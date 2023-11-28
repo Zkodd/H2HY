@@ -1,0 +1,50 @@
+﻿<Window x:Class="H2HY.Views.H2HYModalDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:h2hy="clr-namespace:H2HY"
+        xmlns:h2hyProp="clr-namespace:H2HY.Properties"
+        d:DataContext="{d:DesignInstance Type=h2hy:ViewModelDialogBase}"
+        mc:Ignorable="d"
+        WindowStyle="ToolWindow"
+        Title="{Binding Title}"
+        Height="250"
+        Width="300"
+        h2hyProp:WindowCloser.EnableWindowClosing="True">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ContentControl Grid.Row="0"
+                        Content="{Binding}"
+                        x:Name="ViewContent"/>
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Visibility="{Binding AreButtonsVisible, Converter={StaticResource BoolToVis}}">
+            <Button Grid.Row="2"
+                    Content="Cancel"
+                    Width="60"
+                    Margin="3"
+                    IsCancel="True"
+                    Click="CancelClick" />
+
+            <Button Grid.Row="2"
+                    Content="Ok"
+                    Margin="3"
+                    Width="60"
+                    IsDefault="True"
+                    Click="OkClick"
+                    IsEnabled="{Binding IsOkEnabled}" />
+        </StackPanel>
+    </Grid>
+</Window>

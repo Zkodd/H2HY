@@ -1,9 +1,9 @@
-﻿namespace H2HY.Stores
+﻿namespace H2HY.Models
 {
     /// <summary>
     /// Indicates store changes.
     /// </summary>
-    public enum StoreChanged
+    public enum H2HYListChanged
     {
         /// <summary>
         /// An item was added to the store.
@@ -21,7 +21,7 @@
         Reset = 2,
 
         /// <summary>
-        /// An item has been updated.
+        /// An item has updated.
         /// </summary>
         Changed = 3
     }

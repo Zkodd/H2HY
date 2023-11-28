@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace H2HY
+namespace H2HY.Commands
 {
     /// <summary>
     /// provide a base implementation of the <code>ICommand</code> interface.
@@ -11,24 +11,24 @@ namespace H2HY
     /// <typeparam name="T"></typeparam>
     public class RelayCommand<T> : ICommand
     {
-        private readonly Action<T> _execute;
-        private readonly Predicate<T> _canExecute;
+        private readonly Action<T?> _execute;
+        private readonly Predicate<T?>? _canExecute;
 
         /// <summary>
         /// standard constructor for command. CanExecute returns true.
         /// </summary>
         /// <param name="execute">action, which is executed</param>
-        public RelayCommand(Action<T> execute)
+        public RelayCommand(Action<T?> execute)
             : this(execute, null)
         {
         }
 
         /// <summary>
-        /// standard constructor for command and canExecute-callback
+        /// standard constructor for command and canExecute-call back
         /// </summary>
         /// <param name="execute">action, which is executed</param>
-        /// <param name="canExecute">callback, determinates if command is executable</param>
-        public RelayCommand(Action<T> execute, Predicate<T> canExecute)
+        /// <param name="canExecute">call back, determinates if command is executable</param>
+        public RelayCommand(Action<T?> execute, Predicate<T?>? canExecute)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
             _canExecute = canExecute;
@@ -39,32 +39,32 @@ namespace H2HY
         /// </summary>
         /// <param name="parameter"></param>
         /// <returns>true on default</returns>
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
-            return _canExecute == null || _canExecute((T)parameter);
+            return _canExecute == null || _canExecute((T?)parameter);
         }
 
         /// <summary>
         /// Occurs when changes occur that affect whether or not the command should execute.
         /// </summary>
-        public event EventHandler CanExecuteChanged
+        public event EventHandler? CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
 
         /// <summary>
-        /// execute commmands. Is never call by ur code.
+        /// execute command. Is never call by ur code.
         /// </summary>
         /// <param name="parameter">parameter given by the WPF binding.</param>
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
-            _execute((T)parameter);
+            _execute((T?)parameter);
         }
     }
 
     /// <summary>
-    /// specialised Relaycommand:
+    /// specialised Relay command:
     ///  ///  <![CDATA[ RelayCommand : RelayCommand<object> ]]>
     /// </summary>
     public class RelayCommand : RelayCommand<object>
@@ -73,16 +73,16 @@ namespace H2HY
         /// standard constructor for command. CanExecute returns true.
         /// </summary>
         /// <param name="execute">action, which is executed</param>
-        public RelayCommand(Action<object> execute) : base(execute)
+        public RelayCommand(Action<object?> execute) : base(execute)
         {
         }
 
         /// <summary>
-        /// standard constructor for command and canExecute-callback
+        /// standard constructor for command and canExecute-call back
         /// </summary>
         /// <param name="execute">action, which is executed</param>
-        /// <param name="canExecute">callback, determinates if command is executable</param>
-        public RelayCommand(Action<object> execute, Predicate<object> canExecute) : base(execute, canExecute)
+        /// <param name="canExecute">call back, determinates if command is executable</param>
+        public RelayCommand(Action<object?> execute, Predicate<object?>? canExecute) : base(execute, canExecute)
         {
         }
     }
