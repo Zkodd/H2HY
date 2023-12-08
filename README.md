@@ -1,4 +1,6 @@
-# H2HY
+# H2HY -  Deprecated
+
+This package has been deprecated as it is legacy and is no longer maintained.
 
 My personal handy-dandy basic helper for MVVVM issues. Light ware - no schnickschnack.
 INotifyPropertyChanged in view model base, RelayCommand, ICommand/CommandManager,
